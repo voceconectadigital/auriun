@@ -1,9 +1,10 @@
+import type { CSSProperties } from 'react'
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
-import type { CSSProperties } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { Breadcrumb, type Crumb } from '@/components/ui/Breadcrumb'
+import { SegmentCoverImage } from '@/components/ui/SegmentCoverImage'
 
 type DetailHeroProps = {
   crumbs: Crumb[]
@@ -58,13 +59,18 @@ export function DetailHero({
             <Button to={ctaTo} size="lg" className="min-h-13 w-full justify-center sm:w-auto">
               {ctaLabel}
             </Button>
-            <Button to="/solucoes/" variant="ghost" size="lg" className="min-h-13 w-full justify-center sm:w-auto">
+            <Button
+              to="/solucoes/"
+              variant="ghost"
+              size="lg"
+              className="min-h-13 w-full justify-center sm:w-auto"
+            >
               Ver soluções
               <ArrowRight className="size-4" aria-hidden />
             </Button>
           </div>
         </div>
-        <div className="overflow-hidden rounded-sm border border-brand-line bg-white">
+        <div className="overflow-hidden rounded-sm border border-brand-line bg-white bg-brand-navy/10">
           <img
             src={image}
             alt={imageAlt}
@@ -82,10 +88,111 @@ export function DetailHero({
   )
 }
 
-type RelatedCard = {
+export type RelatedCard = {
   title: string
   description: string
   to: string
+  /** When set, renders the image-on-top segment card layout. */
+  image?: string
+  imageAlt?: string
+  imageObjectPosition?: string
+  imageObjectPositionMobile?: string
+}
+
+const cardEase = 'duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)]'
+
+function RelatedImageCard({ item }: { item: RelatedCard }) {
+  const image = item.image!
+  const alt = item.imageAlt ?? item.title
+
+  return (
+    <Link
+      to={item.to}
+      className={[
+        'group flex flex-col overflow-hidden border border-brand-line bg-white',
+        'transition-[transform,box-shadow,border-color]',
+        cardEase,
+        'hover:-translate-y-1 hover:border-brand-blue/55',
+        'hover:shadow-[0_14px_32px_-10px_rgba(7,26,45,0.28)]',
+        'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2',
+        'active:bg-brand-mist/40',
+      ].join(' ')}
+    >
+      <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-navy/15 md:aspect-video">
+        <SegmentCoverImage
+          src={image}
+          alt={alt}
+          className={[
+            'size-full object-cover transition-transform',
+            cardEase,
+            'group-hover:scale-105 group-focus-visible:scale-105',
+          ].join(' ')}
+          objectPosition={item.imageObjectPosition}
+          objectPositionMobile={item.imageObjectPositionMobile}
+          width={640}
+          height={360}
+          loading="lazy"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+        />
+        <div
+          className={[
+            'pointer-events-none absolute inset-0 bg-brand-navy/30 transition-colors',
+            cardEase,
+            'group-hover:bg-brand-navy/18 group-focus-visible:bg-brand-navy/18',
+          ].join(' ')}
+          aria-hidden
+        />
+      </div>
+      <div className="flex flex-1 flex-col p-5">
+        <h3
+          className={[
+            'font-display text-lg font-semibold text-brand-graphite transition-colors',
+            cardEase,
+            'group-hover:text-brand-blue group-focus-visible:text-brand-blue',
+          ].join(' ')}
+        >
+          {item.title}
+        </h3>
+        <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-slate">
+          {item.description}
+        </p>
+        <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-orange">
+          Conhecer
+          <ArrowRight
+            className={[
+              'size-3.5 transition-transform',
+              cardEase,
+              'group-hover:translate-x-1 group-focus-visible:translate-x-1',
+            ].join(' ')}
+            aria-hidden
+          />
+        </span>
+      </div>
+    </Link>
+  )
+}
+
+function RelatedTextCard({ item }: { item: RelatedCard }) {
+  return (
+    <Link
+      to={item.to}
+      className="group border border-brand-line bg-white p-5 transition hover:border-brand-blue/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+    >
+      <h3 className="font-display text-lg font-semibold text-brand-graphite group-hover:text-brand-blue">
+        {item.title}
+      </h3>
+      <p className="mt-2 text-sm leading-relaxed text-brand-slate">
+        {item.description}
+      </p>
+      <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-orange">
+        Conhecer
+        <ArrowRight
+          className="size-3.5 transition group-hover:translate-x-0.5"
+          aria-hidden
+        />
+      </span>
+    </Link>
+  )
 }
 
 export function RelatedGrid({
@@ -103,24 +210,13 @@ export function RelatedGrid({
           {title}
         </h2>
         <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {items.map((item) => (
-            <Link
-              key={item.to}
-              to={item.to}
-              className="group border border-brand-line bg-white p-5 transition hover:border-brand-blue/40"
-            >
-              <h3 className="font-display text-lg font-semibold text-brand-graphite group-hover:text-brand-blue">
-                {item.title}
-              </h3>
-              <p className="mt-2 text-sm leading-relaxed text-brand-slate">
-                {item.description}
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-orange">
-                Conhecer
-                <ArrowRight className="size-3.5 transition group-hover:translate-x-0.5" aria-hidden />
-              </span>
-            </Link>
-          ))}
+          {items.map((item) =>
+            item.image ? (
+              <RelatedImageCard key={item.to} item={item} />
+            ) : (
+              <RelatedTextCard key={item.to} item={item} />
+            ),
+          )}
         </div>
       </Container>
     </section>

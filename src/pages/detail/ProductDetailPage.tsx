@@ -12,7 +12,7 @@ import {
   useDocumentSeo,
 } from '@/components/seo/Seo'
 import { getProductBySlug, products, productPath } from '@/data/products'
-import { getSegmentBySlug, segmentPath } from '@/data/segments'
+import { getSegmentBySlug, toSegmentRelatedCard } from '@/data/segments'
 import { getServiceBySlug, servicePath } from '@/data/services'
 import { SITE } from '@/data/site'
 import type { ProductItem } from '@/data/types'
@@ -36,12 +36,8 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
 
   const relatedSegments = product.relatedSegments
     .map((s) => getSegmentBySlug(s))
-    .filter(Boolean)
-    .map((s) => ({
-      title: s!.title,
-      description: s!.description,
-      to: segmentPath(s!.slug),
-    }))
+    .filter((s): s is NonNullable<typeof s> => Boolean(s))
+    .map(toSegmentRelatedCard)
 
   const relatedServices = product.relatedServices
     .map((s) => getServiceBySlug(s))

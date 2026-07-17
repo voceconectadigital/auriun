@@ -548,4 +548,18 @@ export function getAllSegmentSlugs(): string[] {
   return segments.map((item) => item.slug)
 }
 
+/** Related-card payload drawn entirely from the central segment object. */
+export function toSegmentRelatedCard(segment: SegmentItem) {
+  return {
+    title: segment.title,
+    description: segment.description,
+    to: segmentPath(segment.slug),
+    image: segment.image,
+    imageAlt: segment.cardImageAlt ?? segment.imageAlt,
+    imageObjectPosition: segment.imageObjectPosition?.card,
+    imageObjectPositionMobile:
+      segment.imageObjectPosition?.mobile ?? segment.imageObjectPosition?.card,
+  }
+}
+
 export { segmentPath }

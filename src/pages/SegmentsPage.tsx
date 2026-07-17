@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom'
-import type { CSSProperties } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
+import { SegmentCoverImage } from '@/components/ui/SegmentCoverImage'
 import {
   JsonLd,
   organizationJsonLd,
@@ -18,6 +18,7 @@ export function SegmentsPage() {
     description:
       'Segmentos industriais atendidos pela Auriun: mineração, óleo e gás, energia, manufatura e outros setores estratégicos.',
     path: '/segmentos/',
+    image: segments[0]?.image,
   })
 
   return (
@@ -38,44 +39,54 @@ export function SegmentsPage() {
         <Container>
           <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {segments.map((item) => (
-              <article
+              <Link
                 key={item.slug}
-                className="flex flex-col overflow-hidden border border-brand-line bg-white"
+                to={segmentPath(item.slug)}
+                className={[
+                  'group flex flex-col overflow-hidden border border-brand-line bg-white',
+                  'transition-[transform,box-shadow,border-color] duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)]',
+                  'hover:-translate-y-1 hover:border-brand-blue/55',
+                  'hover:shadow-[0_14px_32px_-10px_rgba(7,26,45,0.28)]',
+                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2',
+                  'active:bg-brand-mist/40',
+                ].join(' ')}
               >
-                <img
-                  src={item.image}
-                  alt={item.cardImageAlt ?? item.imageAlt}
-                  className="segment-framed-img aspect-[16/10] w-full object-cover"
-                  style={
-                    item.imageObjectPosition?.card
-                      ? ({
-                          '--segment-pos': item.imageObjectPosition.card,
-                          '--segment-pos-mobile':
-                            item.imageObjectPosition.mobile ??
-                            item.imageObjectPosition.card,
-                        } as CSSProperties)
-                      : undefined
-                  }
-                  loading="lazy"
-                  width={640}
-                  height={400}
-                />
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-brand-navy/15 md:aspect-video">
+                  <SegmentCoverImage
+                    src={item.image}
+                    alt={item.cardImageAlt ?? item.imageAlt}
+                    className="size-full object-cover transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-105 group-focus-visible:scale-105"
+                    objectPosition={item.imageObjectPosition?.card}
+                    objectPositionMobile={
+                      item.imageObjectPosition?.mobile ??
+                      item.imageObjectPosition?.card
+                    }
+                    width={640}
+                    height={360}
+                    loading="lazy"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  />
+                  <div
+                    className="pointer-events-none absolute inset-0 bg-brand-navy/25 transition-colors duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:bg-brand-navy/15 group-focus-visible:bg-brand-navy/15"
+                    aria-hidden
+                  />
+                </div>
                 <div className="flex flex-1 flex-col p-5">
-                  <h2 className="font-display text-lg font-semibold text-brand-graphite">
+                  <h2 className="font-display text-lg font-semibold text-brand-graphite transition-colors duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:text-brand-blue group-focus-visible:text-brand-blue">
                     {item.title}
                   </h2>
                   <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-slate">
                     {item.description}
                   </p>
-                  <Link
-                    to={segmentPath(item.slug)}
-                    className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-orange hover:text-brand-blue"
-                  >
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-orange">
                     Conhecer segmento
-                    <ArrowRight className="size-3.5" aria-hidden />
-                  </Link>
+                    <ArrowRight
+                      className="size-3.5 transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:translate-x-1 group-focus-visible:translate-x-1"
+                      aria-hidden
+                    />
+                  </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
 

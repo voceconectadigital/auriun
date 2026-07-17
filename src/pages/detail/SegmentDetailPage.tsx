@@ -12,7 +12,12 @@ import {
   useDocumentSeo,
 } from '@/components/seo/Seo'
 import { getProductBySlug, productPath } from '@/data/products'
-import { getSegmentBySlug, segments, segmentPath } from '@/data/segments'
+import {
+  getSegmentBySlug,
+  segments,
+  segmentPath,
+  toSegmentRelatedCard,
+} from '@/data/segments'
 import { getServiceBySlug, servicePath } from '@/data/services'
 import { SITE } from '@/data/site'
 import type { SegmentItem } from '@/data/types'
@@ -55,11 +60,7 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
   const otherSegments = segments
     .filter((s) => s.slug !== segment.slug)
     .slice(0, 6)
-    .map((s) => ({
-      title: s.title,
-      description: s.description,
-      to: segmentPath(s.slug),
-    }))
+    .map(toSegmentRelatedCard)
 
   const paragraphs = segment.introduction.split('\n\n')
 
@@ -86,10 +87,10 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
         description={segment.description}
         image={segment.image}
         imageAlt={segment.imageAlt}
-        imageObjectPosition={segment.imageObjectPosition?.hero}
+        imageObjectPosition={segment.imageObjectPosition?.hero ?? 'center center'}
         imageObjectPositionMobile={segment.imageObjectPosition?.mobile}
-        fetchPriority={segment.slug === 'mineracao' ? 'high' : undefined}
-        preload={segment.slug === 'mineracao'}
+        fetchPriority="high"
+        preload
         ctaLabel="Solicitar uma solução"
       />
 
