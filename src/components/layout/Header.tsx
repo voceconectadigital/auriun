@@ -87,14 +87,14 @@ export function Header() {
         scrolled || open || megaOpen ? 'shadow-[0_12px_40px_rgba(7,26,45,0.1)]' : '',
       ].join(' ')}
     >
-      <Container className="relative flex h-[88px] items-center justify-between gap-6">
+      <Container className="relative flex h-[var(--site-header-h)] items-center justify-between gap-3 px-5 sm:gap-4 sm:px-8 lg:px-10">
         <Link
           to="/"
           className="relative z-20 flex shrink-0 items-center"
           aria-label="Auriun — página inicial"
           onClick={closeAll}
         >
-          <Logo className="h-10 w-auto max-w-[120px] sm:h-12 sm:max-w-[140px] lg:h-[58px] lg:max-w-[160px]" />
+          <Logo className="h-9 w-auto max-w-[112px] sm:h-11 sm:max-w-[132px] xl:h-[58px] xl:max-w-[160px]" />
         </Link>
 
         <nav className="hidden items-center gap-1 xl:flex" aria-label="Principal">
@@ -154,18 +154,19 @@ export function Header() {
           </NavLink>
         </nav>
 
-        <div className="relative z-20 flex items-center gap-3">
-          <Button
-            to="/contato/?assunto=orcamento"
-            className="hidden sm:inline-flex"
-            size="md"
-            onClick={closeAll}
-          >
-            Solicitar orçamento
-          </Button>
+        <div className="relative z-20 flex items-center gap-2 sm:gap-3">
+          <div className="hidden xl:block">
+            <Button
+              to="/contato/?assunto=orcamento"
+              size="md"
+              onClick={closeAll}
+            >
+              Solicitar orçamento
+            </Button>
+          </div>
           <button
             type="button"
-            className="inline-flex size-11 items-center justify-center text-brand-graphite ring-1 ring-brand-line xl:hidden"
+            className="inline-flex size-11 min-h-11 min-w-11 items-center justify-center text-brand-graphite ring-1 ring-brand-line transition hover:bg-brand-mist focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2 xl:hidden"
             aria-expanded={open}
             aria-controls={menuId}
             aria-label={open ? 'Fechar menu' : 'Abrir menu'}
@@ -186,7 +187,7 @@ export function Header() {
         <div className="min-h-0 overflow-hidden">
           {desktopMenu === 'solucoes' ? (
             <div id="mega-solucoes" className="mega-fade border-b border-brand-line bg-white">
-              <Container className="grid gap-0 py-8 lg:grid-cols-[1.05fr_0.95fr_0.95fr] lg:gap-10 lg:py-10">
+              <Container className="grid gap-0 px-5 py-8 sm:px-8 lg:grid-cols-[1.05fr_0.95fr_0.95fr] lg:gap-10 lg:px-10 lg:py-10">
                 <Link
                   to="/solucoes/"
                   onClick={closeAll}
@@ -270,7 +271,7 @@ export function Header() {
 
           {desktopMenu === 'segmentos' && previewSegment ? (
             <div id="mega-segmentos" className="mega-fade border-b border-brand-line bg-white">
-              <Container className="grid gap-8 py-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:py-10">
+              <Container className="grid gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:px-10 lg:py-10">
                 <Link
                   to={segmentPath(previewSegment.slug)}
                   onClick={closeAll}
@@ -345,108 +346,127 @@ export function Header() {
       {!megaOpen ? <div className="brand-hairline h-px w-full" aria-hidden /> : null}
 
       {open ? (
-        <div
-          id={menuId}
-          className="max-h-[calc(100dvh-89px)] overflow-y-auto border-t border-brand-line bg-white xl:hidden"
-        >
-          <Container className="flex flex-col gap-1 py-5">
-            <Link to="/" onClick={closeAll} className={mobileLink}>
-              Home
-            </Link>
-            <Link to="/a-auriun/" onClick={closeAll} className={mobileLink}>
-              A Auriun
-            </Link>
-
-            <MobileAccordion
-              label="Soluções"
-              open={mobileAccordions.solucoes}
-              onToggle={() =>
-                setMobileAccordions((s) => ({ ...s, solucoes: !s.solucoes }))
-              }
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 top-[var(--site-header-h)] z-40 bg-brand-navy/55 backdrop-blur-[2px] xl:hidden"
+            aria-label="Fechar menu"
+            onClick={closeAll}
+          />
+          <div
+            id={menuId}
+            className="relative z-50 flex max-h-[calc(100dvh-var(--site-header-h))] flex-col border-t border-brand-line bg-white xl:hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Menu de navegação"
+          >
+            <nav
+              className="flex-1 overflow-y-auto overscroll-contain px-5 py-4 sm:px-8"
+              aria-label="Mobile"
             >
-              <Link
-                to="/solucoes/"
+              <div className="flex flex-col">
+                <Link to="/" onClick={closeAll} className={mobileLink}>
+                  Home
+                </Link>
+                <Link to="/a-auriun/" onClick={closeAll} className={mobileLink}>
+                  A Auriun
+                </Link>
+
+                <MobileAccordion
+                  label="Soluções"
+                  open={mobileAccordions.solucoes}
+                  onToggle={() =>
+                    setMobileAccordions((s) => ({ ...s, solucoes: !s.solucoes }))
+                  }
+                >
+                  <Link
+                    to="/solucoes/"
+                    onClick={closeAll}
+                    className="flex min-h-12 items-center py-3 text-[0.975rem] font-semibold text-brand-blue"
+                  >
+                    Visão geral
+                  </Link>
+                  <p className="mt-2 text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-slate">
+                    Produtos
+                  </p>
+                  {products.map((item) => (
+                    <Link
+                      key={item.slug}
+                      to={productPath(item.slug)}
+                      onClick={closeAll}
+                      className="flex min-h-12 flex-col justify-center py-3 text-[0.975rem] text-brand-graphite"
+                    >
+                      <span className="font-medium">{item.title}</span>
+                      <span className="mt-0.5 block text-[0.8125rem] leading-snug text-brand-slate line-clamp-1">
+                        {item.description}
+                      </span>
+                    </Link>
+                  ))}
+                  <p className="mt-3 text-[12px] font-semibold uppercase tracking-[0.14em] text-brand-slate">
+                    Serviços
+                  </p>
+                  {services.map((item) => (
+                    <Link
+                      key={item.slug}
+                      to={servicePath(item.slug)}
+                      onClick={closeAll}
+                      className="flex min-h-12 flex-col justify-center py-3 text-[0.975rem] text-brand-graphite"
+                    >
+                      <span className="font-medium">{item.title}</span>
+                      <span className="mt-0.5 block text-[0.8125rem] leading-snug text-brand-slate line-clamp-1">
+                        {item.description}
+                      </span>
+                    </Link>
+                  ))}
+                </MobileAccordion>
+
+                <MobileAccordion
+                  label="Segmentos"
+                  open={mobileAccordions.segmentos}
+                  onToggle={() =>
+                    setMobileAccordions((s) => ({
+                      ...s,
+                      segmentos: !s.segmentos,
+                    }))
+                  }
+                >
+                  <Link
+                    to="/segmentos/"
+                    onClick={closeAll}
+                    className="flex min-h-12 items-center py-3 text-[0.975rem] font-semibold text-brand-blue"
+                  >
+                    Todos os segmentos
+                  </Link>
+                  {segments.map((item) => (
+                    <Link
+                      key={item.slug}
+                      to={segmentPath(item.slug)}
+                      onClick={closeAll}
+                      className="flex min-h-12 items-center py-3 text-[0.975rem] text-brand-graphite"
+                    >
+                      {item.title}
+                    </Link>
+                  ))}
+                </MobileAccordion>
+
+                <Link to="/contato/" onClick={closeAll} className={mobileLink}>
+                  Contato
+                </Link>
+              </div>
+            </nav>
+
+            <div className="shrink-0 border-t border-brand-line bg-brand-mist/60 px-5 py-4 sm:px-8">
+              <Button
+                to="/contato/?assunto=orcamento"
+                className="min-h-13 w-full"
+                size="lg"
                 onClick={closeAll}
-                className="block py-2.5 text-sm font-semibold text-brand-blue"
               >
-                Visão geral
-              </Link>
-              <p className="mt-3 text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-slate">
-                Produtos
-              </p>
-              {products.map((item) => (
-                <Link
-                  key={item.slug}
-                  to={productPath(item.slug)}
-                  onClick={closeAll}
-                  className="block py-2.5 text-sm text-brand-graphite"
-                >
-                  <span className="font-medium">{item.title}</span>
-                  <span className="mt-0.5 block text-xs text-brand-slate line-clamp-1">
-                    {item.description}
-                  </span>
-                </Link>
-              ))}
-              <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-slate">
-                Serviços
-              </p>
-              {services.map((item) => (
-                <Link
-                  key={item.slug}
-                  to={servicePath(item.slug)}
-                  onClick={closeAll}
-                  className="block py-2.5 text-sm text-brand-graphite"
-                >
-                  <span className="font-medium">{item.title}</span>
-                  <span className="mt-0.5 block text-xs text-brand-slate line-clamp-1">
-                    {item.description}
-                  </span>
-                </Link>
-              ))}
-            </MobileAccordion>
-
-            <MobileAccordion
-              label="Segmentos"
-              open={mobileAccordions.segmentos}
-              onToggle={() =>
-                setMobileAccordions((s) => ({
-                  ...s,
-                  segmentos: !s.segmentos,
-                }))
-              }
-            >
-              <Link
-                to="/segmentos/"
-                onClick={closeAll}
-                className="block py-2.5 text-sm font-semibold text-brand-blue"
-              >
-                Todos os segmentos
-              </Link>
-              {segments.map((item) => (
-                <Link
-                  key={item.slug}
-                  to={segmentPath(item.slug)}
-                  onClick={closeAll}
-                  className="block py-2.5 text-sm text-brand-graphite"
-                >
-                  {item.title}
-                </Link>
-              ))}
-            </MobileAccordion>
-
-            <Link to="/contato/" onClick={closeAll} className={mobileLink}>
-              Contato
-            </Link>
-            <Button
-              to="/contato/?assunto=orcamento"
-              className="mt-3 w-full"
-              size="lg"
-              onClick={closeAll}
-            >
-              Solicitar orçamento
-            </Button>
-          </Container>
-        </div>
+                Solicitar orçamento
+              </Button>
+            </div>
+          </div>
+        </>
       ) : null}
     </header>
   )
@@ -460,7 +480,7 @@ function navClass(active: boolean): string {
 }
 
 const mobileLink =
-  'px-3 py-3.5 text-base font-medium text-brand-graphite hover:bg-brand-mist'
+  'flex min-h-12 items-center px-1 py-3 text-base font-medium text-brand-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2'
 
 function MobileAccordion({
   label,
@@ -477,14 +497,17 @@ function MobileAccordion({
     <div className="border-y border-brand-line/80">
       <button
         type="button"
-        className="flex w-full items-center justify-between px-3 py-3.5 text-left text-base font-medium text-brand-graphite"
+        className="flex min-h-12 w-full items-center justify-between px-1 py-3.5 text-left text-base font-medium text-brand-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
         aria-expanded={open}
         onClick={onToggle}
       >
         {label}
-        <ChevronDown className={`size-4 transition ${open ? 'rotate-180' : ''}`} aria-hidden />
+        <ChevronDown
+          className={`size-5 shrink-0 text-brand-slate transition ${open ? 'rotate-180' : ''}`}
+          aria-hidden
+        />
       </button>
-      {open ? <div className="space-y-0.5 px-3 pb-4">{children}</div> : null}
+      {open ? <div className="space-y-0.5 px-1 pb-4">{children}</div> : null}
     </div>
   )
 }

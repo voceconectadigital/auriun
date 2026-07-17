@@ -180,7 +180,7 @@ export function SolutionsEcosystem() {
             <Link
               key={panel.id}
               to={panel.href}
-              className="group relative block min-h-[320px] overflow-hidden sm:min-h-[380px]"
+              className="group relative block min-h-[280px] overflow-hidden sm:min-h-[340px]"
             >
               <img
                 src={panel.image}
@@ -191,13 +191,13 @@ export function SolutionsEcosystem() {
                 loading="lazy"
                 decoding="async"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/50 to-transparent" />
-              <div className="relative flex h-full min-h-[320px] flex-col justify-end p-6 sm:min-h-[380px] sm:p-8">
-                <h3 className="ecosystem-panel-title">{panel.title}</h3>
-                <p className="mt-3 max-w-md text-[0.975rem] leading-relaxed text-white/75">
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/55 to-transparent" />
+              <div className="relative flex h-full min-h-[280px] flex-col justify-end p-6 sm:min-h-[340px] sm:p-8">
+                <h3 className="ecosystem-panel-title text-[1.5rem] sm:text-[1.75rem]">{panel.title}</h3>
+                <p className="mt-3 max-w-md text-[0.975rem] leading-[1.65] text-white/78">
                   {panel.description}
                 </p>
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-brand-orange">
+                <span className="mt-5 inline-flex min-h-11 items-center gap-2 text-[0.975rem] font-semibold text-brand-orange">
                   Explorar
                   <ArrowRight className="size-4" aria-hidden />
                 </span>

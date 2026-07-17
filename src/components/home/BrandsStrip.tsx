@@ -14,14 +14,34 @@ export function BrandsStrip() {
           <h2 className="section-title mt-4 text-brand-graphite">
             Tecnologia das principais marcas do mercado.
           </h2>
-          <p className="mt-5 text-base text-brand-slate sm:text-lg">
+          <p className="mt-5 text-[1.0625rem] leading-[1.65] text-brand-slate sm:text-lg">
             Um portfólio multimarcas para diferentes demandas industriais.
           </p>
         </div>
       </Container>
 
-      {/* Marquee with edge mask — pattern from 21st Logos 3 / Marquee Logo Scroller */}
-      <div className="relative pb-16 md:pb-20 lg:pb-24">
+      {/* Mobile / tablet: static grid */}
+      <Container className="px-5 pb-16 sm:px-8 md:hidden lg:px-10">
+        <ul className="grid grid-cols-2 gap-3 min-[480px]:grid-cols-3 sm:gap-4">
+          {partnerBrands.map((brand) => (
+            <li
+              key={brand}
+              className="flex min-h-[88px] items-center justify-center border border-brand-line bg-brand-mist/40 px-3 py-5"
+            >
+              <span className="text-center text-[0.875rem] font-semibold tracking-[0.04em] text-brand-graphite/75">
+                {brand}
+              </span>
+            </li>
+          ))}
+        </ul>
+        <p className="mt-6 text-[0.8125rem] leading-relaxed text-brand-slate/70">
+          Logotipos oficiais pendentes de autorização — células tipográficas temporárias.
+          Não representa exclusividade ou representação oficial.
+        </p>
+      </Container>
+
+      {/* Desktop: marquee */}
+      <div className="relative hidden pb-16 md:block md:pb-20 lg:pb-24">
         <div className="motion-reduce:hidden">
           <div
             className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white to-transparent sm:w-24 lg:w-32"

@@ -45,8 +45,8 @@ const variants: Record<ButtonVariant, string> = {
 }
 
 const sizes: Record<ButtonSize, string> = {
-  md: 'px-5 py-2.5 text-sm',
-  lg: 'px-6 py-3 text-sm sm:text-base',
+  md: 'min-h-11 px-5 py-2.5 text-sm',
+  lg: 'min-h-12 px-6 py-3 text-sm sm:min-h-[3.25rem] sm:text-base',
 }
 
 function cx(...parts: Array<string | false | undefined>) {

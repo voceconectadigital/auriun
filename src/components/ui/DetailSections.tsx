@@ -33,17 +33,17 @@ export function DetailHero({
           <p className="mt-6 text-xs font-semibold uppercase tracking-[0.18em] text-brand-blue">
             {eyebrow}
           </p>
-          <h1 className="mt-3 font-display text-3xl font-semibold tracking-tight text-brand-graphite text-balance sm:text-4xl lg:text-[2.75rem]">
+          <h1 className="mt-3 font-display text-[clamp(2rem,8vw,2.75rem)] font-semibold tracking-tight text-brand-graphite text-balance sm:text-4xl lg:text-[2.75rem]">
             {title}
           </h1>
           <p className="mt-4 max-w-xl text-base leading-relaxed text-brand-slate sm:text-lg">
             {description}
           </p>
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Button to={ctaTo} size="lg">
+          <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+            <Button to={ctaTo} size="lg" className="min-h-13 w-full justify-center sm:w-auto">
               {ctaLabel}
             </Button>
-            <Button to="/solucoes/" variant="ghost" size="lg">
+            <Button to="/solucoes/" variant="ghost" size="lg" className="min-h-13 w-full justify-center sm:w-auto">
               Ver soluções
               <ArrowRight className="size-4" aria-hidden />
             </Button>
@@ -122,16 +122,16 @@ export function DetailCta({
 }) {
   return (
     <section className="section-pad bg-brand-graphite">
-      <Container className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-center">
+      <Container className="flex w-full flex-col items-stretch justify-between gap-6 md:flex-row md:items-center">
         <div className="max-w-2xl">
-          <h2 className="font-display text-2xl font-semibold text-white sm:text-3xl">
+          <h2 className="font-display text-[clamp(1.5rem,6vw,1.875rem)] font-semibold text-white sm:text-3xl">
             {title}
           </h2>
-          <p className="mt-3 text-sm leading-relaxed text-white/70 sm:text-base">
+          <p className="mt-3 text-[0.9375rem] leading-[1.65] text-white/70 sm:text-base">
             {description}
           </p>
         </div>
-        <Button to={to} size="lg" className="shrink-0">
+        <Button to={to} size="lg" className="min-h-13 w-full shrink-0 justify-center md:w-auto">
           {label}
         </Button>
       </Container>

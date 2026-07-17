@@ -169,7 +169,7 @@ export function ContactForm() {
         />
       </Field>
 
-      <Button type="submit" size="lg" className="w-full sm:w-auto">
+      <Button type="submit" size="lg" className="min-h-13 w-full sm:w-auto">
         <Send className="size-4" aria-hidden />
         Solicitar orçamento
       </Button>
@@ -188,7 +188,7 @@ export function ContactForm() {
 }
 
 const inputClass =
-  'w-full rounded-sm border border-brand-line bg-white px-3.5 py-2.5 text-sm text-brand-graphite outline-none transition placeholder:text-brand-slate/50 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20'
+  'w-full min-h-12 rounded-sm border border-brand-line bg-white px-3.5 py-3 text-base text-brand-graphite outline-none transition placeholder:text-brand-slate/50 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20'
 
 function Field({
   label,

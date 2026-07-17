@@ -79,6 +79,57 @@
     text-wrap: balance;
   }
 
+  /* Site chrome height — keep Hero / Layout / Header in sync */
+  :root {
+    --site-header-h: 72px;
+  }
+
+  @media (min-width: 768px) {
+    :root {
+      --site-header-h: 80px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    :root {
+      --site-header-h: 88px;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .section-pad {
+      padding-top: 4.5rem;
+      padding-bottom: 4.5rem;
+      padding-left: 1.125rem;
+      padding-right: 1.125rem;
+    }
+
+    .hero-title {
+      font-size: clamp(2.5rem, 11vw, 3.7rem);
+      line-height: 1.1;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 8vw, 3rem);
+      line-height: 1.14;
+    }
+
+    .segments-tabs {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      mask-image: linear-gradient(
+        90deg,
+        #000 0%,
+        #000 calc(100% - 2.5rem),
+        transparent 100%
+      );
+    }
+
+    .segments-tabs::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   .brand-hairline {
     background: linear-gradient(
       90deg,
@@ -139,6 +190,23 @@
         0 16px 36px rgba(3, 18, 32, 0.16),
         0 6px 14px rgba(3, 18, 32, 0.1),
         0 2px 6px rgba(3, 18, 32, 0.08);
+    }
+
+    .differential-card:active {
+      transform: scale(0.985);
+    }
+
+    .footer-cta-button:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .footer-cta-button:active {
+      transform: scale(0.985);
+    }
+
+    .hero-kenburns {
+      animation: none;
     }
   }
 

@@ -12,7 +12,10 @@ export function Layout() {
   return (
     <div className="flex min-h-dvh flex-col">
       <Header />
-      <main className={isHome ? 'flex-1' : 'flex-1 pt-[89px]'}>
+      <main
+        className={isHome ? 'flex-1' : 'flex-1'}
+        style={isHome ? undefined : { paddingTop: 'var(--site-header-h)' }}
+      >
         <Outlet />
       </main>
       <Footer />

@@ -66,10 +66,11 @@ export function Differentials() {
               className={[
                 'differential-card group relative isolate overflow-hidden',
                 'border border-white/10',
-                'min-h-[240px] sm:min-h-[260px]',
+                'min-h-[260px] sm:min-h-[260px]',
                 item.span,
                 item.featured ? 'lg:min-h-[360px]' : 'lg:min-h-[220px]',
-                index === 3 ? 'min-h-[220px] lg:min-h-[200px]' : '',
+                index === 3 ? 'min-h-[240px] lg:min-h-[200px]' : '',
+                'active:scale-[0.985] transition-transform duration-200 lg:active:scale-100',
               ].join(' ')}
             >
               <picture>

@@ -48,7 +48,7 @@ export function ContactPage() {
       </section>
 
       <section className="section-pad">
-        <Container className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+        <Container className="grid gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:px-10">
           <div>
             <h2 className="font-display text-2xl font-semibold text-brand-graphite sm:text-3xl">
               Canais comerciais
@@ -111,7 +111,7 @@ export function ContactPage() {
             )}
           </div>
 
-          <div className="border border-brand-line bg-white p-6 sm:p-9">
+          <div className="border border-brand-line bg-white p-5 sm:p-9">
             <h2 className="font-display text-xl font-semibold text-brand-graphite sm:text-2xl">
               Formulário de contato
             </h2>

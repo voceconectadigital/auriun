@@ -31,11 +31,11 @@ export function FinalCta() {
               Conte com atendimento técnico, agilidade comercial e uma ampla rede de
               fornecimento.
             </p>
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button to="/contato/?assunto=orcamento" size="lg">
+            <div className="mt-9 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
+              <Button to="/contato/?assunto=orcamento" size="lg" className="min-h-13 w-full justify-center sm:w-auto">
                 Solicitar orçamento
               </Button>
-              <Button to="/contato/" size="lg" variant="outline-light">
+              <Button to="/contato/" size="lg" variant="outline-light" className="min-h-13 w-full justify-center sm:w-auto">
                 Falar com a Auriun
               </Button>
             </div>

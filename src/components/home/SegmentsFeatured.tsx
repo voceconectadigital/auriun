@@ -27,14 +27,14 @@ export function SegmentsFeatured() {
           <Button
             to="/segmentos/"
             variant="outline-light"
-            className="self-start lg:self-auto"
+            className="min-h-12 self-stretch sm:self-start lg:self-auto"
           >
             Ver todos
             <ArrowRight className="size-4" aria-hidden />
           </Button>
         </div>
 
-        {/* Interactive panel — Feature 108 / Vertical Tabs pattern */}
+        {/* Interactive panel — desktop */}
         <div className="mt-12 hidden gap-8 lg:grid lg:grid-cols-[0.9fr_1.1fr] lg:gap-10">
           <div>
             <p id={labelId} className="sr-only">
@@ -127,61 +127,79 @@ export function SegmentsFeatured() {
           </div>
         </div>
 
-        <div className="mt-10 space-y-3 lg:hidden">
-          {segments.map((segment) => {
-            const open = segment.slug === activeSlug
-            return (
-              <div
-                key={segment.slug}
-                className="overflow-hidden border border-white/12 bg-brand-navy-mid"
-              >
+        {/* Mobile / tablet: horizontal tabs + single panel */}
+        <div className="mt-10 lg:hidden">
+          <p className="sr-only" id={`${labelId}-mobile`}>
+            Selecione um segmento industrial
+          </p>
+          <div
+            className="segments-tabs -mx-1 flex gap-2 overflow-x-auto overscroll-x-contain px-1 pb-2"
+            role="tablist"
+            aria-labelledby={`${labelId}-mobile`}
+            style={{ scrollSnapType: 'x mandatory' }}
+          >
+            {segments.map((segment) => {
+              const selected = segment.slug === activeSlug
+              return (
                 <button
+                  key={segment.slug}
                   type="button"
-                  className="flex w-full items-center justify-between gap-3 px-5 py-4 text-left"
-                  aria-expanded={open}
+                  role="tab"
+                  aria-selected={selected}
+                  aria-controls={`segment-panel-${segment.slug}`}
+                  id={`segment-tab-${segment.slug}`}
+                  className={[
+                    'min-h-12 shrink-0 snap-start rounded-sm px-4 text-[0.9375rem] font-semibold transition',
+                    'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy',
+                    selected
+                      ? 'bg-brand-orange text-white'
+                      : 'bg-white/8 text-white/75 ring-1 ring-white/15',
+                  ].join(' ')}
                   onClick={() => setActiveSlug(segment.slug)}
                 >
-                  <span className="text-base font-semibold text-white">
-                    {segment.shortTitle}
-                  </span>
-                  <ArrowRight
-                    className={[
-                      'size-4 text-brand-orange transition',
-                      open ? 'rotate-90' : '',
-                    ].join(' ')}
-                    aria-hidden
-                  />
+                  {segment.shortTitle}
                 </button>
-                {open ? (
-                  <div className="border-t border-white/10">
-                    <div className="relative aspect-[16/10] overflow-hidden bg-brand-blue-deep">
-                      <img
-                        src={segment.image}
-                        alt=""
-                        className="size-full object-cover"
-                        width={800}
-                        height={500}
-                        loading="lazy"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent" />
-                    </div>
-                    <div className="px-5 py-5">
-                      <p className="text-[0.975rem] leading-relaxed text-white/70">
-                        {segment.description}
-                      </p>
-                      <Link
-                        to={segmentPath(segment.slug)}
-                        className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-brand-orange"
-                      >
-                        Conhecer segmento
-                        <ArrowRight className="size-4" aria-hidden />
-                      </Link>
-                    </div>
-                  </div>
-                ) : null}
-              </div>
-            )
-          })}
+              )
+            })}
+          </div>
+
+          <div
+            id={`segment-panel-${active.slug}`}
+            role="tabpanel"
+            aria-labelledby={`segment-tab-${active.slug}`}
+            className="mt-5 overflow-hidden border border-white/12 bg-brand-navy-mid"
+          >
+            <div className="relative aspect-[16/10] overflow-hidden bg-brand-blue-deep">
+              <img
+                key={active.slug}
+                src={active.image}
+                alt=""
+                className="size-full object-cover segment-photo-fade"
+                width={800}
+                height={500}
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent" />
+            </div>
+            <div className="px-5 py-6">
+              <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
+                Segmento
+              </p>
+              <h3 className="mt-2 text-xl font-bold tracking-tight text-white sm:text-2xl">
+                {active.title}
+              </h3>
+              <p className="mt-3 text-[0.975rem] leading-[1.65] text-white/70">
+                {active.description}
+              </p>
+              <Link
+                to={segmentPath(active.slug)}
+                className="mt-5 inline-flex min-h-12 items-center gap-2 text-[0.975rem] font-semibold text-brand-orange"
+              >
+                Conhecer segmento
+                <ArrowRight className="size-4" aria-hidden />
+              </Link>
+            </div>
+          </div>
         </div>
       </Container>
     </section>
