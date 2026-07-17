@@ -101,7 +101,7 @@ export function Header() {
           aria-label="Auriun — página inicial"
           onClick={closeAll}
         >
-          <Logo className="h-9 w-auto max-w-[112px] sm:h-11 sm:max-w-[132px] xl:h-[58px] xl:max-w-[160px]" />
+          <Logo className="h-10 w-auto max-h-10 sm:h-11 sm:max-h-11 xl:h-12 xl:max-h-12" />
         </Link>
 
         <nav className="hidden items-center gap-1 xl:flex" aria-label="Principal">

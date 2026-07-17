@@ -1,29 +1,22 @@
+import { BRAND_LOGO } from '@/data/site'
+
 type LogoProps = {
   className?: string
-  /** Preferir `default` (colorida) sobre fundo branco. */
-  variant?: 'default' | 'on-dark'
 }
 
 /**
- * Logo oficial: aurion-logo.webp (nome do arquivo mantido).
- * Dimensões de referência ~260×212. object-contain, sem fundo artificial.
+ * Logo oficial 3D — caminho centralizado em BRAND_LOGO.
+ * object-contain, sem filtros, sem fundo artificial, sem sombra extra.
  */
-export function Logo({ className = 'h-14 w-auto', variant = 'default' }: LogoProps) {
+export function Logo({ className = 'h-12 w-auto' }: LogoProps) {
   return (
     <img
-      src="/aurion-logo.webp"
-      alt="Auriun Soluções Industriais"
-      width={260}
-      height={212}
-      className={[
-        className,
-        'object-contain object-left',
-        variant === 'on-dark' ? 'brightness-[1.05]' : '',
-      ]
-        .filter(Boolean)
-        .join(' ')}
+      src={BRAND_LOGO.src}
+      alt={BRAND_LOGO.alt}
+      width={BRAND_LOGO.width}
+      height={BRAND_LOGO.height}
+      className={[className, 'object-contain object-left'].filter(Boolean).join(' ')}
       decoding="async"
-      style={{ background: 'transparent' }}
     />
   )
 }

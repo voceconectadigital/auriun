@@ -36,7 +36,8 @@ Edite `src/data/site.ts`. Campos vazios não são exibidos.
 
 ## Logo
 
-Arquivo oficial: `public/aurion-logo.webp` (nome mantido como recebido; a marca é **Auriun**).
+Arquivo oficial: `public/aurion-logo-3d.webp` (caminho público `/aurion-logo-3d.webp`).
+Centralizado em `BRAND_LOGO` (`src/data/site.ts`) e no componente `Logo`.
 
 ## Estrutura de conteúdo
 

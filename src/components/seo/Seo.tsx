@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { SITE } from '@/data/site'
+import { SITE, BRAND_LOGO } from '@/data/site'
 import { absoluteUrl } from '@/data/routes'
 
 type JsonLdProps = {
@@ -40,7 +40,7 @@ export function organizationJsonLd() {
     '@type': 'Organization',
     name: SITE.name,
     url: absoluteUrl('/'),
-    logo: absoluteUrl('/aurion-logo.webp'),
+    logo: absoluteUrl(BRAND_LOGO.src),
     description: SITE.description,
   }
 }
@@ -62,7 +62,7 @@ export function useDocumentSeo({ title, description, path, image }: PageSeoProps
     setMeta('property', 'og:description', description)
     setMeta('property', 'og:type', 'website')
     setMeta('property', 'og:url', absoluteUrl(path))
-    const ogImage = absoluteUrl(image ?? '/aurion-logo.webp')
+    const ogImage = absoluteUrl(image ?? BRAND_LOGO.src)
     setMeta('property', 'og:image', ogImage)
     setMeta('name', 'twitter:card', 'summary_large_image')
     setMeta('name', 'twitter:image', ogImage)

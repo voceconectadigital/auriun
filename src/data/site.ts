@@ -27,6 +27,14 @@ export const SITE = {
   topbarMessage: 'Atendimento consultivo para a indústria em todo o Brasil',
 } as const
 
+/** Caminho público único da marca — usar em Logo, SEO e JSON-LD. */
+export const BRAND_LOGO = {
+  src: '/aurion-logo-3d.webp',
+  width: 260,
+  height: 195,
+  alt: 'Auriun Soluções Industriais',
+} as const
+
 export function hasValue(value: string | undefined | null): boolean {
   if (!value) return false
   return !value.toUpperCase().includes('PLACEHOLDER') && value.trim().length > 0

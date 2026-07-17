@@ -47,7 +47,7 @@ async function main() {
         html,
         'property',
         'og:image',
-        absoluteUrl(route.ogImage ?? '/aurion-logo.webp'),
+        absoluteUrl(route.ogImage ?? '/aurion-logo-3d.webp'),
       )
       html = upsertMeta(
         html,
@@ -59,7 +59,7 @@ async function main() {
         html,
         'name',
         'twitter:image',
-        absoluteUrl(route.ogImage ?? '/aurion-logo.webp'),
+        absoluteUrl(route.ogImage ?? '/aurion-logo-3d.webp'),
       )
       html = upsertLink(html, 'canonical', absoluteUrl(url))
 

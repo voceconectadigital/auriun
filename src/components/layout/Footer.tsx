@@ -50,9 +50,7 @@ export function Footer() {
       <div className="footer-main border-t border-white/10">
         <Container className="section-pad grid gap-10 pt-14 pb-14 md:grid-cols-2 md:gap-14 md:pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-20">
           <div className="lg:col-span-4">
-            <div className="inline-flex bg-white px-4 py-3">
-              <Logo className="h-12 w-auto max-w-[140px] sm:h-14 sm:max-w-[150px]" />
-            </div>
+            <Logo className="h-auto w-[140px] max-w-[160px] sm:w-[150px]" />
             <p className="mt-6 max-w-sm text-[0.975rem] leading-[1.65] text-white/65 sm:mt-7">
               {SITE.valueProposition}
             </p>
