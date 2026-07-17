@@ -2,9 +2,9 @@ import { useMemo } from 'react'
 import { useSearchParams } from 'react-router-dom'
 import { MessageCircle } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
-import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
 import { ContactForm } from '@/components/contact/ContactForm'
+import { InternalHero } from '@/components/ui/InternalHero'
 import {
   JsonLd,
   organizationJsonLd,
@@ -28,6 +28,7 @@ export function ContactPage() {
     description:
       'Entre em contato com a Auriun Soluções Industriais para orçamentos, suporte técnico-comercial e demandas industriais.',
     path: '/contato/',
+    image: '/images/cta-industrial.jpg',
   })
 
   const wa = whatsappUrl()
@@ -35,20 +36,25 @@ export function ContactPage() {
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
-      <section className="border-b border-brand-line bg-brand-navy text-white">
-        <Container className="section-pad py-16 md:py-20">
-          <SectionHeading
-            eyebrow="Contato"
-            title={assunto === 'orcamento' ? 'Solicitar orçamento' : 'Fale com a Auriun'}
-            description={intro}
-            tone="dark"
-            as="h1"
-          />
-        </Container>
-      </section>
+      <InternalHero
+        variant="contact"
+        crumbs={[
+          { label: 'Início', to: '/' },
+          { label: 'Contato' },
+        ]}
+        eyebrow="Contato"
+        title={assunto === 'orcamento' ? 'Solicitar orçamento' : 'Fale com a Auriun'}
+        description={intro}
+        image="/images/cta-industrial.jpg"
+        imageAlt="Ambiente industrial representando o canal comercial da Auriun"
+        imagePosition="center center"
+        imagePositionMobile="center 40%"
+        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Solicitar orçamento' }}
+        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
+      />
 
       <section className="section-pad">
-        <Container className="grid gap-12 px-5 sm:px-8 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16 lg:px-10">
+        <Container className="grid gap-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
           <div>
             <h2 className="font-display text-2xl font-semibold text-brand-graphite sm:text-3xl">
               Canais comerciais

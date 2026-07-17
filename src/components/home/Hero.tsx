@@ -32,7 +32,7 @@ export function Hero() {
           <div className="absolute inset-y-0 left-0 w-[min(56%,560px)] bg-[radial-gradient(ellipse_at_left,rgba(217,119,45,0.1),transparent_70%)]" />
         </div>
 
-        <Container className="relative flex flex-col justify-end px-5 pb-20 pt-10 sm:px-8 sm:pb-28 sm:pt-14 lg:min-h-[840px] lg:justify-center lg:px-10 lg:pb-32 lg:pt-12">
+        <Container className="relative flex flex-col justify-end pb-20 pt-10 sm:pb-28 sm:pt-14 lg:min-h-[840px] lg:justify-center lg:pb-32 lg:pt-12">
           <div className="max-w-[640px] lg:max-w-[620px]">
             <p className="reveal text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-orange sm:text-[13px] sm:tracking-[0.2em]">
               Distribuição • Integração • Suprimentos industriais

@@ -18,7 +18,7 @@ const indicators = [
 export function InstitutionalBand() {
   return (
     <section className="relative z-0 bg-white pt-32 md:pt-[5.75rem] lg:pt-[6.75rem]">
-      <Container className="px-5 pb-16 sm:px-8 md:pb-20 lg:px-10 lg:pb-24">
+      <Container className="pb-16 md:pb-20 lg:pb-24">
         <div className="grid gap-8 border-b border-brand-line pb-10 md:gap-10 md:pb-12 lg:grid-cols-[minmax(0,1.45fr)_minmax(0,0.8fr)] lg:items-end lg:gap-20 lg:pb-14">
           <div>
             <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-brand-blue">

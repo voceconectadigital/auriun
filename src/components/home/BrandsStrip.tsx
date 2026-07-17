@@ -21,7 +21,7 @@ export function BrandsStrip() {
       </Container>
 
       {/* Mobile / tablet: static grid */}
-      <Container className="px-5 pb-16 sm:px-8 md:hidden lg:px-10">
+      <Container className="pb-16 md:hidden">
         <ul className="grid grid-cols-2 gap-3 min-[480px]:grid-cols-3 sm:gap-4">
           {partnerBrands.map((brand) => (
             <li

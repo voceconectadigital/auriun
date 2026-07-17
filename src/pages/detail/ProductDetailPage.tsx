@@ -1,10 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { Container } from '@/components/ui/Container'
-import {
-  DetailCta,
-  DetailHero,
-  RelatedGrid,
-} from '@/components/ui/DetailSections'
+import { DetailCta, RelatedGrid } from '@/components/ui/DetailSections'
+import { InternalHero } from '@/components/ui/InternalHero'
 import {
   breadcrumbJsonLd,
   JsonLd,
@@ -71,7 +68,8 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
           ]),
         ]}
       />
-      <DetailHero
+      <InternalHero
+        variant="product"
         crumbs={[
           { label: 'Início', to: '/' },
           { label: 'Soluções', to: '/solucoes/' },
@@ -83,6 +81,8 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
         description={product.description}
         image={product.image}
         imageAlt={product.imageAlt}
+        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Solicitar orçamento' }}
+        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 
       <section className="section-pad">

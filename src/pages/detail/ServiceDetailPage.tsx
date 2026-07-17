@@ -1,10 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { Container } from '@/components/ui/Container'
-import {
-  DetailCta,
-  DetailHero,
-  RelatedGrid,
-} from '@/components/ui/DetailSections'
+import { DetailCta, RelatedGrid } from '@/components/ui/DetailSections'
+import { InternalHero } from '@/components/ui/InternalHero'
 import {
   breadcrumbJsonLd,
   JsonLd,
@@ -80,7 +77,8 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
           ]),
         ]}
       />
-      <DetailHero
+      <InternalHero
+        variant="service"
         crumbs={[
           { label: 'Início', to: '/' },
           { label: 'Soluções', to: '/solucoes/' },
@@ -92,18 +90,21 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
         description={service.description}
         image={service.image}
         imageAlt={service.imageAlt}
-        ctaLabel="Conversar com a equipe"
+        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Conversar com a equipe' }}
+        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 
       <section className="section-pad">
-        <Container className="max-w-3xl">
-          <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-            O que é este serviço
-          </h2>
-          <div className="mt-4 space-y-4 text-base leading-relaxed text-brand-slate">
-            {paragraphs.map((p) => (
-              <p key={p.slice(0, 32)}>{p}</p>
-            ))}
+        <Container>
+          <div className="max-w-3xl">
+            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
+              O que é este serviço
+            </h2>
+            <div className="mt-4 space-y-4 text-base leading-relaxed text-brand-slate">
+              {paragraphs.map((p) => (
+                <p key={p.slice(0, 32)}>{p}</p>
+              ))}
+            </div>
           </div>
         </Container>
       </section>

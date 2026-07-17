@@ -5,8 +5,8 @@ type LogoProps = {
 }
 
 /**
- * Logo oficial 3D — caminho centralizado em BRAND_LOGO.
- * object-contain, sem filtros, sem fundo artificial, sem sombra extra.
+ * Logo oficial 3D com sombra embutida — caminho centralizado em BRAND_LOGO.
+ * object-contain, sem filtros, sem fundo artificial, sem sombra CSS extra.
  */
 export function Logo({ className = 'h-12 w-auto' }: LogoProps) {
   return (

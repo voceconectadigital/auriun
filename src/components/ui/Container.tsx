@@ -7,6 +7,10 @@ type ContainerProps = {
   id?: string
 }
 
+/**
+ * Global site container. Width/gutter come from `.container-site` tokens
+ * in index.css — do not add competing max-w-* or padding-inline here.
+ */
 export function Container({
   children,
   className = '',

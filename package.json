@@ -9,7 +9,9 @@
     "preview": "vite preview",
     "lint": "eslint .",
     "typecheck": "tsc -b --pretty false",
-    "prerender": "node scripts/prerender.mjs"
+    "prerender": "node scripts/prerender.mjs",
+    "test:internal-hero": "node scripts/check-internal-hero.mjs",
+    "test:related-icons": "node scripts/check-related-icons.mjs"
   },
   "dependencies": {
     "lucide-react": "^1.25.0",

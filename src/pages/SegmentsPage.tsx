@@ -1,8 +1,8 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
-import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
+import { InternalHero } from '@/components/ui/InternalHero'
 import { SegmentCoverImage } from '@/components/ui/SegmentCoverImage'
 import {
   JsonLd,
@@ -13,27 +13,35 @@ import { segments, segmentPath } from '@/data/segments'
 import { SITE } from '@/data/site'
 
 export function SegmentsPage() {
+  const hubCover = segments[0]
+
   useDocumentSeo({
     title: `Segmentos atendidos | ${SITE.shortName}`,
     description:
       'Segmentos industriais atendidos pela Auriun: mineração, óleo e gás, energia, manufatura e outros setores estratégicos.',
     path: '/segmentos/',
-    image: segments[0]?.image,
+    image: hubCover?.image,
   })
 
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
-      <section className="border-b border-brand-line bg-brand-mist">
-        <Container className="section-pad py-16 md:py-20">
-          <SectionHeading
-            eyebrow="Segmentos"
-            title="Mercados estratégicos atendidos"
-            description="Conheça os setores em que a Auriun está preparada para apoiar operações com fornecimento técnico e atendimento consultivo."
-            as="h1"
-          />
-        </Container>
-      </section>
+      <InternalHero
+        variant="hub"
+        crumbs={[
+          { label: 'Início', to: '/' },
+          { label: 'Segmentos' },
+        ]}
+        eyebrow="Segmentos"
+        title="Mercados estratégicos atendidos"
+        description="Conheça os setores em que a Auriun está preparada para apoiar operações com fornecimento técnico e atendimento consultivo."
+        image={hubCover.image}
+        imageAlt={hubCover.imageAlt}
+        imagePosition={hubCover.imageObjectPosition?.hero ?? 'center center'}
+        imagePositionMobile={hubCover.imageObjectPosition?.mobile}
+        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Solicitar orçamento' }}
+        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
+      />
 
       <section className="section-pad">
         <Container>

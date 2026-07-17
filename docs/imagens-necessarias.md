@@ -1,7 +1,7 @@
 # Imagens necessárias / status
 
 ## Logo
-- [x] `aurion-logo-3d.webp` — oficial 3D (caminho público `/aurion-logo-3d.webp`)
+- [x] `aurion-logo-3d-shadow.webp` — oficial 3D com sombra (caminho público `/aurion-logo-3d-shadow.webp`)
 - [ ] Favicon dedicado — manter `favicon.webp` até haver ícone legível em 32px
 - Arquivos antigos sem uso no código: `aurion-logo.webp`, `og-logo.webp`
 - [ ] Avaliar padding transparente e contraste sobre fundos claros/escuros

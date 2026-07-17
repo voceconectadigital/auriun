@@ -215,7 +215,7 @@ export function Header() {
         scrolled || open || megaOpen ? 'shadow-[0_12px_40px_rgba(7,26,45,0.1)]' : '',
       ].join(' ')}
     >
-      <Container className="relative flex h-auto min-h-[var(--site-header-h)] items-center justify-between gap-3 px-5 py-[10px] sm:gap-4 sm:px-8 lg:px-10">
+      <Container className="relative flex h-auto min-h-[var(--site-header-h)] items-center justify-between gap-3 py-[10px] sm:gap-4">
         <Link
           to="/"
           className="relative z-20 flex shrink-0 items-center overflow-visible"
@@ -358,7 +358,7 @@ export function Header() {
         <div className="min-h-0 overflow-hidden">
           {megaVisible && renderedMenu === 'solucoes' ? (
             <div id="mega-solucoes" className="mega-fade border-b border-brand-line bg-white">
-              <Container className="grid gap-0 px-5 py-8 sm:px-8 lg:grid-cols-[1.05fr_0.95fr_0.95fr] lg:gap-10 lg:px-10 lg:py-10">
+              <Container className="grid gap-0 py-8 lg:grid-cols-[1.05fr_0.95fr_0.95fr] lg:gap-10 lg:py-10">
                 <Link
                   to="/solucoes/"
                   onClick={closeAll}
@@ -442,7 +442,7 @@ export function Header() {
 
           {megaVisible && renderedMenu === 'segmentos' && previewSegment ? (
             <div id="mega-segmentos" className="mega-fade border-b border-brand-line bg-white">
-              <Container className="grid gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:px-10 lg:py-10">
+              <Container className="grid gap-8 py-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:py-10">
                 <Link
                   to={segmentPath(previewSegment.slug)}
                   onClick={closeAll}
@@ -548,7 +548,7 @@ export function Header() {
             aria-label="Menu de navegação"
           >
             <nav
-              className="flex-1 overflow-y-auto overscroll-contain px-5 py-4 sm:px-8"
+              className="site-gutter-x flex-1 overflow-y-auto overscroll-contain py-4"
               aria-label="Mobile"
             >
               <div className="flex flex-col">
@@ -642,7 +642,7 @@ export function Header() {
               </div>
             </nav>
 
-            <div className="shrink-0 border-t border-brand-line bg-brand-mist/60 px-5 py-4 sm:px-8">
+            <div className="site-gutter-x shrink-0 border-t border-brand-line bg-brand-mist/60 py-4">
               <Button
                 to="/contato/?assunto=orcamento"
                 className="min-h-13 w-full"

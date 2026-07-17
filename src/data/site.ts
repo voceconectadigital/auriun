@@ -29,7 +29,7 @@ export const SITE = {
 
 /** Caminho público único da marca — usar em Logo, SEO e JSON-LD. */
 export const BRAND_LOGO = {
-  src: '/aurion-logo-3d.webp',
+  src: '/aurion-logo-3d-shadow.webp',
   width: 260,
   height: 195,
   alt: 'Auriun Soluções Industriais',
@@ -44,7 +44,7 @@ export function whatsappUrl(message?: string): string | null {
   if (!hasValue(CONTACT.whatsapp)) return null
   const text = encodeURIComponent(
     message ??
-      'Olá! Gostaria de solicitar um orçamento com a Auriun Soluções Industriais.',
+      'Olá! Acessei o site da Auriun e gostaria de solicitar mais informações.',
   )
   return `https://wa.me/${CONTACT.whatsapp}?text=${text}`
 }

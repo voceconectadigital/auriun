@@ -1,7 +1,7 @@
 import { Target, Eye, Heart } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
-import { SectionHeading } from '@/components/ui/SectionHeading'
+import { InternalHero } from '@/components/ui/InternalHero'
 import { aboutContent } from '@/data/content'
 import { JsonLd, organizationJsonLd, useDocumentSeo } from '@/components/seo/Seo'
 import { SITE } from '@/data/site'
@@ -12,21 +12,28 @@ export function AboutPage() {
     description:
       'Conheça a Auriun Soluções Industriais: distribuição e integração de soluções para a indústria com atendimento consultivo.',
     path: '/a-auriun/',
+    image: '/images/about-facility.jpg',
   })
 
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
-      <section className="border-b border-brand-line bg-brand-mist">
-        <Container className="section-pad py-16 md:py-20">
-          <SectionHeading
-            eyebrow="Institucional"
-            title="A Auriun Soluções Industriais"
-            description="Distribuidora e integradora de soluções para o setor industrial, com foco em eficiência operacional, redução de custos e continuidade dos processos produtivos."
-            as="h1"
-          />
-        </Container>
-      </section>
+      <InternalHero
+        variant="institutional"
+        crumbs={[
+          { label: 'Início', to: '/' },
+          { label: 'A Auriun' },
+        ]}
+        eyebrow="Institucional"
+        title="A Auriun Soluções Industriais"
+        description="Distribuidora e integradora de soluções para o setor industrial, com foco em eficiência operacional, redução de custos e continuidade dos processos produtivos."
+        image="/images/about-facility.jpg"
+        imageAlt="Instalação industrial da operação Auriun"
+        imagePosition="center 35%"
+        imagePositionMobile="center 30%"
+        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Falar com a Auriun' }}
+        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
+      />
 
       <section className="section-pad">
         <Container className="grid items-center gap-10 lg:grid-cols-2 lg:gap-16">
@@ -105,23 +112,25 @@ export function AboutPage() {
       </section>
 
       <section className="section-pad">
-        <Container className="max-w-3xl text-center">
-          <h2 className="font-display text-3xl font-semibold tracking-tight text-brand-graphite text-balance">
-            Compromisso com qualidade, inovação e excelência
-          </h2>
-          <p className="mt-4 text-base leading-relaxed text-brand-slate">
-            Buscamos parcerias de longo prazo, agregando valor por meio de soluções
-            personalizadas e contribuindo para o crescimento sustentável dos negócios
-            dos nossos clientes — sem promessas vazias, com foco em execução técnica
-            e comercial consistente.
-          </p>
-          <div className="mt-8 flex flex-wrap justify-center gap-3">
-            <Button to="/contato/?assunto=orcamento" size="lg">
-              Solicitar orçamento
-            </Button>
-            <Button to="/solucoes/" variant="ghost" size="lg">
-              Ver soluções
-            </Button>
+        <Container>
+          <div className="mx-auto max-w-3xl text-center">
+            <h2 className="font-display text-3xl font-semibold tracking-tight text-brand-graphite text-balance">
+              Compromisso com qualidade, inovação e excelência
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-brand-slate">
+              Buscamos parcerias de longo prazo, agregando valor por meio de soluções
+              personalizadas e contribuindo para o crescimento sustentável dos negócios
+              dos nossos clientes — sem promessas vazias, com foco em execução técnica
+              e comercial consistente.
+            </p>
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
+              <Button to="/contato/?assunto=orcamento" size="lg">
+                Solicitar orçamento
+              </Button>
+              <Button to="/solucoes/" variant="ghost" size="lg">
+                Ver soluções
+              </Button>
+            </div>
           </div>
         </Container>
       </section>

@@ -1,3 +1,5 @@
+import { Container } from '@/components/ui/Container'
+
 /**
  * Transition bridge between dark hero and light institutional band.
  * Placed between sections with h-0 + -translate-y-1/2 so the bar
@@ -6,8 +8,8 @@
 export function HeroBridge() {
   return (
     <div className="relative z-30 h-0 overflow-visible">
-      <div className="pointer-events-none relative -translate-y-1/2 px-4 sm:px-8 lg:px-10">
-        <div className="pointer-events-auto mx-auto w-full max-w-[1360px]">
+      <div className="pointer-events-none relative -translate-y-1/2">
+        <Container className="pointer-events-auto">
           <div className="hero-bridge relative flex flex-col overflow-hidden rounded-[4px] border border-[rgba(7,26,45,0.1)] bg-[linear-gradient(180deg,#ffffff_0%,#f5f7f9_100%)] md:min-h-[104px] md:flex-row md:items-stretch">
             <div className="brand-hairline absolute inset-x-0 top-0 z-[2] h-[3px]" aria-hidden />
 
@@ -24,7 +26,7 @@ export function HeroBridge() {
               </p>
             </div>
           </div>
-        </div>
+        </Container>
       </div>
     </div>
   )

@@ -1,10 +1,7 @@
 import { useParams } from 'react-router-dom'
 import { Container } from '@/components/ui/Container'
-import {
-  DetailCta,
-  DetailHero,
-  RelatedGrid,
-} from '@/components/ui/DetailSections'
+import { DetailCta, RelatedGrid } from '@/components/ui/DetailSections'
+import { InternalHero } from '@/components/ui/InternalHero'
 import {
   breadcrumbJsonLd,
   JsonLd,
@@ -76,7 +73,8 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
           ]),
         ]}
       />
-      <DetailHero
+      <InternalHero
+        variant="segment"
         crumbs={[
           { label: 'Início', to: '/' },
           { label: 'Segmentos', to: '/segmentos/' },
@@ -87,11 +85,12 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
         description={segment.description}
         image={segment.image}
         imageAlt={segment.imageAlt}
-        imageObjectPosition={segment.imageObjectPosition?.hero ?? 'center center'}
-        imageObjectPositionMobile={segment.imageObjectPosition?.mobile}
+        imagePosition={segment.imageObjectPosition?.hero ?? 'center center'}
+        imagePositionMobile={segment.imageObjectPosition?.mobile}
         fetchPriority="high"
         preload
-        ctaLabel="Solicitar uma solução"
+        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Solicitar uma solução' }}
+        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 
       <section className="section-pad">

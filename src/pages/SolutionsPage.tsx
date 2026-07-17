@@ -3,6 +3,7 @@ import { ArrowRight } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
+import { InternalHero } from '@/components/ui/InternalHero'
 import {
   JsonLd,
   organizationJsonLd,
@@ -13,26 +14,35 @@ import { services, servicePath } from '@/data/services'
 import { SITE } from '@/data/site'
 
 export function SolutionsPage() {
+  const hubCover = products[0]
+
   useDocumentSeo({
     title: `Soluções | ${SITE.shortName}`,
     description:
       'Produtos e serviços industriais da Auriun: elétrica, automação, instrumentação, MRO, sourcing e supply chain.',
     path: '/solucoes/',
+    image: hubCover.image,
   })
 
   return (
     <>
       <JsonLd data={organizationJsonLd()} />
-      <section className="border-b border-brand-line bg-brand-mist">
-        <Container className="section-pad py-16 md:py-20">
-          <SectionHeading
-            eyebrow="Soluções"
-            title="Produtos e serviços para a indústria"
-            description="Explore as categorias de fornecimento e os serviços de integração. Cada card abre a página individual da solução."
-            as="h1"
-          />
-        </Container>
-      </section>
+      <InternalHero
+        variant="hub"
+        crumbs={[
+          { label: 'Início', to: '/' },
+          { label: 'Soluções' },
+        ]}
+        eyebrow="Soluções"
+        title="Produtos e serviços para a indústria"
+        description="Explore as categorias de fornecimento e os serviços de integração. Cada card abre a página individual da solução."
+        image={hubCover.image}
+        imageAlt={hubCover.imageAlt}
+        imagePosition="68% center"
+        imagePositionMobile="62% center"
+        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Solicitar orçamento' }}
+        secondaryCta={{ to: '/solucoes/#produtos', label: 'Ver produtos' }}
+      />
 
       <section id="produtos" className="scroll-mt-28 section-pad">
         <Container>

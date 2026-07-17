@@ -18,7 +18,7 @@ export function Footer() {
       <div className="brand-hairline h-px w-full" aria-hidden />
 
       <div className="footer-cta-wrap">
-        <Container className="px-5 pt-14 sm:px-8 md:pt-16 lg:px-10 lg:pt-20">
+        <Container className="pt-14 md:pt-16 lg:pt-20">
           <div className="footer-cta-band grid overflow-hidden bg-[#1a7bc9] shadow-[0_18px_48px_rgba(3,18,32,0.28)] lg:grid-cols-[1.25fr_auto]">
             <div className="px-5 py-8 sm:px-10 sm:py-11 lg:px-12 lg:py-12">
               <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white/75">
@@ -50,7 +50,13 @@ export function Footer() {
       <div className="footer-main border-t border-white/10">
         <Container className="section-pad grid gap-10 pt-14 pb-14 md:grid-cols-2 md:gap-14 md:pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-20">
           <div className="lg:col-span-4">
-            <Logo className="h-auto w-[140px] max-w-[160px] sm:w-[150px]" />
+            <Link
+              to="/"
+              className="inline-flex items-center"
+              aria-label="Auriun — página inicial"
+            >
+              <Logo className="h-auto w-[150px] max-w-[170px] sm:w-[160px]" />
+            </Link>
             <p className="mt-6 max-w-sm text-[0.975rem] leading-[1.65] text-white/65 sm:mt-7">
               {SITE.valueProposition}
             </p>
@@ -218,7 +224,7 @@ export function Footer() {
       </div>
 
       <div className="border-t border-white/10">
-        <Container className="flex flex-col gap-4 px-5 py-7 sm:flex-row sm:items-end sm:justify-between sm:px-8 lg:px-10">
+        <Container className="flex flex-col gap-4 py-7 sm:flex-row sm:items-end sm:justify-between">
           <p
             className="select-none text-[clamp(2.25rem,10vw,5.5rem)] font-bold leading-none tracking-[-0.06em] text-white/[0.06]"
             aria-hidden

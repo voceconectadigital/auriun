@@ -55,12 +55,53 @@
     text-wrap: balance;
   }
 
-  .section-pad {
-    @apply px-5 py-20 sm:px-8 md:py-24 lg:px-10 lg:py-28;
+  /*
+   * Global site container — single horizontal axis for header, heroes,
+   * body sections, grids, and footer. Content width is preserved at
+   * --site-max-width; gutters sit outside that box (body-approved model).
+   */
+  :root {
+    --site-max-width: 1360px;
+    --site-gutter: 1.125rem; /* 18px mobile */
+    /*
+     * Header shell + sticky offset — must fit logo box + vertical padding.
+     * Logo widths: 5.625rem / sm 6.125rem / xl 7.125rem (aspect 260×195).
+     * Header row uses padding-block: 10px.
+     */
+    --site-header-h: 88px; /* ~67.5px logo + 10+10 */
+  }
+
+  @media (min-width: 640px) {
+    :root {
+      --site-gutter: 2rem; /* 32px tablet */
+      --site-header-h: 94px; /* ~73.5px logo + 10+10 */
+    }
+  }
+
+  @media (min-width: 1024px) {
+    :root {
+      --site-gutter: 2.5rem; /* 40px desktop — approved body gutter */
+    }
+  }
+
+  @media (min-width: 1280px) {
+    :root {
+      --site-header-h: 106px; /* ~85.5px logo + 10+10 */
+    }
   }
 
   .container-site {
-    @apply mx-auto w-full max-w-[1360px];
+    width: min(var(--site-max-width), calc(100% - 2 * var(--site-gutter)));
+    margin-inline: auto;
+  }
+
+  .site-gutter-x {
+    padding-inline: var(--site-gutter);
+  }
+
+  /* Vertical rhythm only — never owns the lateral gutter */
+  .section-pad {
+    @apply py-20 md:py-24 lg:py-28;
   }
 
   .hero-title {
@@ -79,30 +120,10 @@
     text-wrap: balance;
   }
 
-  /* Site chrome height — keep Hero / Layout / Header in sync.
-   * Fits logo box + padding-block 10px (widths 5.625 / 6.125 / 7.125rem). */
-  :root {
-    --site-header-h: 88px;
-  }
-
-  @media (min-width: 640px) {
-    :root {
-      --site-header-h: 94px;
-    }
-  }
-
-  @media (min-width: 1280px) {
-    :root {
-      --site-header-h: 106px;
-    }
-  }
-
   @media (max-width: 767px) {
     .section-pad {
       padding-top: 4.5rem;
       padding-bottom: 4.5rem;
-      padding-left: 1.125rem;
-      padding-right: 1.125rem;
     }
 
     .hero-title {
@@ -425,7 +446,7 @@
     left: 50%;
     bottom: 2.25rem;
     z-index: 1;
-    width: min(100% - 2.5rem, 1360px);
+    width: min(calc(100% - 2 * var(--site-gutter)), var(--site-max-width));
     height: 1px;
     transform: translateX(-50%);
     background: linear-gradient(
@@ -612,6 +633,134 @@
   }
 }
 
+/* Floating WhatsApp FAB — shadow pulse only (no size animation) */
+@keyframes whatsapp-shadow-pulse {
+  0%,
+  100% {
+    box-shadow:
+      0 4px 14px rgba(7, 26, 45, 0.14),
+      0 0 0 0 rgba(37, 211, 102, 0.28);
+  }
+  50% {
+    box-shadow:
+      0 6px 18px rgba(7, 26, 45, 0.18),
+      0 0 0 12px rgba(37, 211, 102, 0);
+  }
+}
+
+.whatsapp-fab {
+  position: fixed;
+  z-index: 45;
+  right: 1.125rem; /* 18px */
+  bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem; /* 56px */
+  height: 3.5rem;
+  border-radius: 9999px;
+  background-color: #25d366;
+  color: #fff;
+  border: 1.5px solid rgba(255, 255, 255, 0.88);
+  box-shadow:
+    0 4px 14px rgba(7, 26, 45, 0.14),
+    0 0 0 0 rgba(37, 211, 102, 0.28);
+  animation: whatsapp-shadow-pulse 2.8s ease-in-out infinite;
+  transition:
+    transform 300ms ease,
+    background-color 300ms ease,
+    box-shadow 300ms ease,
+    opacity 200ms ease,
+    visibility 200ms ease;
+  text-decoration: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.whatsapp-fab__icon {
+  display: block;
+  width: 1.75rem;
+  height: 1.75rem;
+  flex-shrink: 0;
+}
+
+.whatsapp-fab__tooltip {
+  position: absolute;
+  right: calc(100% + 0.75rem);
+  top: 50%;
+  transform: translateY(-50%) translateX(4px);
+  max-width: min(16rem, calc(100vw - 6rem));
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.375rem;
+  background-color: #071a2d;
+  color: #fff;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.35;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 250ms ease,
+    visibility 250ms ease,
+    transform 250ms ease;
+}
+
+@media (min-width: 640px) {
+  .whatsapp-fab {
+    right: 1.5rem; /* 24px */
+    bottom: 1.5rem;
+    width: 3.75rem; /* 60px */
+    height: 3.75rem;
+  }
+
+  .whatsapp-fab__icon {
+    width: 1.875rem;
+    height: 1.875rem;
+  }
+
+  .whatsapp-fab:hover .whatsapp-fab__tooltip,
+  .whatsapp-fab:focus-visible .whatsapp-fab__tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
+.whatsapp-fab:hover,
+.whatsapp-fab:focus-visible {
+  background-color: #1ebe57;
+  transform: translateY(-2px);
+  animation-play-state: paused;
+  box-shadow:
+    0 8px 22px rgba(7, 26, 45, 0.22),
+    0 0 0 0 rgba(37, 211, 102, 0);
+}
+
+.whatsapp-fab:focus-visible {
+  outline: 2px solid #071a2d;
+  outline-offset: 3px;
+}
+
+html[data-mobile-nav-open='true'] .whatsapp-fab {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-fab {
+    animation: none;
+    box-shadow: 0 4px 14px rgba(7, 26, 45, 0.16);
+  }
+
+  .whatsapp-fab:hover,
+  .whatsapp-fab:focus-visible {
+    animation: none;
+    box-shadow: 0 8px 20px rgba(7, 26, 45, 0.2);
+  }
+}
+
 /* Segment photos: object-position via CSS vars (set per layout in components) */
 .segment-framed-img {
   object-position: var(--segment-pos-mobile, var(--segment-pos, center));
@@ -620,6 +769,146 @@
 @media (min-width: 1024px) {
   .segment-framed-img {
     object-position: var(--segment-pos, center);
+  }
+}
+
+/* —— Internal page hero (not Home) ——
+   Structural lock: media queries may adjust framing/height only.
+   Never swap to light mist, dark text, or isolated image cards. */
+.internal-hero {
+  background-color: var(--color-brand-navy);
+  color: #ffffff;
+}
+
+.internal-hero-title {
+  font-size: clamp(2.5rem, 6.5vw, 4.25rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+@media (max-width: 767px) {
+  .internal-hero-title {
+    font-size: clamp(2.5rem, 10vw, 3.25rem);
+    line-height: 1.1;
+  }
+
+  .internal-hero {
+    background-color: var(--color-brand-navy);
+    color: #ffffff;
+  }
+}
+
+.internal-hero-image {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--internal-hero-pos-mobile, var(--internal-hero-pos, center center));
+  transform: scale(1.03);
+  animation: internal-hero-settle 1.25s cubic-bezier(0.22, 1, 0.36, 1) both;
+  will-change: transform;
+  /* Never render as a bordered/rounded card */
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+@media (min-width: 1024px) {
+  .internal-hero-image {
+    object-position: var(--internal-hero-pos, center center);
+  }
+}
+
+.internal-hero-scrim {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(7, 26, 45, 0.72) 0%,
+      rgba(7, 26, 45, 0.55) 38%,
+      rgba(7, 26, 45, 0.88) 100%
+    ),
+    linear-gradient(
+      90deg,
+      rgba(7, 26, 45, 0.96) 0%,
+      rgba(7, 26, 45, 0.82) 42%,
+      rgba(7, 26, 45, 0.35) 68%,
+      rgba(7, 26, 45, 0.22) 100%
+    );
+}
+
+@media (min-width: 1024px) {
+  .internal-hero-scrim {
+    background:
+      linear-gradient(
+        90deg,
+        rgba(7, 26, 45, 0.97) 0%,
+        rgba(7, 26, 45, 0.88) 38%,
+        rgba(7, 26, 45, 0.42) 62%,
+        rgba(7, 26, 45, 0.18) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(7, 26, 45, 0.35) 0%,
+        transparent 40%,
+        rgba(7, 26, 45, 0.45) 100%
+      );
+  }
+}
+
+.internal-hero-glow {
+  background:
+    radial-gradient(ellipse 55% 60% at 18% 70%, rgba(217, 119, 45, 0.14), transparent 70%),
+    radial-gradient(ellipse 40% 50% at 78% 30%, rgba(29, 113, 184, 0.18), transparent 65%);
+  opacity: 0.9;
+}
+
+.internal-hero-lines {
+  opacity: 0.12;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.35) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.28) 1px, transparent 1px);
+  background-size: 72px 72px;
+  background-position: -20px -12px;
+  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0.55) 0%, transparent 58%);
+}
+
+.internal-hero-seam {
+  background: linear-gradient(
+    180deg,
+    transparent 0%,
+    rgba(67, 139, 68, 0.55) 18%,
+    rgba(29, 113, 184, 0.7) 50%,
+    rgba(217, 119, 45, 0.55) 82%,
+    transparent 100%
+  );
+  opacity: 0.55;
+}
+
+.internal-hero-cta-primary {
+  transition:
+    transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.3s ease;
+}
+
+.internal-hero-cta-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 32px rgba(3, 18, 32, 0.32);
+}
+
+.internal-hero-edge {
+  margin-bottom: -1px;
+}
+
+@keyframes internal-hero-settle {
+  from {
+    transform: scale(1.035) translate3d(0.6%, 0, 0);
+  }
+  to {
+    transform: scale(1.02) translate3d(0, 0, 0);
   }
 }
 
@@ -632,12 +921,240 @@
   }
 }
 
+/* ── Related / callout cards (DetailSections RelatedGrid) ── */
+.related-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr;
+  align-items: stretch;
+}
+
+@media (min-width: 640px) {
+  .related-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  .related-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.related-card {
+  --related-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  --related-duration: 600ms;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  border: 1px solid var(--color-brand-line);
+  background-color: #fff;
+  text-decoration: none;
+  color: inherit;
+  transition-property: transform, box-shadow, border-color;
+  transition-duration: var(--related-duration);
+  transition-timing-function: var(--related-ease);
+}
+
+.related-card--text {
+  padding: 1.25rem 1.25rem 1.35rem;
+  background-color: color-mix(in srgb, var(--color-brand-mist) 55%, #fff);
+}
+
+.related-card--image {
+  background-color: #fff;
+}
+
+.related-card__accent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 2px;
+  height: 100%;
+  background-color: color-mix(in srgb, var(--color-brand-orange) 45%, transparent);
+  pointer-events: none;
+}
+
+.related-card__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  width: 100%;
+  overflow: hidden;
+  background-color: color-mix(in srgb, var(--color-brand-navy) 15%, transparent);
+}
+
+@media (min-width: 768px) {
+  .related-card__media {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.related-card__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition-property: transform;
+  transition-duration: var(--related-duration);
+  transition-timing-function: var(--related-ease);
+}
+
+.related-card__media-veil {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-color: color-mix(in srgb, var(--color-brand-navy) 30%, transparent);
+  transition-property: background-color;
+  transition-duration: var(--related-duration);
+  transition-timing-function: var(--related-ease);
+}
+
+.related-card__body {
+  position: relative;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 1.25rem;
+}
+
+.related-card__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+}
+
+.related-card__watermark {
+  position: absolute;
+  right: -0.65rem;
+  bottom: -0.85rem;
+  z-index: 0;
+  width: 6.5rem; /* ~104px mobile */
+  height: 6.5rem;
+  color: var(--color-brand-navy);
+  opacity: 0.07;
+  pointer-events: none;
+  transition-property: transform, opacity, color;
+  transition-duration: var(--related-duration);
+  transition-timing-function: var(--related-ease);
+}
+
+@media (min-width: 768px) {
+  .related-card__watermark {
+    width: 8.25rem; /* ~132px desktop */
+    height: 8.25rem;
+    right: -0.85rem;
+    bottom: -1rem;
+  }
+}
+
+.related-card__title {
+  font-family: var(--font-display);
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 1.35;
+  color: var(--color-brand-graphite);
+  transition-property: color;
+  transition-duration: var(--related-duration);
+  transition-timing-function: var(--related-ease);
+}
+
+.related-card__desc {
+  margin-top: 0.5rem;
+  flex: 1 1 auto;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  color: var(--color-brand-slate);
+}
+
+.related-card__cta {
+  margin-top: 1rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-brand-orange);
+}
+
+.related-card__arrow {
+  transition-property: transform;
+  transition-duration: var(--related-duration);
+  transition-timing-function: var(--related-ease);
+}
+
+.related-card:hover,
+.related-card:focus-visible {
+  border-color: color-mix(in srgb, var(--color-brand-blue) 42%, var(--color-brand-orange) 18%);
+  box-shadow: 0 14px 32px -12px color-mix(in srgb, var(--color-brand-navy) 28%, transparent);
+}
+
+.related-card:hover .related-card__title,
+.related-card:focus-visible .related-card__title {
+  color: var(--color-brand-blue);
+}
+
+.related-card:hover .related-card__watermark,
+.related-card:focus-visible .related-card__watermark {
+  color: var(--color-brand-blue);
+  opacity: 0.12;
+}
+
+.related-card:hover .related-card__media-veil,
+.related-card:focus-visible .related-card__media-veil {
+  background-color: color-mix(in srgb, var(--color-brand-navy) 18%, transparent);
+}
+
+.related-card:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--color-brand-blue),
+    0 14px 32px -12px color-mix(in srgb, var(--color-brand-navy) 28%, transparent);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .related-card:hover,
+  .related-card:focus-visible {
+    transform: translateY(-4px);
+  }
+
+  .related-card:hover .related-card__watermark,
+  .related-card:focus-visible .related-card__watermark {
+    transform: scale(1.14) translate(-4px, -5px);
+  }
+
+  .related-card:hover .related-card__arrow,
+  .related-card:focus-visible .related-card__arrow {
+    transform: translateX(4px);
+  }
+
+  .related-card:hover .related-card__photo,
+  .related-card:focus-visible .related-card__photo {
+    transform: scale(1.04);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-kenburns,
   .brands-marquee-track,
   .mega-fade,
-  .segment-photo-fade {
+  .segment-photo-fade,
+  .internal-hero-image {
     animation: none !important;
+  }
+
+  .internal-hero-image {
+    transform: scale(1.02) !important;
+  }
+
+  .internal-hero-cta-primary:hover {
+    transform: none !important;
   }
 
   .differential-card,
@@ -700,11 +1217,24 @@
     opacity: 1 !important;
     pointer-events: auto !important;
   }
-}
 
-/* Hide WhatsApp FAB while the mobile nav drawer is open */
-html[data-mobile-nav-open='true'] .whatsapp-fab {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
+  .related-card:hover,
+  .related-card:focus-visible {
+    transform: none !important;
+  }
+
+  .related-card:hover .related-card__watermark,
+  .related-card:focus-visible .related-card__watermark,
+  .related-card:hover .related-card__arrow,
+  .related-card:focus-visible .related-card__arrow,
+  .related-card:hover .related-card__photo,
+  .related-card:focus-visible .related-card__photo {
+    transform: none !important;
+  }
+
+  .related-card:hover .related-card__watermark,
+  .related-card:focus-visible .related-card__watermark {
+    opacity: 0.1;
+    color: var(--color-brand-blue);
+  }
 }

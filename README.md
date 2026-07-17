@@ -36,7 +36,7 @@ Edite `src/data/site.ts`. Campos vazios não são exibidos.
 
 ## Logo
 
-Arquivo oficial: `public/aurion-logo-3d.webp` (caminho público `/aurion-logo-3d.webp`).
+Arquivo oficial: `public/aurion-logo-3d-shadow.webp` (caminho público `/aurion-logo-3d-shadow.webp`).
 Centralizado em `BRAND_LOGO` (`src/data/site.ts`) e no componente `Logo`.
 
 ## Estrutura de conteúdo
