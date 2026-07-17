@@ -36,6 +36,18 @@ export type ServiceItem = {
   seoDescription: string
 }
 
+/** CSS object-position values for segment photo framing by layout. */
+export type SegmentImageObjectPosition = {
+  /** Detail hero (desktop-first, full operation). */
+  hero?: string
+  /** Horizontal cards (hub grid, etc.). */
+  card?: string
+  /** Tall / vertical panels (home featured, mega menu). */
+  panel?: string
+  /** Mobile crops. */
+  mobile?: string
+}
+
 export type SegmentItem = {
   slug: string
   title: string
@@ -48,6 +60,9 @@ export type SegmentItem = {
   support: string[]
   image: string
   imageAlt: string
+  /** Alt for smaller cards; falls back to imageAlt when omitted. */
+  cardImageAlt?: string
+  imageObjectPosition?: SegmentImageObjectPosition
   relatedProducts: string[]
   relatedServices: string[]
   benefits: string[]

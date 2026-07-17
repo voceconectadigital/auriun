@@ -86,6 +86,10 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
         description={segment.description}
         image={segment.image}
         imageAlt={segment.imageAlt}
+        imageObjectPosition={segment.imageObjectPosition?.hero}
+        imageObjectPositionMobile={segment.imageObjectPosition?.mobile}
+        fetchPriority={segment.slug === 'mineracao' ? 'high' : undefined}
+        preload={segment.slug === 'mineracao'}
         ctaLabel="Solicitar uma solução"
       />
 

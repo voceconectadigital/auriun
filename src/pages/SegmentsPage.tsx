@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom'
+import type { CSSProperties } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
@@ -43,8 +44,18 @@ export function SegmentsPage() {
               >
                 <img
                   src={item.image}
-                  alt={item.imageAlt}
-                  className="aspect-[16/10] w-full object-cover"
+                  alt={item.cardImageAlt ?? item.imageAlt}
+                  className="segment-framed-img aspect-[16/10] w-full object-cover"
+                  style={
+                    item.imageObjectPosition?.card
+                      ? ({
+                          '--segment-pos': item.imageObjectPosition.card,
+                          '--segment-pos-mobile':
+                            item.imageObjectPosition.mobile ??
+                            item.imageObjectPosition.card,
+                        } as CSSProperties)
+                      : undefined
+                  }
                   loading="lazy"
                   width={640}
                   height={400}

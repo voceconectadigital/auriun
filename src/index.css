@@ -518,6 +518,17 @@
   }
 }
 
+/* Segment photos: object-position via CSS vars (set per layout in components) */
+.segment-framed-img {
+  object-position: var(--segment-pos-mobile, var(--segment-pos, center));
+}
+
+@media (min-width: 1024px) {
+  .segment-framed-img {
+    object-position: var(--segment-pos, center);
+  }
+}
+
 @keyframes brands-marquee {
   from {
     transform: translateX(0);

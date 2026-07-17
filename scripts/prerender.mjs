@@ -43,7 +43,24 @@ async function main() {
       html = upsertMeta(html, 'property', 'og:description', route.seoDescription)
       html = upsertMeta(html, 'property', 'og:url', absoluteUrl(url))
       html = upsertMeta(html, 'property', 'og:type', 'website')
-      html = upsertMeta(html, 'property', 'og:image', absoluteUrl('/aurion-logo.webp'))
+      html = upsertMeta(
+        html,
+        'property',
+        'og:image',
+        absoluteUrl(route.ogImage ?? '/aurion-logo.webp'),
+      )
+      html = upsertMeta(
+        html,
+        'name',
+        'twitter:card',
+        'summary_large_image',
+      )
+      html = upsertMeta(
+        html,
+        'name',
+        'twitter:image',
+        absoluteUrl(route.ogImage ?? '/aurion-logo.webp'),
+      )
       html = upsertLink(html, 'canonical', absoluteUrl(url))
 
       const outDir =

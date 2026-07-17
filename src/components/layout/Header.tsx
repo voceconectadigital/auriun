@@ -1,4 +1,11 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
+import {
+  useEffect,
+  useId,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import { ArrowRight, ChevronDown, Menu, X } from 'lucide-react'
 import { Logo } from '@/components/ui/Logo'
@@ -281,9 +288,23 @@ export function Header() {
                     key={previewSegment.slug}
                     src={previewSegment.image}
                     alt=""
-                    className="absolute inset-0 size-full object-cover opacity-75 transition duration-500"
+                    className="segment-framed-img absolute inset-0 size-full object-cover opacity-75 transition duration-500"
+                    style={
+                      previewSegment.imageObjectPosition
+                        ? ({
+                            '--segment-pos':
+                              previewSegment.imageObjectPosition.panel ??
+                              'center center',
+                            '--segment-pos-mobile':
+                              previewSegment.imageObjectPosition.mobile ??
+                              previewSegment.imageObjectPosition.panel ??
+                              'center center',
+                          } as CSSProperties)
+                        : undefined
+                    }
                     width={900}
                     height={640}
+                    loading="lazy"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/45 to-transparent" />
                   <div className="relative flex h-full min-h-[280px] flex-col justify-end p-8">
@@ -474,7 +495,7 @@ export function Header() {
 
 function navClass(active: boolean): string {
   return [
-    'group relative inline-flex items-center gap-1 px-3.5 py-2 text-[0.9375rem] font-medium tracking-wide transition-colors',
+    'group relative inline-flex cursor-pointer items-center gap-1 px-3.5 py-2 text-[0.9375rem] font-medium tracking-wide transition-colors',
     active ? 'text-brand-orange' : 'text-brand-graphite/80 hover:text-brand-navy',
   ].join(' ')
 }

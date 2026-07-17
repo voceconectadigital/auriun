@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
+import type { CSSProperties } from 'react'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
 import { Breadcrumb, type Crumb } from '@/components/ui/Breadcrumb'
@@ -11,6 +12,10 @@ type DetailHeroProps = {
   description: string
   image: string
   imageAlt: string
+  imageObjectPosition?: string
+  imageObjectPositionMobile?: string
+  fetchPriority?: 'high' | 'low' | 'auto'
+  preload?: boolean
   ctaTo?: string
   ctaLabel?: string
 }
@@ -22,11 +27,21 @@ export function DetailHero({
   description,
   image,
   imageAlt,
+  imageObjectPosition = 'center center',
+  imageObjectPositionMobile,
+  fetchPriority,
+  preload = false,
   ctaTo = '/contato/?assunto=orcamento',
   ctaLabel = 'Solicitar orçamento',
 }: DetailHeroProps) {
+  const framingStyle = {
+    '--segment-pos': imageObjectPosition,
+    '--segment-pos-mobile': imageObjectPositionMobile ?? imageObjectPosition,
+  } as CSSProperties
+
   return (
     <section className="border-b border-brand-line bg-brand-mist">
+      {preload ? <link rel="preload" as="image" href={image} /> : null}
       <Container className="section-pad grid items-center gap-10 py-12 md:py-16 lg:grid-cols-2 lg:gap-14">
         <div>
           <Breadcrumb items={crumbs} />
@@ -53,10 +68,13 @@ export function DetailHero({
           <img
             src={image}
             alt={imageAlt}
-            className="aspect-[16/11] w-full object-cover"
+            className="segment-framed-img aspect-[16/11] w-full object-cover"
+            style={framingStyle}
             width={960}
             height={660}
             loading="eager"
+            fetchPriority={fetchPriority}
+            decoding="async"
           />
         </div>
       </Container>

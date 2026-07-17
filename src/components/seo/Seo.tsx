@@ -62,8 +62,10 @@ export function useDocumentSeo({ title, description, path, image }: PageSeoProps
     setMeta('property', 'og:description', description)
     setMeta('property', 'og:type', 'website')
     setMeta('property', 'og:url', absoluteUrl(path))
-    setMeta('property', 'og:image', absoluteUrl(image ?? '/aurion-logo.webp'))
+    const ogImage = absoluteUrl(image ?? '/aurion-logo.webp')
+    setMeta('property', 'og:image', ogImage)
     setMeta('name', 'twitter:card', 'summary_large_image')
+    setMeta('name', 'twitter:image', ogImage)
     setLinkCanonical(absoluteUrl(path))
   }, [title, description, path, image])
 }

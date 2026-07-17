@@ -1,4 +1,4 @@
-import { useId, useState } from 'react'
+import { useId, useState, type CSSProperties } from 'react'
 import { ArrowRight } from 'lucide-react'
 import { Link } from 'react-router-dom'
 import { Button } from '@/components/ui/Button'
@@ -11,6 +11,16 @@ export function SegmentsFeatured() {
   const active = segments.find((item) => item.slug === activeSlug) ?? segments[0]
 
   if (!active) return null
+
+  const panelFraming = active.imageObjectPosition
+    ? ({
+        '--segment-pos': active.imageObjectPosition.panel ?? 'center center',
+        '--segment-pos-mobile':
+          active.imageObjectPosition.mobile ??
+          active.imageObjectPosition.panel ??
+          'center center',
+      } as CSSProperties)
+    : undefined
 
   return (
     <section className="bg-brand-navy text-white">
@@ -100,7 +110,8 @@ export function SegmentsFeatured() {
               key={active.slug}
               src={active.image}
               alt=""
-              className="absolute inset-0 size-full object-cover opacity-80 segment-photo-fade"
+              className="segment-framed-img absolute inset-0 size-full object-cover opacity-80 segment-photo-fade"
+              style={panelFraming}
               width={1100}
               height={800}
               loading="lazy"
@@ -174,7 +185,8 @@ export function SegmentsFeatured() {
                 key={active.slug}
                 src={active.image}
                 alt=""
-                className="size-full object-cover segment-photo-fade"
+                className="segment-framed-img size-full object-cover segment-photo-fade"
+                style={panelFraming}
                 width={800}
                 height={500}
                 loading="lazy"

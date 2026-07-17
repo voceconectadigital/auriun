@@ -28,6 +28,13 @@ export const segments: SegmentItem[] = [
     image: '/images/segmentos/segmento-mineracao.webp',
     imageAlt:
       'Operação de mineração com equipamentos de grande porte e infraestrutura de processamento',
+    cardImageAlt: 'Soluções industriais para operações de mineração',
+    imageObjectPosition: {
+      hero: 'center center',
+      card: '42% 48%',
+      panel: '68% 52%',
+      mobile: '62% 48%',
+    },
     relatedProducts: [
       'materiais-eletricos',
       'automacao-industrial',

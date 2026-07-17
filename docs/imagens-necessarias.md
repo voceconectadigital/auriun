@@ -31,7 +31,7 @@ Ver lista completa abaixo — placeholders locais atuais não representam projet
 - [ ] servico-projetos-greenfield-e-brownfield.jpg/.webp
 
 ## Segmentos
-- [ ] segmento-mineracao.jpg/.webp
+- [x] segmento-mineracao.webp — oficial (`/images/segmentos/segmento-mineracao.webp`)
 - [ ] segmento-oleo-e-gas.jpg/.webp
 - [ ] segmento-papel-e-celulose.jpg/.webp
 - [ ] segmento-siderurgia.jpg/.webp

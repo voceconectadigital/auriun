@@ -8,6 +8,7 @@ export type StaticRoute = {
   path: string
   seoTitle: string
   seoDescription: string
+  ogImage?: string
 }
 
 export const staticRoutes: StaticRoute[] = [
@@ -47,18 +48,21 @@ export function getAllRoutes(): StaticRoute[] {
     path: productPath(item.slug),
     seoTitle: `${item.seoTitle} | ${SITE.shortName}`,
     seoDescription: item.seoDescription,
+    ogImage: item.image,
   }))
 
   const serviceRoutes = services.map((item) => ({
     path: servicePath(item.slug),
     seoTitle: `${item.seoTitle} | ${SITE.shortName}`,
     seoDescription: item.seoDescription,
+    ogImage: item.image,
   }))
 
   const segmentRoutes = segments.map((item) => ({
     path: segmentPath(item.slug),
     seoTitle: `${item.seoTitle} | ${SITE.shortName}`,
     seoDescription: item.seoDescription,
+    ogImage: item.image,
   }))
 
   return [...staticRoutes, ...productRoutes, ...serviceRoutes, ...segmentRoutes]
