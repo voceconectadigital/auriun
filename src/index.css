@@ -79,20 +79,21 @@
     text-wrap: balance;
   }
 
-  /* Site chrome height — keep Hero / Layout / Header in sync */
+  /* Site chrome height — keep Hero / Layout / Header in sync.
+   * Fits logo box + padding-block 10px (widths 5.625 / 6.125 / 7.125rem). */
   :root {
-    --site-header-h: 72px;
+    --site-header-h: 88px;
   }
 
-  @media (min-width: 768px) {
+  @media (min-width: 640px) {
     :root {
-      --site-header-h: 80px;
+      --site-header-h: 94px;
     }
   }
 
   @media (min-width: 1280px) {
     :root {
-      --site-header-h: 88px;
+      --site-header-h: 106px;
     }
   }
 
@@ -155,12 +156,103 @@
     animation-delay: 0.32s;
   }
 
+  /* Desktop header nav — pill hover/active (fine pointer only for hover) */
+  .site-nav-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.25rem;
+    min-height: 2.5rem;
+    padding: 0.625rem 1rem; /* 10px / 16px */
+    border-radius: 6px;
+    border: none;
+    background-color: transparent;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    line-height: 1.25;
+    color: color-mix(in srgb, var(--color-brand-graphite) 80%, transparent);
+    text-decoration: none;
+    box-shadow: none;
+    transition:
+      background-color 220ms ease,
+      color 220ms ease;
+  }
+
+  .site-nav-item:focus {
+    outline: none;
+  }
+
+  .site-nav-item:focus-visible {
+    background-color: var(--color-brand-mist);
+    color: var(--color-brand-navy);
+    box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-brand-blue);
+  }
+
+  .site-nav-item.is-active,
+  .site-nav-item[aria-expanded='true'] {
+    background-color: var(--color-brand-mist);
+    color: var(--color-brand-navy);
+    font-weight: 600;
+  }
+
+  .site-nav-bridge:focus-within .site-nav-item {
+    background-color: var(--color-brand-mist);
+    color: var(--color-brand-navy);
+  }
+
+  .site-nav-chevron {
+    transition: transform 220ms ease;
+  }
+
+  .site-nav-chevron.is-open {
+    transform: rotate(180deg);
+  }
+
+  /* Invisible bridge so pointer can travel trigger → mega without a dead zone */
+  .site-nav-bridge {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .site-nav-bridge::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 1.25rem;
+    pointer-events: auto;
+  }
+
+  .site-mega-shell {
+    transition:
+      grid-template-rows 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 240ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 240ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .site-mega-shell:not(.site-mega-shell--open) {
+    transition:
+      grid-template-rows 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 200ms cubic-bezier(0.22, 1, 0.36, 1),
+      opacity 200ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .site-nav-item:hover {
+      background-color: var(--color-brand-mist);
+      color: var(--color-brand-navy);
+    }
+  }
+
   .mega-fade {
-    animation: mega-fade-in 0.28s ease-out both;
+    animation: mega-fade-in 0.26s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .segment-photo-fade {
-    animation: mega-fade-in 0.35s ease-out both;
+    animation: mega-fade-in 0.35s cubic-bezier(0.22, 1, 0.36, 1) both;
   }
 
   .hero-kenburns {
@@ -501,10 +593,12 @@
 @keyframes mega-fade-in {
   from {
     opacity: 0;
-    transform: translateY(-6px);
+    visibility: hidden;
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
+    visibility: visible;
     transform: translateY(0);
   }
 }
@@ -606,4 +700,11 @@
     opacity: 1 !important;
     pointer-events: auto !important;
   }
+}
+
+/* Hide WhatsApp FAB while the mobile nav drawer is open */
+html[data-mobile-nav-open='true'] .whatsapp-fab {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }

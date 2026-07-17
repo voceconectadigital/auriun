@@ -4,6 +4,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type KeyboardEvent as ReactKeyboardEvent,
   type ReactNode,
 } from 'react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
@@ -17,10 +18,17 @@ import { segments, segmentPath } from '@/data/segments'
 
 type MenuKey = 'solucoes' | 'segmentos' | null
 
+const OPEN_DELAY_MS = 100
+const CLOSE_DELAY_MS = 220
+const MEGA_CLOSE_MS = 260
+const FINE_HOVER_MQ = '(hover: hover) and (pointer: fine)'
+
 export function Header() {
   const [open, setOpen] = useState(false)
   const [desktopMenu, setDesktopMenu] = useState<MenuKey>(null)
+  const [renderedMenu, setRenderedMenu] = useState<MenuKey>(null)
   const [scrolled, setScrolled] = useState(false)
+  const [fineHover, setFineHover] = useState(false)
   const [segmentPreview, setSegmentPreview] = useState(segments[0]?.slug ?? 'mineracao')
   const [mobileAccordions, setMobileAccordions] = useState({
     solucoes: false,
@@ -28,14 +36,38 @@ export function Header() {
   })
   const menuId = useId()
   const headerRef = useRef<HTMLElement>(null)
+  const solucoesTriggerRef = useRef<HTMLAnchorElement>(null)
+  const segmentosTriggerRef = useRef<HTMLAnchorElement>(null)
+  const openTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const closeTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const unmountTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const desktopMenuRef = useRef<MenuKey>(null)
   const { pathname } = useLocation()
   const [menuPath, setMenuPath] = useState(pathname)
 
   if (pathname !== menuPath) {
     setMenuPath(pathname)
     setDesktopMenu(null)
+    setRenderedMenu(null)
     setOpen(false)
   }
+
+  // Keep panel content mounted while the shell closes (avoid display:none mid-transition).
+  if (desktopMenu !== null && desktopMenu !== renderedMenu) {
+    setRenderedMenu(desktopMenu)
+  }
+
+  useEffect(() => {
+    desktopMenuRef.current = desktopMenu
+  }, [desktopMenu])
+
+  useEffect(() => {
+    const mq = window.matchMedia(FINE_HOVER_MQ)
+    const sync = () => setFineHover(mq.matches)
+    sync()
+    mq.addEventListener('change', sync)
+    return () => mq.removeEventListener('change', sync)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12)
@@ -46,38 +78,126 @@ export function Header() {
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : ''
+    document.documentElement.dataset.mobileNavOpen = open ? 'true' : 'false'
     return () => {
       document.body.style.overflow = ''
+      delete document.documentElement.dataset.mobileNavOpen
     }
   }, [open])
 
   useEffect(() => {
+    if (desktopMenu !== null || renderedMenu === null) return
+    unmountTimerRef.current = setTimeout(() => {
+      setRenderedMenu(null)
+      unmountTimerRef.current = null
+    }, MEGA_CLOSE_MS)
+    return () => {
+      if (unmountTimerRef.current) {
+        clearTimeout(unmountTimerRef.current)
+        unmountTimerRef.current = null
+      }
+    }
+  }, [desktopMenu, renderedMenu])
+
+  useEffect(() => {
+    function clearHoverTimers() {
+      if (openTimerRef.current) {
+        clearTimeout(openTimerRef.current)
+        openTimerRef.current = null
+      }
+      if (closeTimerRef.current) {
+        clearTimeout(closeTimerRef.current)
+        closeTimerRef.current = null
+      }
+    }
+
     function onPointerDown(event: MouseEvent) {
       if (!headerRef.current?.contains(event.target as Node)) {
+        clearHoverTimers()
         setDesktopMenu(null)
       }
     }
+
     function onKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
+      if (event.key !== 'Escape') return
+      const current = desktopMenuRef.current
+      if (current) {
+        event.preventDefault()
+        clearHoverTimers()
         setDesktopMenu(null)
-        setOpen(false)
+        const trigger =
+          current === 'solucoes' ? solucoesTriggerRef.current : segmentosTriggerRef.current
+        trigger?.focus()
+        return
       }
+      setOpen(false)
     }
+
     document.addEventListener('mousedown', onPointerDown)
     document.addEventListener('keydown', onKeyDown)
     return () => {
       document.removeEventListener('mousedown', onPointerDown)
       document.removeEventListener('keydown', onKeyDown)
+      clearHoverTimers()
     }
   }, [])
 
+  function clearHoverTimers() {
+    if (openTimerRef.current) {
+      clearTimeout(openTimerRef.current)
+      openTimerRef.current = null
+    }
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+  }
+
+  function openDesktopMenu(key: Exclude<MenuKey, null>, immediate = false) {
+    clearHoverTimers()
+    if (immediate || desktopMenuRef.current !== null) {
+      setDesktopMenu(key)
+      return
+    }
+    openTimerRef.current = setTimeout(() => {
+      setDesktopMenu(key)
+      openTimerRef.current = null
+    }, OPEN_DELAY_MS)
+  }
+
+  function scheduleCloseDesktopMenu() {
+    if (openTimerRef.current) {
+      clearTimeout(openTimerRef.current)
+      openTimerRef.current = null
+    }
+    if (closeTimerRef.current) clearTimeout(closeTimerRef.current)
+    closeTimerRef.current = setTimeout(() => {
+      setDesktopMenu(null)
+      closeTimerRef.current = null
+    }, CLOSE_DELAY_MS)
+  }
+
+  function cancelCloseDesktopMenu() {
+    if (closeTimerRef.current) {
+      clearTimeout(closeTimerRef.current)
+      closeTimerRef.current = null
+    }
+  }
+
   function closeAll() {
+    clearHoverTimers()
     setOpen(false)
     setDesktopMenu(null)
   }
 
-  function toggleDesktop(key: Exclude<MenuKey, null>) {
-    setDesktopMenu((current) => (current === key ? null : key))
+  function handleTriggerKeyDown(
+    event: ReactKeyboardEvent<HTMLAnchorElement>,
+    key: Exclude<MenuKey, null>,
+  ) {
+    if (event.key === 'ArrowDown' || event.key === ' ') {
+      event.preventDefault()
+      openDesktopMenu(key, true)
+    }
   }
 
   const solucoesActive = pathname.startsWith('/solucoes')
@@ -85,6 +205,7 @@ export function Header() {
   const previewSegment =
     segments.find((item) => item.slug === segmentPreview) ?? segments[0]
   const megaOpen = desktopMenu !== null
+  const megaVisible = renderedMenu !== null
 
   return (
     <header
@@ -94,17 +215,17 @@ export function Header() {
         scrolled || open || megaOpen ? 'shadow-[0_12px_40px_rgba(7,26,45,0.1)]' : '',
       ].join(' ')}
     >
-      <Container className="relative flex h-[var(--site-header-h)] items-center justify-between gap-3 px-5 sm:gap-4 sm:px-8 lg:px-10">
+      <Container className="relative flex h-auto min-h-[var(--site-header-h)] items-center justify-between gap-3 px-5 py-[10px] sm:gap-4 sm:px-8 lg:px-10">
         <Link
           to="/"
-          className="relative z-20 flex shrink-0 items-center"
+          className="relative z-20 flex shrink-0 items-center overflow-visible"
           aria-label="Auriun — página inicial"
           onClick={closeAll}
         >
-          <Logo className="h-10 w-auto max-h-10 sm:h-11 sm:max-h-11 xl:h-12 xl:max-h-12" />
+          <Logo className="h-auto w-[5.625rem] max-w-none overflow-visible sm:w-[6.125rem] xl:w-[7.125rem]" />
         </Link>
 
-        <nav className="hidden items-center gap-1 xl:flex" aria-label="Principal">
+        <nav className="hidden items-center gap-0.5 xl:flex" aria-label="Principal">
           <NavLink to="/" end className={({ isActive }) => navClass(isActive)} onClick={closeAll}>
             Home
           </NavLink>
@@ -116,41 +237,73 @@ export function Header() {
             A Auriun
           </NavLink>
 
-          <button
-            type="button"
-            className={navClass(solucoesActive || desktopMenu === 'solucoes')}
-            aria-expanded={desktopMenu === 'solucoes'}
-            aria-haspopup="true"
-            aria-controls="mega-solucoes"
-            onClick={() => toggleDesktop('solucoes')}
+          <div
+            className="site-nav-bridge"
+            onMouseEnter={() => {
+              if (!fineHover) return
+              cancelCloseDesktopMenu()
+              openDesktopMenu('solucoes')
+            }}
+            onMouseLeave={() => {
+              if (!fineHover) return
+              scheduleCloseDesktopMenu()
+            }}
           >
-            Soluções
-            <ChevronDown
-              className={[
-                'size-3.5 opacity-60 transition-transform duration-300',
-                desktopMenu === 'solucoes' ? 'rotate-180' : '',
-              ].join(' ')}
-              aria-hidden
-            />
-          </button>
+            <Link
+              ref={solucoesTriggerRef}
+              to="/solucoes/"
+              className={navClass(solucoesActive || desktopMenu === 'solucoes')}
+              aria-expanded={desktopMenu === 'solucoes'}
+              aria-haspopup="true"
+              aria-controls="mega-solucoes"
+              onClick={closeAll}
+              onFocus={() => cancelCloseDesktopMenu()}
+              onKeyDown={(event) => handleTriggerKeyDown(event, 'solucoes')}
+            >
+              Soluções
+              <ChevronDown
+                className={[
+                  'site-nav-chevron size-3.5 shrink-0 opacity-60',
+                  desktopMenu === 'solucoes' ? 'is-open' : '',
+                ].join(' ')}
+                aria-hidden
+              />
+            </Link>
+          </div>
 
-          <button
-            type="button"
-            className={navClass(segmentosActive || desktopMenu === 'segmentos')}
-            aria-expanded={desktopMenu === 'segmentos'}
-            aria-haspopup="true"
-            aria-controls="mega-segmentos"
-            onClick={() => toggleDesktop('segmentos')}
+          <div
+            className="site-nav-bridge"
+            onMouseEnter={() => {
+              if (!fineHover) return
+              cancelCloseDesktopMenu()
+              openDesktopMenu('segmentos')
+            }}
+            onMouseLeave={() => {
+              if (!fineHover) return
+              scheduleCloseDesktopMenu()
+            }}
           >
-            Segmentos
-            <ChevronDown
-              className={[
-                'size-3.5 opacity-60 transition-transform duration-300',
-                desktopMenu === 'segmentos' ? 'rotate-180' : '',
-              ].join(' ')}
-              aria-hidden
-            />
-          </button>
+            <Link
+              ref={segmentosTriggerRef}
+              to="/segmentos/"
+              className={navClass(segmentosActive || desktopMenu === 'segmentos')}
+              aria-expanded={desktopMenu === 'segmentos'}
+              aria-haspopup="true"
+              aria-controls="mega-segmentos"
+              onClick={closeAll}
+              onFocus={() => cancelCloseDesktopMenu()}
+              onKeyDown={(event) => handleTriggerKeyDown(event, 'segmentos')}
+            >
+              Segmentos
+              <ChevronDown
+                className={[
+                  'site-nav-chevron size-3.5 shrink-0 opacity-60',
+                  desktopMenu === 'segmentos' ? 'is-open' : '',
+                ].join(' ')}
+                aria-hidden
+              />
+            </Link>
+          </div>
 
           <NavLink
             to="/contato/"
@@ -166,6 +319,7 @@ export function Header() {
             <Button
               to="/contato/?assunto=orcamento"
               size="md"
+              className="!min-h-10 !py-2"
               onClick={closeAll}
             >
               Solicitar orçamento
@@ -187,12 +341,22 @@ export function Header() {
       {/* Expanding mega shell — pattern from 21st Navbar Section 2, CSS-only */}
       <div
         className={[
-          'hidden overflow-hidden border-t border-transparent bg-white transition-[grid-template-rows,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] xl:grid',
-          megaOpen ? 'grid-rows-[1fr] border-brand-line' : 'grid-rows-[0fr]',
+          'site-mega-shell hidden overflow-hidden border-t border-transparent bg-white xl:grid',
+          megaOpen
+            ? 'site-mega-shell--open grid-rows-[1fr] border-brand-line'
+            : 'grid-rows-[0fr]',
         ].join(' ')}
+        onMouseEnter={() => {
+          if (!fineHover) return
+          cancelCloseDesktopMenu()
+        }}
+        onMouseLeave={() => {
+          if (!fineHover) return
+          scheduleCloseDesktopMenu()
+        }}
       >
         <div className="min-h-0 overflow-hidden">
-          {desktopMenu === 'solucoes' ? (
+          {megaVisible && renderedMenu === 'solucoes' ? (
             <div id="mega-solucoes" className="mega-fade border-b border-brand-line bg-white">
               <Container className="grid gap-0 px-5 py-8 sm:px-8 lg:grid-cols-[1.05fr_0.95fr_0.95fr] lg:gap-10 lg:px-10 lg:py-10">
                 <Link
@@ -276,7 +440,7 @@ export function Header() {
             </div>
           ) : null}
 
-          {desktopMenu === 'segmentos' && previewSegment ? (
+          {megaVisible && renderedMenu === 'segmentos' && previewSegment ? (
             <div id="mega-segmentos" className="mega-fade border-b border-brand-line bg-white">
               <Container className="grid gap-8 px-5 py-8 sm:px-8 lg:grid-cols-[1.1fr_1fr] lg:gap-12 lg:px-10 lg:py-10">
                 <Link
@@ -364,7 +528,9 @@ export function Header() {
         </div>
       </div>
 
-      {!megaOpen ? <div className="brand-hairline h-px w-full" aria-hidden /> : null}
+      {!megaOpen && !megaVisible ? (
+        <div className="brand-hairline h-px w-full" aria-hidden />
+      ) : null}
 
       {open ? (
         <>
@@ -494,14 +660,11 @@ export function Header() {
 }
 
 function navClass(active: boolean): string {
-  return [
-    'group relative inline-flex cursor-pointer items-center gap-1 px-3.5 py-2 text-[0.9375rem] font-medium tracking-wide transition-colors',
-    active ? 'text-brand-orange' : 'text-brand-graphite/80 hover:text-brand-navy',
-  ].join(' ')
+  return ['site-nav-item', active ? 'is-active' : ''].filter(Boolean).join(' ')
 }
 
 const mobileLink =
-  'flex min-h-12 items-center px-1 py-3 text-base font-medium text-brand-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2'
+  'flex min-h-11 items-center px-1 py-3 text-base font-medium text-brand-graphite active:bg-brand-mist/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2'
 
 function MobileAccordion({
   label,
@@ -518,7 +681,7 @@ function MobileAccordion({
     <div className="border-y border-brand-line/80">
       <button
         type="button"
-        className="flex min-h-12 w-full items-center justify-between px-1 py-3.5 text-left text-base font-medium text-brand-graphite focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
+        className="flex min-h-11 w-full items-center justify-between px-1 py-3.5 text-left text-base font-medium text-brand-graphite active:bg-brand-mist/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-blue focus-visible:ring-offset-2"
         aria-expanded={open}
         onClick={onToggle}
       >
