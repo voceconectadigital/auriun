@@ -7,36 +7,40 @@ const differentials = [
     text: 'Escopo, especificação e contexto operacional orientam cada proposta.',
     span: 'lg:col-span-7 lg:row-span-2',
     featured: true,
-    image: '/images/diferenciais/atendimento-consultivo.jpg',
-    imageWebp: '/images/diferenciais/atendimento-consultivo.webp',
-    imagePosition: 'object-[center_30%]',
+    image: '/images/diferenciais/atendimento-consultivo.webp',
+    imageFallback: '/images/diferenciais/atendimento-consultivo.jpg',
+    // Profissional + painel à direita
+    imagePosition: 'object-[72%_42%] sm:object-[70%_40%] lg:object-[68%_38%]',
   },
   {
     title: 'Agilidade e capacidade de sourcing',
     text: 'Resposta objetiva a demandas urgentes e categorias de difícil reposição.',
     span: 'lg:col-span-5',
     featured: false,
-    image: '/images/diferenciais/agilidade-sourcing.jpg',
-    imageWebp: '/images/diferenciais/agilidade-sourcing.webp',
-    imagePosition: 'object-center',
+    image: '/images/diferenciais/agilidade-sourcing.webp',
+    imageFallback: '/images/diferenciais/agilidade-sourcing.jpg',
+    // Profissional + prateleiras à direita
+    imagePosition: 'object-[78%_45%] sm:object-[76%_42%] lg:object-[74%_40%]',
   },
   {
     title: 'Rede nacional e internacional',
     text: 'Acesso a fontes alinhadas à aplicação, com visão ampliada de fornecimento.',
     span: 'lg:col-span-5',
     featured: false,
-    image: '/images/diferenciais/rede-fornecedores.jpg',
-    imageWebp: '/images/diferenciais/rede-fornecedores.webp',
-    imagePosition: 'object-[center_20%]',
+    image: '/images/diferenciais/rede-fornecedores.webp',
+    imageFallback: '/images/diferenciais/rede-fornecedores.jpg',
+    // Centro logístico: armazém + pátio/porto
+    imagePosition: 'object-[42%_48%] sm:object-[40%_45%] lg:object-[38%_42%]',
   },
   {
     title: 'Compromisso com prazos e continuidade operacional',
     text: 'Fornecimento pensado para reduzir risco de desabastecimento na operação.',
     span: 'lg:col-span-12',
     featured: false,
-    image: '/images/diferenciais/continuidade-operacional.jpg',
-    imageWebp: '/images/diferenciais/continuidade-operacional.webp',
-    imagePosition: 'object-[center_35%] lg:object-center',
+    image: '/images/diferenciais/continuidade-operacional.webp',
+    imageFallback: '/images/diferenciais/continuidade-operacional.jpg',
+    // Profissional + linha industrial (técnico à direita)
+    imagePosition: 'object-[76%_50%] sm:object-[72%_48%] lg:object-[68%_46%]',
   },
 ] as const
 
@@ -74,9 +78,9 @@ export function Differentials() {
               ].join(' ')}
             >
               <picture>
-                <source srcSet={item.imageWebp} type="image/webp" />
+                <source srcSet={item.image} type="image/webp" />
                 <img
-                  src={item.image}
+                  src={item.imageFallback}
                   alt=""
                   aria-hidden
                   className={[
