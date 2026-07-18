@@ -48,7 +48,7 @@ type InternalHeroProps = {
 }
 
 const DEFAULT_PRIMARY: InternalHeroCta = {
-  to: '/contato/?assunto=orcamento',
+  to: '/solicitar-orcamento/',
   label: 'Solicitar orçamento',
 }
 

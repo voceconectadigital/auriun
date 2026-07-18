@@ -155,7 +155,7 @@ export function RelatedGrid({
 export function DetailCta({
   title,
   description,
-  to = '/contato/?assunto=orcamento',
+  to = '/solicitar-orcamento/',
   label = 'Solicitar orçamento',
 }: {
   title: string

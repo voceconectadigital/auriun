@@ -55,7 +55,7 @@ export function Hero() {
                 <ArrowRight className="size-4" aria-hidden />
               </Button>
               <Button
-                to="/contato/?assunto=orcamento"
+                to="/solicitar-orcamento/"
                 size="lg"
                 className="min-h-13 w-full justify-center sm:w-auto"
               >

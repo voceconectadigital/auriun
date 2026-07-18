@@ -90,7 +90,7 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
         imagePositionMobile={segment.imageObjectPosition?.mobile}
         fetchPriority="high"
         preload
-        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Solicitar uma solução' }}
+        primaryCta={{ to: '/solicitar-orcamento/', label: 'Solicitar uma solução' }}
         secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 

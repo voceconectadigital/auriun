@@ -37,9 +37,17 @@ export const staticRoutes: StaticRoute[] = [
   },
   {
     path: '/contato/',
-    seoTitle: `Contato | ${SITE.shortName}`,
+    seoTitle: `Contato | ${SITE.name}`,
     seoDescription:
-      'Entre em contato com a Auriun Soluções Industriais para orçamentos, suporte técnico-comercial e demandas industriais.',
+      'Fale com a Auriun Soluções Industriais. Canais para dúvidas, parcerias, fornecedores e informações gerais.',
+    ogImage: '/images/diferenciais/atendimento-consultivo.jpg',
+  },
+  {
+    path: '/solicitar-orcamento/',
+    seoTitle: `Solicitar orçamento | ${SITE.name}`,
+    seoDescription:
+      'Solicite uma cotação técnica à Auriun Soluções Industriais. Compartilhe as informações da demanda para avaliação de escopo com mais precisão.',
+    ogImage: '/images/cta-industrial.jpg',
   },
 ]
 

@@ -39,7 +39,7 @@ export function SegmentsPage() {
         imageAlt={hubCover.imageAlt}
         imagePosition={hubCover.imageObjectPosition?.hero ?? 'center center'}
         imagePositionMobile={hubCover.imageObjectPosition?.mobile}
-        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Solicitar orçamento' }}
+        primaryCta={{ to: '/solicitar-orcamento/', label: 'Solicitar orçamento' }}
         secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 
@@ -99,7 +99,7 @@ export function SegmentsPage() {
           </div>
 
           <div className="mt-12 flex justify-center">
-            <Button to="/contato/?assunto=orcamento" size="lg">
+            <Button to="/solicitar-orcamento/" size="lg">
               Solicitar orçamento
             </Button>
           </div>

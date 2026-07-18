@@ -1005,6 +1005,118 @@ html[data-mobile-nav-open='true'] .whatsapp-fab {
   }
 }
 
+/* ── Form choice groups + submit CTAs ── */
+.form-choice-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.5rem;
+}
+
+@media (min-width: 380px) {
+  .form-choice-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 640px) {
+  .form-choice-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.form-choice {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  border: 1px solid var(--color-brand-navy);
+  background: #fff;
+  padding: 0.55rem 0.85rem;
+  text-align: left;
+  font-size: 0.875rem;
+  font-weight: 550;
+  line-height: 1.35;
+  color: var(--color-brand-graphite);
+  cursor: pointer;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.form-choice:hover {
+  border-color: var(--color-brand-blue);
+  color: var(--color-brand-blue-dark);
+}
+
+.form-choice:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px #fff, 0 0 0 4px var(--color-brand-blue);
+}
+
+.form-choice.is-selected {
+  border-color: var(--color-brand-blue);
+  background: var(--color-brand-blue);
+  color: #fff;
+}
+
+.form-choice.is-selected:hover {
+  border-color: var(--color-brand-blue-dark);
+  background: var(--color-brand-blue-dark);
+  color: #fff;
+}
+
+.form-choice__check {
+  opacity: 0.95;
+}
+
+.form-submit {
+  min-height: 54px;
+  font-weight: 700;
+  box-shadow: 0 8px 20px rgba(3, 18, 32, 0.12);
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    background-color 180ms ease;
+}
+
+.form-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 28px rgba(3, 18, 32, 0.18);
+}
+
+.form-submit:focus-visible {
+  outline: none;
+}
+
+.form-submit:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.form-submit--orange:hover:not(:disabled) {
+  background-color: var(--color-brand-orange-dark);
+}
+
+.form-submit--blue:hover:not(:disabled) {
+  background-color: var(--color-brand-blue-dark);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .form-choice,
+  .form-submit {
+    transition: none;
+  }
+
+  .form-submit:hover:not(:disabled) {
+    transform: none;
+  }
+}
+
 /* ── Related / callout cards (DetailSections RelatedGrid) ── */
 .related-grid {
   display: grid;

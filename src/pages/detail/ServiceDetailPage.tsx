@@ -91,7 +91,7 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
         description={service.description}
         image={service.image}
         imageAlt={service.imageAlt}
-        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Conversar com a equipe' }}
+        primaryCta={{ to: '/solicitar-orcamento/', label: 'Conversar com a equipe' }}
         secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 

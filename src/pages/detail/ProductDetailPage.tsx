@@ -82,7 +82,7 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
         description={product.description}
         image={product.image}
         imageAlt={product.imageAlt}
-        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Solicitar orçamento' }}
+        primaryCta={{ to: '/solicitar-orcamento/', label: 'Solicitar orçamento' }}
         secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 

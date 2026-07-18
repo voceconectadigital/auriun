@@ -32,7 +32,7 @@ export function FinalCta() {
               fornecimento.
             </p>
             <div className="mt-9 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <Button to="/contato/?assunto=orcamento" size="lg" className="min-h-13 w-full justify-center sm:w-auto">
+              <Button to="/solicitar-orcamento/" size="lg" className="min-h-13 w-full justify-center sm:w-auto">
                 Solicitar orçamento
               </Button>
               <Button to="/contato/" size="lg" variant="outline-light" className="min-h-13 w-full justify-center sm:w-auto">

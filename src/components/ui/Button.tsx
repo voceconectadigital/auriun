@@ -90,9 +90,17 @@ export function Button(props: ButtonProps) {
     )
   }
 
-  const { type = 'button', ...rest } = props as ButtonAsButton
+  const buttonProps = { ...(props as ButtonAsButton) }
+  Reflect.deleteProperty(buttonProps, 'children')
+  Reflect.deleteProperty(buttonProps, 'className')
+  Reflect.deleteProperty(buttonProps, 'variant')
+  Reflect.deleteProperty(buttonProps, 'size')
+  Reflect.deleteProperty(buttonProps, 'to')
+  Reflect.deleteProperty(buttonProps, 'href')
+  const { type = 'button', ...domProps } = buttonProps
+
   return (
-    <button type={type} className={classes} {...rest}>
+    <button type={type} className={classes} {...domProps}>
       {children}
     </button>
   )

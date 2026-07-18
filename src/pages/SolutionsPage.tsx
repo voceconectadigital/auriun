@@ -40,7 +40,7 @@ export function SolutionsPage() {
         imageAlt={hubCover.imageAlt}
         imagePosition="68% center"
         imagePositionMobile="62% center"
-        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Solicitar orçamento' }}
+        primaryCta={{ to: '/solicitar-orcamento/', label: 'Solicitar orçamento' }}
         secondaryCta={{ to: '/solucoes/#produtos', label: 'Ver produtos' }}
       />
 
@@ -140,7 +140,7 @@ export function SolutionsPage() {
               Envie o escopo ou a lista de materiais — retornamos com orientação comercial objetiva.
             </p>
           </div>
-          <Button to="/contato/?assunto=orcamento">
+          <Button to="/solicitar-orcamento/">
             Solicitar orçamento
           </Button>
         </Container>

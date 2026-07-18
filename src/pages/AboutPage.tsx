@@ -31,7 +31,7 @@ export function AboutPage() {
         imageAlt="Instalação industrial da operação Auriun"
         imagePosition="center 35%"
         imagePositionMobile="center 30%"
-        primaryCta={{ to: '/contato/?assunto=orcamento', label: 'Falar com a Auriun' }}
+        primaryCta={{ to: '/contato/', label: 'Falar com a Auriun' }}
         secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 
@@ -124,7 +124,7 @@ export function AboutPage() {
               e comercial consistente.
             </p>
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button to="/contato/?assunto=orcamento" size="lg">
+              <Button to="/solicitar-orcamento/" size="lg">
                 Solicitar orçamento
               </Button>
               <Button to="/solucoes/" variant="ghost" size="lg">

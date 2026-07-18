@@ -33,7 +33,7 @@ export function Footer() {
             </div>
             <div className="flex w-full items-center justify-center border-t border-white/20 px-5 py-6 sm:px-10 lg:w-auto lg:border-l lg:border-t-0 lg:px-12">
               <Link
-                to="/contato/?assunto=orcamento"
+                to="/solicitar-orcamento/"
                 className="footer-cta-button group inline-flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-2.5 bg-brand-orange px-8 text-[0.975rem] font-bold tracking-wide text-white lg:w-auto"
               >
                 Solicitar orçamento

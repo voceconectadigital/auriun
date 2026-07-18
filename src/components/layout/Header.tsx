@@ -317,7 +317,7 @@ export function Header() {
         <div className="relative z-20 flex items-center gap-2 sm:gap-3">
           <div className="hidden xl:block">
             <Button
-              to="/contato/?assunto=orcamento"
+              to="/solicitar-orcamento/"
               size="md"
               className="!min-h-10 !py-2"
               onClick={closeAll}
@@ -644,7 +644,7 @@ export function Header() {
 
             <div className="site-gutter-x shrink-0 border-t border-brand-line bg-brand-mist/60 py-4">
               <Button
-                to="/contato/?assunto=orcamento"
+                to="/solicitar-orcamento/"
                 className="min-h-13 w-full"
                 size="lg"
                 onClick={closeAll}
