@@ -103,7 +103,6 @@ export function InternalHero({
         <div className="internal-hero-scrim absolute inset-0" aria-hidden />
         <div className="internal-hero-glow absolute inset-0" aria-hidden />
         <div className="internal-hero-lines absolute inset-0" aria-hidden />
-        <div className="internal-hero-seam absolute inset-y-[12%] left-[46%] hidden w-px lg:block" aria-hidden />
       </div>
 
       <Container className="relative z-[1] flex min-h-[auto] flex-col justify-end pb-14 pt-10 sm:pb-16 sm:pt-12 lg:min-h-[620px] lg:justify-center lg:pb-20 lg:pt-16">

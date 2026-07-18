@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { Container } from '@/components/ui/Container'
 import { DetailCta, RelatedGrid } from '@/components/ui/DetailSections'
 import { InternalHero } from '@/components/ui/InternalHero'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import {
   breadcrumbJsonLd,
   JsonLd,
@@ -97,9 +98,7 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
       <section className="section-pad">
         <Container>
           <div className="max-w-3xl">
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              O que é este serviço
-            </h2>
+            <SectionHeading title="O que é este serviço" />
             <div className="mt-4 space-y-4 text-base leading-relaxed text-brand-slate">
               {paragraphs.map((p) => (
                 <p key={p.slice(0, 32)}>{p}</p>
@@ -112,9 +111,7 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
       <section className="section-pad bg-brand-mist">
         <Container className="grid gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Desafios que ajuda a resolver
-            </h2>
+            <SectionHeading title="Desafios que ajuda a resolver" />
             <ul className="mt-5 space-y-3">
               {service.challenges.map((item) => (
                 <li
@@ -127,9 +124,7 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
             </ul>
           </div>
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Como a Auriun atua
-            </h2>
+            <SectionHeading title="Como a Auriun atua" />
             <ol className="mt-5 space-y-3">
               {service.approach.map((item, index) => (
                 <li key={item} className="flex gap-3 text-sm text-brand-slate">
@@ -147,9 +142,7 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
       <section className="section-pad">
         <Container className="grid gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Benefícios para o cliente
-            </h2>
+            <SectionHeading title="Benefícios para o cliente" />
             <ul className="mt-5 space-y-3">
               {service.benefits.map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-brand-slate">
@@ -160,9 +153,7 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
             </ul>
           </div>
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Aplicações em MRO, CAPEX e OPEX
-            </h2>
+            <SectionHeading title="Aplicações em MRO, CAPEX e OPEX" />
             <ul className="mt-5 space-y-3">
               {service.mroCapexOpex.map((item) => (
                 <li
@@ -177,15 +168,27 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
         </Container>
       </section>
 
-      <RelatedGrid title="Segmentos relacionados" items={relatedSegments} />
-      <RelatedGrid title="Produtos relacionados" items={relatedProducts} />
+      <RelatedGrid
+        variant="major"
+        eyebrow="Mercados atendidos"
+        title="Setores que se beneficiam deste serviço"
+        items={relatedSegments}
+      />
+      <RelatedGrid
+        variant="major"
+        eyebrow="Fornecimento técnico"
+        title="Produtos alinhados a este serviço"
+        items={relatedProducts}
+      />
       <DetailCta
         title="Converse com a equipe Auriun"
         description="Descreva o desafio de suprimentos, sourcing ou projeto. Retornamos com uma leitura objetiva do escopo."
         label="Falar com a equipe"
       />
       <RelatedGrid
-        title="Outros serviços relacionados"
+        variant="major"
+        eyebrow="Capacidades complementares"
+        title="Outras frentes de atendimento"
         items={relatedServices.length ? relatedServices : otherServices}
       />
     </>

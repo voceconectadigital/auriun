@@ -47,6 +47,7 @@ export function SolutionsPage() {
       <section id="produtos" className="scroll-mt-28 section-pad">
         <Container>
           <SectionHeading
+            variant="major"
             eyebrow="Produtos"
             title="Linhas de fornecimento"
             description="Categorias principais do portfólio Auriun."
@@ -89,6 +90,7 @@ export function SolutionsPage() {
       <section id="servicos" className="scroll-mt-28 section-pad bg-brand-mist">
         <Container>
           <SectionHeading
+            variant="major"
             eyebrow="Serviços"
             title="Integração além da distribuição"
             description="Sourcing, supply chain, materiais especiais e suporte a projetos."
@@ -138,7 +140,7 @@ export function SolutionsPage() {
               Envie o escopo ou a lista de materiais — retornamos com orientação comercial objetiva.
             </p>
           </div>
-          <Button to="/contato/?assunto=orcamento" size="lg">
+          <Button to="/contato/?assunto=orcamento">
             Solicitar orçamento
           </Button>
         </Container>

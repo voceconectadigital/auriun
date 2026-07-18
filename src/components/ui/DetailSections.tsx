@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { Container } from '@/components/ui/Container'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import { SegmentCoverImage } from '@/components/ui/SegmentCoverImage'
 import {
   resolveRelatedIcon,
@@ -121,19 +122,22 @@ function RelatedTextCard({ item }: { item: RelatedCard }) {
 }
 
 export function RelatedGrid({
+  eyebrow,
   title,
   items,
+  variant = 'major',
 }: {
+  eyebrow?: string
   title: string
   items: RelatedCard[]
+  /** Related card grids default to `major` (dash + dot + eyebrow). */
+  variant?: 'major' | 'compact'
 }) {
   if (!items.length) return null
   return (
     <section className="section-pad">
       <Container>
-        <h2 className="font-display text-2xl font-semibold text-brand-graphite sm:text-3xl">
-          {title}
-        </h2>
+        <SectionHeading variant={variant} eyebrow={eyebrow} title={title} />
         <div className="related-grid mt-8">
           {items.map((item) =>
             item.image ? (

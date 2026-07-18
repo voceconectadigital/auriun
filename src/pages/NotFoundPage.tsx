@@ -22,9 +22,6 @@ export function NotFoundPage() {
       <section className="section-pad">
         <Container>
           <div className="mx-auto max-w-2xl text-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-orange">
-              Erro 404
-            </p>
             <SectionHeading
               title="Página não encontrada"
               description="O endereço acessado não corresponde a nenhuma página publicada. Verifique a URL ou navegue a partir do menu principal."
@@ -32,10 +29,10 @@ export function NotFoundPage() {
               as="h1"
             />
             <div className="mt-8 flex flex-wrap justify-center gap-3">
-              <Button to="/" size="lg">
+              <Button to="/">
                 Ir para a Home
               </Button>
-              <Button to="/solucoes/" variant="ghost" size="lg">
+              <Button to="/solucoes/" variant="ghost">
                 Ver soluções
               </Button>
               <Link

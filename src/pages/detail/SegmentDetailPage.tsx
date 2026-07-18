@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { Container } from '@/components/ui/Container'
 import { DetailCta, RelatedGrid } from '@/components/ui/DetailSections'
 import { InternalHero } from '@/components/ui/InternalHero'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import {
   breadcrumbJsonLd,
   JsonLd,
@@ -96,9 +97,7 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
       <section className="section-pad">
         <Container className="grid gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Contexto do segmento
-            </h2>
+            <SectionHeading title="Contexto do segmento" />
             <div className="mt-4 space-y-4 text-base leading-relaxed text-brand-slate">
               {paragraphs.map((p) => (
                 <p key={p.slice(0, 32)}>{p}</p>
@@ -107,9 +106,7 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
             </div>
           </div>
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Desafios típicos do setor
-            </h2>
+            <SectionHeading title="Desafios típicos" />
             <ul className="mt-5 space-y-3">
               {segment.challenges.map((item) => (
                 <li
@@ -127,9 +124,7 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
       <section className="section-pad bg-brand-mist">
         <Container className="grid gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Como a Auriun pode apoiar
-            </h2>
+            <SectionHeading title="Como a Auriun pode apoiar" />
             <ul className="mt-5 space-y-3">
               {segment.support.map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-brand-slate">
@@ -140,9 +135,7 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
             </ul>
           </div>
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Benefícios do atendimento consultivo
-            </h2>
+            <SectionHeading title="Benefícios do atendimento consultivo" />
             <ul className="mt-5 space-y-3">
               {segment.benefits.map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-brand-slate">
@@ -155,14 +148,29 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
         </Container>
       </section>
 
-      <RelatedGrid title="Produtos aplicáveis" items={relatedProducts} />
-      <RelatedGrid title="Serviços aplicáveis" items={relatedServices} />
+      <RelatedGrid
+        variant="major"
+        eyebrow="Soluções para a operação"
+        title="Tecnologias alinhadas aos desafios do setor"
+        items={relatedProducts}
+      />
+      <RelatedGrid
+        variant="major"
+        eyebrow="Suporte estratégico"
+        title="Da especificação técnica ao fornecimento"
+        items={relatedServices}
+      />
       <DetailCta
         title="Solicite uma solução para este segmento"
         description="Conte o contexto operacional e os materiais ou serviços necessários. A equipe Auriun analisa o escopo com visão técnica e comercial."
         label="Solicitar uma solução"
       />
-      <RelatedGrid title="Outros segmentos atendidos" items={otherSegments} />
+      <RelatedGrid
+        variant="major"
+        eyebrow="Mercados e operações"
+        title="Soluções para diferentes setores industriais"
+        items={otherSegments}
+      />
     </>
   )
 }

@@ -2,6 +2,7 @@ import { useParams } from 'react-router-dom'
 import { Container } from '@/components/ui/Container'
 import { DetailCta, RelatedGrid } from '@/components/ui/DetailSections'
 import { InternalHero } from '@/components/ui/InternalHero'
+import { SectionHeading } from '@/components/ui/SectionHeading'
 import {
   breadcrumbJsonLd,
   JsonLd,
@@ -88,9 +89,7 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
       <section className="section-pad">
         <Container className="grid gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Apresentação da categoria
-            </h2>
+            <SectionHeading title="Apresentação da categoria" />
             <div className="mt-4 space-y-4 text-base leading-relaxed text-brand-slate">
               {paragraphs.map((p) => (
                 <p key={p.slice(0, 32)}>{p}</p>
@@ -98,9 +97,7 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
             </div>
           </div>
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Principais aplicações
-            </h2>
+            <SectionHeading title="Principais aplicações" />
             <ul className="mt-4 space-y-2">
               {product.applications.map((item) => (
                 <li
@@ -118,9 +115,7 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
       <section className="section-pad bg-brand-mist">
         <Container className="grid gap-10 lg:grid-cols-2">
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Soluções e grupos fornecidos
-            </h2>
+            <SectionHeading title="Soluções e grupos fornecidos" />
             <ul className="mt-5 grid gap-3 sm:grid-cols-2">
               {product.solutionGroups.map((item) => (
                 <li
@@ -133,9 +128,7 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
             </ul>
           </div>
           <div>
-            <h2 className="font-display text-2xl font-semibold text-brand-graphite">
-              Benefícios para a operação
-            </h2>
+            <SectionHeading title="Benefícios para a operação" />
             <ul className="mt-5 space-y-3">
               {product.benefits.map((item) => (
                 <li key={item} className="flex gap-3 text-sm text-brand-slate">
@@ -148,13 +141,28 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
         </Container>
       </section>
 
-      <RelatedGrid title="Segmentos relacionados" items={relatedSegments} />
-      <RelatedGrid title="Serviços relacionados" items={relatedServices} />
+      <RelatedGrid
+        variant="major"
+        eyebrow="Mercados atendidos"
+        title="Setores que demandam esta categoria"
+        items={relatedSegments}
+      />
+      <RelatedGrid
+        variant="major"
+        eyebrow="Suporte complementar"
+        title="Serviços que potencializam o fornecimento"
+        items={relatedServices}
+      />
       <DetailCta
         title="Solicite uma cotação para esta categoria"
         description="Envie a especificação, a lista de materiais ou o contexto da demanda. Nossa equipe analisa o escopo e retorna com orientação técnica e comercial."
       />
-      <RelatedGrid title="Outras categorias de produtos" items={otherProducts} />
+      <RelatedGrid
+        variant="major"
+        eyebrow="Portfólio técnico"
+        title="Outras linhas de fornecimento"
+        items={otherProducts}
+      />
     </>
   )
 }
