@@ -52,6 +52,8 @@ type ChoiceGroupProps = {
   optional?: boolean
   error?: string | null
   errorId?: string
+  /** Optional id on the radiogroup for focus management. */
+  groupId?: string
   /** fluid = Assunto; segments = grid; demand = content-width wrap */
   layout?: ChoiceLayout
 }
@@ -70,6 +72,7 @@ export function ChoiceGroup({
   optional,
   error,
   errorId,
+  groupId,
   layout = 'fluid',
 }: ChoiceGroupProps) {
   const groupClass = [
@@ -93,7 +96,7 @@ export function ChoiceGroup({
           <span className="ml-1 font-normal text-brand-slate/70">(opcional)</span>
         ) : null}
       </legend>
-      <div role="radiogroup" aria-label={legend} className={groupClass}>
+      <div id={groupId} role="radiogroup" aria-label={legend} className={groupClass} tabIndex={-1}>
         {options.map((opt) => {
           const selected = value === opt.value
           return (

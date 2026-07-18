@@ -10,7 +10,7 @@ import {
 } from '@/components/seo/Seo'
 import { SITE } from '@/data/site'
 
-const STEPS = [
+const PROCESS_STEPS = [
   {
     number: '01',
     title: 'Entendimento da demanda',
@@ -26,15 +26,6 @@ const STEPS = [
     title: 'Retorno comercial',
     text: 'Apresentamos o direcionamento adequado à complexidade da solicitação.',
   },
-]
-
-const SCOPE_HINTS = [
-  'Produto, serviço ou aplicação',
-  'Quantidade ou dimensão',
-  'Especificação técnica disponível',
-  'Prazo ou criticidade',
-  'Local de entrega ou operação',
-  'Marcas de referência (se houver)',
 ]
 
 export function QuoteRequestPage() {
@@ -71,64 +62,9 @@ export function QuoteRequestPage() {
         imagePositionMobile="center 40%"
       />
 
-      <section className="border-b border-brand-line bg-white">
-        <Container className="py-8 sm:py-10">
-          <ol className="quote-process">
-            {STEPS.map((step) => (
-              <li key={step.number} className="quote-process__step">
-                <span className="quote-process__number" aria-hidden>
-                  {step.number}
-                </span>
-                <div className="quote-process__body">
-                  <h2 className="font-display text-base font-semibold text-brand-graphite sm:text-lg">
-                    {step.title}
-                  </h2>
-                  <p className="mt-1.5 text-sm leading-relaxed text-brand-slate">
-                    {step.text}
-                  </p>
-                </div>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </section>
-
       <section className="section-pad bg-[linear-gradient(165deg,#f7f9fb_0%,#ffffff_42%,#f3f5f7_100%)]">
         <Container>
-          <div className="quote-main">
-            <aside className="quote-scope-panel">
-              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
-                Para uma análise mais precisa
-              </p>
-              <h2 className="mt-3 font-display text-xl font-semibold text-white sm:text-2xl">
-                Informações que ajudam na cotação
-              </h2>
-              <ul className="quote-scope-panel__list mt-6">
-                {SCOPE_HINTS.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ul>
-              <p className="mt-7 text-sm leading-relaxed text-white/75">
-                Se você ainda não possui todas as informações, envie o que estiver disponível.
-                Nossa equipe poderá orientar os próximos pontos.
-              </p>
-            </aside>
-
-            <div className="quote-form-panel">
-              <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
-                Solicitação de orçamento
-              </p>
-              <h2 className="mt-3 font-display text-2xl font-semibold text-brand-graphite sm:text-[1.75rem]">
-                Vamos estruturar sua cotação
-              </h2>
-              <p className="mt-3 text-sm leading-relaxed text-brand-slate sm:text-base">
-                Preencha os dados abaixo e detalhe o máximo possível sobre sua necessidade.
-              </p>
-              <div className="mt-7">
-                <QuoteRequestForm />
-              </div>
-            </div>
-          </div>
+          <QuoteRequestForm />
 
           <p className="mt-10 text-center text-sm text-brand-slate">
             Dúvidas gerais, parcerias ou fornecedores?{' '}
@@ -139,6 +75,28 @@ export function QuoteRequestPage() {
               Ir para Contato
             </Link>
           </p>
+        </Container>
+      </section>
+
+      <section className="quote-after border-t border-brand-line bg-white">
+        <Container className="py-10 sm:py-12">
+          <header className="quote-after__head">
+            <p className="quote-after__eyebrow">Após o envio</p>
+            <h2 className="quote-after__title">Como seguimos com a sua solicitação</h2>
+          </header>
+          <ol className="quote-after__list">
+            {PROCESS_STEPS.map((step) => (
+              <li key={step.number} className="quote-after__item">
+                <span className="quote-after__number" aria-hidden>
+                  {step.number}
+                </span>
+                <div className="quote-after__body">
+                  <h3 className="quote-after__item-title">{step.title}</h3>
+                  <p className="quote-after__item-text">{step.text}</p>
+                </div>
+              </li>
+            ))}
+          </ol>
         </Container>
       </section>
     </>
