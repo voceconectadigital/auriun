@@ -389,16 +389,16 @@ export function Header() {
                   </div>
                 </Link>
 
-                <div>
+                <div className="min-h-0">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-blue">
                     Produtos
                   </p>
-                  <ul className="mt-4 space-y-1">
-                    {products.slice(0, 6).map((item) => (
+                  <ul className="mt-4 max-h-[min(52vh,420px)] space-y-1 overflow-y-auto overscroll-contain pr-1">
+                    {products.map((item) => (
                       <li key={item.slug}>
                         <Link
                           to={productPath(item.slug)}
-                          className="group block px-2 py-2.5 hover:bg-brand-mist"
+                          className="group block px-2 py-2 hover:bg-brand-mist"
                           onClick={closeAll}
                         >
                           <span className="block text-[0.9375rem] font-medium text-brand-graphite group-hover:text-brand-blue">
@@ -411,18 +411,26 @@ export function Header() {
                       </li>
                     ))}
                   </ul>
+                  <Link
+                    to="/solucoes/#produtos"
+                    onClick={closeAll}
+                    className="mt-3 inline-flex items-center gap-1.5 px-2 text-sm font-semibold text-brand-blue hover:text-brand-navy"
+                  >
+                    Ver todos os produtos
+                    <ArrowRight className="size-3.5" aria-hidden />
+                  </Link>
                 </div>
 
-                <div>
+                <div className="min-h-0">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
                     Serviços
                   </p>
-                  <ul className="mt-4 space-y-1">
-                    {services.slice(0, 6).map((item) => (
+                  <ul className="mt-4 max-h-[min(52vh,420px)] space-y-1 overflow-y-auto overscroll-contain pr-1">
+                    {services.map((item) => (
                       <li key={item.slug}>
                         <Link
                           to={servicePath(item.slug)}
-                          className="group block px-2 py-2.5 hover:bg-brand-mist"
+                          className="group block px-2 py-2 hover:bg-brand-mist"
                           onClick={closeAll}
                         >
                           <span className="block text-[0.9375rem] font-medium text-brand-graphite group-hover:text-brand-blue">
@@ -435,6 +443,14 @@ export function Header() {
                       </li>
                     ))}
                   </ul>
+                  <Link
+                    to="/solucoes/#servicos"
+                    onClick={closeAll}
+                    className="mt-3 inline-flex items-center gap-1.5 px-2 text-sm font-semibold text-brand-orange hover:text-brand-navy"
+                  >
+                    Ver todos os serviços
+                    <ArrowRight className="size-3.5" aria-hidden />
+                  </Link>
                 </div>
               </Container>
             </div>
