@@ -84,8 +84,45 @@ if (/rounded-.*border.*img|aspect-\[16\/11\]/.test(heroSrc)) {
 if (!/internal-hero-scrim/.test(heroSrc)) {
   errors.push('InternalHero must include integrated photo scrim/gradient')
 }
-if (!/outline-light/.test(heroSrc)) {
-  errors.push('InternalHero must use outline-light secondary CTA')
+// Hero CTAs removed globally — buttons must not render inside internal-page-hero
+if (/\bButton\b/.test(heroSrc) || /from ['"]@\/components\/ui\/Button['"]/.test(heroSrc)) {
+  errors.push('InternalHero must not import or render Button (no hero CTAs)')
+}
+if (/\bArrowRight\b/.test(heroSrc)) {
+  errors.push('InternalHero must not use ArrowRight (CTA icon removed)')
+}
+if (/\bprimaryCta\b|\bsecondaryCta\b|\bInternalHeroCta\b|\bshowActions\b/.test(heroSrc)) {
+  errors.push('InternalHero must not expose primaryCta/secondaryCta/showActions props')
+}
+if (/to=\{|DEFAULT_PRIMARY|DEFAULT_SECONDARY|outline-light/.test(heroSrc)) {
+  errors.push('InternalHero must not contain CTA link markup or defaults')
+}
+if (/internal-hero-cta/.test(heroSrc)) {
+  errors.push('InternalHero must not use internal-hero-cta classes')
+}
+// Supporting copy removed — hero DOM is breadcrumb, eyebrow, H1 only (no body <p>)
+if (
+  /description\s*[?:]|subtitle\s*[?:]|intro\s*[?:]|supportingText\s*[?:]/.test(
+    heroSrc,
+  ) ||
+  /\{description\}|\{subtitle\}|\{intro\}|\{supportingText\}/.test(heroSrc)
+) {
+  errors.push(
+    'InternalHero must not expose or render description/subtitle/intro/supportingText',
+  )
+}
+const heroDomWithoutComments = heroSrc
+  .replace(/\/\*[\s\S]*?\*\//g, '')
+  .replace(/\/\/.*$/gm, '')
+{
+  const nonEyebrowPs = [
+    ...heroDomWithoutComments.matchAll(/<p\b[^>]*>/g),
+  ].filter((m) => !/internal-hero-eyebrow/.test(m[0]))
+  if (nonEyebrowPs.length) {
+    errors.push(
+      'InternalHero must not render a description paragraph inside [data-testid="internal-page-hero"]',
+    )
+  }
 }
 
 const detailSections = readFileSync(
@@ -114,6 +151,14 @@ for (const rel of consumers) {
   }
   if (!/variant=/.test(src)) {
     errors.push(`${rel} must pass a variant prop to InternalHero`)
+  }
+  if (/\bprimaryCta\b|\bsecondaryCta\b/.test(src)) {
+    errors.push(`${rel} must not pass primaryCta/secondaryCta to InternalHero`)
+  }
+  // Description prop must not be passed into InternalHero (SEO/body copy stays elsewhere)
+  const heroJsx = src.match(/<InternalHero[\s\S]*?\/>/)?.[0] ?? ''
+  if (/\bdescription=/.test(heroJsx)) {
+    errors.push(`${rel} must not pass description to InternalHero`)
   }
   for (const pattern of forbiddenNamePatterns) {
     if (pattern.test(src)) {
@@ -175,6 +220,9 @@ if (existsSync(cssPath)) {
     if (/brand-mist|#f3f5f7|background:\s*#fff|color:\s*#0/i.test(block)) {
       errors.push('index.css internal-hero rules must not force light mist / dark text')
     }
+  }
+  if (/\.internal-hero-cta/.test(css)) {
+    errors.push('index.css must not define .internal-hero-cta* (hero CTAs removed)')
   }
 }
 

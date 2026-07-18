@@ -79,11 +79,8 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
         ]}
         eyebrow={product.eyebrow}
         title={product.title}
-        description={product.description}
         image={product.image}
         imageAlt={product.imageAlt}
-        primaryCta={{ to: '/solicitar-orcamento/', label: 'Solicitar orçamento' }}
-        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 
       <section className="section-pad">

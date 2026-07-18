@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom'
-import { ClipboardList, FileSearch, MessagesSquare } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { QuoteRequestForm } from '@/components/contact/QuoteRequestForm'
 import { InternalHero } from '@/components/ui/InternalHero'
@@ -13,20 +12,29 @@ import { SITE } from '@/data/site'
 
 const STEPS = [
   {
-    icon: ClipboardList,
-    title: 'Contexto da demanda',
-    text: 'Informe segmento, tipo de necessidade e o máximo de detalhe técnico disponível.',
+    number: '01',
+    title: 'Entendimento da demanda',
+    text: 'Você informa o contexto, a aplicação e os requisitos disponíveis.',
   },
   {
-    icon: FileSearch,
-    title: 'Leitura de escopo',
-    text: 'Nossa equipe analisa a solicitação com foco em aderência técnica e comercial.',
+    number: '02',
+    title: 'Análise do escopo',
+    text: 'Avaliamos aderência técnica, disponibilidade e caminhos de fornecimento.',
   },
   {
-    icon: MessagesSquare,
-    title: 'Retorno orientado',
-    text: 'Retornamos com orientação objetiva conforme a complexidade do escopo informado.',
+    number: '03',
+    title: 'Retorno comercial',
+    text: 'Apresentamos o direcionamento adequado à complexidade da solicitação.',
   },
+]
+
+const SCOPE_HINTS = [
+  'Produto, serviço ou aplicação',
+  'Quantidade ou dimensão',
+  'Especificação técnica disponível',
+  'Prazo ou criticidade',
+  'Local de entrega ou operação',
+  'Marcas de referência (se houver)',
 ]
 
 export function QuoteRequestPage() {
@@ -56,61 +64,73 @@ export function QuoteRequestPage() {
           { label: 'Solicitar orçamento' },
         ]}
         eyebrow="Atendimento comercial"
-        title="Solicite uma cotação técnica"
-        description="Compartilhe as informações da sua demanda para que nossa equipe possa avaliar o escopo com mais precisão."
+        title="Conte o que sua operação precisa"
         image="/images/cta-industrial.jpg"
         imageAlt="Ambiente industrial representando demandas comerciais da Auriun"
         imagePosition="center center"
         imagePositionMobile="center 40%"
-        primaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
-        secondaryCta={{ to: '/contato/', label: 'Fale conosco' }}
       />
 
       <section className="border-b border-brand-line bg-white">
-        <Container className="py-10 sm:py-12">
-          <div className="grid gap-8 sm:grid-cols-3 sm:gap-6 lg:gap-10">
-            {STEPS.map((step, index) => {
-              const Icon = step.icon
-              return (
-                <div key={step.title} className="flex gap-4">
-                  <div className="flex size-11 shrink-0 items-center justify-center bg-brand-navy text-white">
-                    <Icon className="size-5" aria-hidden />
-                  </div>
-                  <div>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.14em] text-brand-orange">
-                      Etapa {index + 1}
-                    </p>
-                    <h3 className="mt-1.5 font-display text-lg font-semibold text-brand-graphite">
-                      {step.title}
-                    </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-brand-slate">{step.text}</p>
-                  </div>
+        <Container className="py-8 sm:py-10">
+          <ol className="quote-process">
+            {STEPS.map((step) => (
+              <li key={step.number} className="quote-process__step">
+                <span className="quote-process__number" aria-hidden>
+                  {step.number}
+                </span>
+                <div className="quote-process__body">
+                  <h2 className="font-display text-base font-semibold text-brand-graphite sm:text-lg">
+                    {step.title}
+                  </h2>
+                  <p className="mt-1.5 text-sm leading-relaxed text-brand-slate">
+                    {step.text}
+                  </p>
                 </div>
-              )
-            })}
-          </div>
+              </li>
+            ))}
+          </ol>
         </Container>
       </section>
 
-      <section className="section-pad bg-[linear-gradient(180deg,#f7f9fb_0%,#ffffff_42%)]">
-        <Container className="max-w-4xl">
-          <div className="mx-auto max-w-2xl text-center">
-            <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
-              Formulário comercial
-            </p>
-            <h2 className="mt-3 font-display text-2xl font-semibold text-brand-graphite sm:text-3xl">
-              Detalhe sua solicitação
-            </h2>
-            <p className="mt-3 text-base leading-relaxed text-brand-slate">
-              Quanto mais contexto técnico e operacional, mais precisa será a avaliação do escopo.
-            </p>
+      <section className="section-pad bg-[linear-gradient(165deg,#f7f9fb_0%,#ffffff_42%,#f3f5f7_100%)]">
+        <Container>
+          <div className="quote-main">
+            <aside className="quote-scope-panel">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
+                Para uma análise mais precisa
+              </p>
+              <h2 className="mt-3 font-display text-xl font-semibold text-white sm:text-2xl">
+                Informações que ajudam na cotação
+              </h2>
+              <ul className="quote-scope-panel__list mt-6">
+                {SCOPE_HINTS.map((item) => (
+                  <li key={item}>{item}</li>
+                ))}
+              </ul>
+              <p className="mt-7 text-sm leading-relaxed text-white/75">
+                Se você ainda não possui todas as informações, envie o que estiver disponível.
+                Nossa equipe poderá orientar os próximos pontos.
+              </p>
+            </aside>
+
+            <div className="quote-form-panel">
+              <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
+                Solicitação de orçamento
+              </p>
+              <h2 className="mt-3 font-display text-2xl font-semibold text-brand-graphite sm:text-[1.75rem]">
+                Vamos estruturar sua cotação
+              </h2>
+              <p className="mt-3 text-sm leading-relaxed text-brand-slate sm:text-base">
+                Preencha os dados abaixo e detalhe o máximo possível sobre sua necessidade.
+              </p>
+              <div className="mt-7">
+                <QuoteRequestForm />
+              </div>
+            </div>
           </div>
 
-          <div className="mt-10 border border-brand-line bg-white p-5 shadow-[0_16px_48px_rgba(3,18,32,0.07)] sm:p-8 lg:p-12">
-            <QuoteRequestForm />
-          </div>
-
-          <p className="mt-8 text-center text-sm text-brand-slate">
+          <p className="mt-10 text-center text-sm text-brand-slate">
             Dúvidas gerais, parcerias ou fornecedores?{' '}
             <Link
               to="/contato/"

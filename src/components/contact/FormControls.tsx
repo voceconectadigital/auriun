@@ -2,7 +2,9 @@ import type { ReactNode } from 'react'
 import { Check } from 'lucide-react'
 
 export const inputClass =
-  'w-full min-h-12 rounded-sm border border-brand-line bg-white px-3.5 py-3 text-base text-brand-graphite outline-none transition placeholder:text-brand-slate/50 focus:border-brand-blue focus:ring-2 focus:ring-brand-blue/20 aria-[invalid=true]:border-red-500 aria-[invalid=true]:focus:ring-red-500/25'
+  'w-full min-h-[50px] rounded-[10px] border border-brand-line/90 bg-white px-3.5 py-3 text-base text-brand-graphite outline-none transition placeholder:text-brand-slate/50 focus:border-brand-blue focus:ring-[3px] focus:ring-brand-blue/20 aria-[invalid=true]:border-red-500 aria-[invalid=true]:focus:ring-red-500/25'
+
+export const textareaClass = `${inputClass} min-h-[170px] resize-y`
 
 export function Field({
   label,
@@ -37,6 +39,8 @@ export function Field({
 
 type ChoiceOption = { value: string; label: string }
 
+type ChoiceLayout = 'fluid' | 'segments' | 'demand'
+
 type ChoiceGroupProps = {
   legend: string
   name: string
@@ -48,8 +52,14 @@ type ChoiceGroupProps = {
   optional?: boolean
   error?: string | null
   errorId?: string
+  /** fluid = Assunto; segments = grid; demand = content-width wrap */
+  layout?: ChoiceLayout
 }
 
+/**
+ * Content-width choice chips (radio-like). Prefer this over equal-width grids.
+ * Also exported as `RadioChipGroup`.
+ */
 export function ChoiceGroup({
   legend,
   name,
@@ -60,7 +70,16 @@ export function ChoiceGroup({
   optional,
   error,
   errorId,
+  layout = 'fluid',
 }: ChoiceGroupProps) {
+  const groupClass = [
+    'choice-chip-group',
+    layout === 'segments' ? 'choice-chip-group--segments' : '',
+    layout === 'demand' ? 'choice-chip-group--demand' : '',
+  ]
+    .filter(Boolean)
+    .join(' ')
+
   return (
     <fieldset
       className="block"
@@ -74,11 +93,7 @@ export function ChoiceGroup({
           <span className="ml-1 font-normal text-brand-slate/70">(opcional)</span>
         ) : null}
       </legend>
-      <div
-        role="radiogroup"
-        aria-label={legend}
-        className="form-choice-grid"
-      >
+      <div role="radiogroup" aria-label={legend} className={groupClass}>
         {options.map((opt) => {
           const selected = value === opt.value
           return (
@@ -88,15 +103,17 @@ export function ChoiceGroup({
               role="radio"
               aria-checked={selected}
               name={name}
-              className={['form-choice', selected ? 'is-selected' : ''].filter(Boolean).join(' ')}
+              className={['choice-chip', selected ? 'is-selected' : ''].filter(Boolean).join(' ')}
               onClick={() => {
                 if (optional && selected) onChange('')
                 else onChange(opt.value)
               }}
             >
-              <span className="form-choice__label">{opt.label}</span>
+              <span className="choice-chip__label">{opt.label}</span>
               {selected ? (
-                <Check className="form-choice__check size-3.5 shrink-0" aria-hidden strokeWidth={2.5} />
+                <span className="choice-chip__check" aria-hidden>
+                  <Check className="size-2.5" strokeWidth={3} />
+                </span>
               ) : null}
             </button>
           )
@@ -110,3 +127,7 @@ export function ChoiceGroup({
     </fieldset>
   )
 }
+
+/** Alias for ChoiceGroup — content-width radio chips. */
+export const RadioChipGroup = ChoiceGroup
+export const ChoiceChip = ChoiceGroup

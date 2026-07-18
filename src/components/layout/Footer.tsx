@@ -3,15 +3,24 @@ import { ArrowRight, ExternalLink, Mail, MapPin, Phone } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Logo } from '@/components/ui/Logo'
 import { Container } from '@/components/ui/Container'
-import { CONTACT, SITE, SOCIAL, hasValue, mailHref, telHref } from '@/data/site'
+import {
+  CONTACT,
+  SITE,
+  SOCIAL,
+  hasValue,
+  isPublicContact,
+  mailHref,
+  telHref,
+} from '@/data/site'
 import { products, productPath } from '@/data/products'
 import { services, servicePath } from '@/data/services'
 import { segments, segmentPath } from '@/data/segments'
 
 export function Footer() {
   const year = new Date().getFullYear()
-  const phone = telHref()
-  const email = mailHref()
+  const showChannels = isPublicContact()
+  const phone = showChannels ? telHref() : null
+  const email = showChannels ? mailHref() : null
 
   return (
     <footer className="bg-brand-navy text-white">
@@ -166,7 +175,7 @@ export function Footer() {
                   </a>
                 </li>
               ) : null}
-              {hasValue(CONTACT.address) ? (
+              {showChannels && hasValue(CONTACT.address) ? (
                 <li className="flex items-start gap-2 py-3">
                   <MapPin className="mt-0.5 size-4 shrink-0 opacity-70" aria-hidden />
                   <span>{CONTACT.address}</span>

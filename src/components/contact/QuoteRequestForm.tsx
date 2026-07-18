@@ -1,7 +1,7 @@
 import { useId, useState, type FormEvent } from 'react'
 import { Send } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { ChoiceGroup, Field, inputClass } from '@/components/contact/FormControls'
+import { ChoiceGroup, Field, inputClass, textareaClass } from '@/components/contact/FormControls'
 import { CONTACT, hasValue, mailHref, whatsappUrl } from '@/data/site'
 import {
   emailErrorMessage,
@@ -291,8 +291,9 @@ export function QuoteRequestForm() {
       </div>
 
       <ChoiceGroup
-        legend="Segmento / área"
+        legend="Segmento"
         name="segment"
+        layout="segments"
         options={SEGMENT_OPTIONS}
         value={form.segment}
         optional
@@ -302,6 +303,7 @@ export function QuoteRequestForm() {
       <ChoiceGroup
         legend="Tipo de demanda"
         name="demandType"
+        layout="demand"
         options={DEMAND_OPTIONS}
         value={form.demandType}
         required
@@ -318,7 +320,7 @@ export function QuoteRequestForm() {
       />
 
       <Field
-        label="Descrição da necessidade"
+        label="Descreva sua necessidade"
         htmlFor={`${baseId}-message`}
         required
         error={touched.message ? errors.message : null}
@@ -337,8 +339,8 @@ export function QuoteRequestForm() {
               message: form.message.trim() ? null : 'Descreva a necessidade.',
             }))
           }}
-          className={`${inputClass} resize-y`}
-          placeholder="Produtos, serviços, prazo desejado, lista de materiais ou contexto do projeto."
+          className={textareaClass}
+          placeholder="Informe produto ou serviço, aplicação, quantidade, especificação, prazo desejado e demais detalhes disponíveis."
           aria-invalid={touched.message && errors.message ? true : undefined}
         />
       </Field>
@@ -348,7 +350,7 @@ export function QuoteRequestForm() {
           type="submit"
           size="lg"
           variant="primary"
-          className="form-submit form-submit--orange min-h-[54px] w-full font-bold sm:w-auto"
+          className="form-submit form-submit--orange min-h-[54px] w-full font-bold"
           disabled={loading}
         >
           {loading ? 'Enviando...' : 'Solicitar orçamento'}

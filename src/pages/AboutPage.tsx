@@ -26,13 +26,10 @@ export function AboutPage() {
         ]}
         eyebrow="Institucional"
         title="A Auriun Soluções Industriais"
-        description="Distribuidora e integradora de soluções para o setor industrial, com foco em eficiência operacional, redução de custos e continuidade dos processos produtivos."
         image="/images/about-facility.jpg"
         imageAlt="Instalação industrial da operação Auriun"
         imagePosition="center 35%"
         imagePositionMobile="center 30%"
-        primaryCta={{ to: '/contato/', label: 'Falar com a Auriun' }}
-        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 
       <section className="section-pad">

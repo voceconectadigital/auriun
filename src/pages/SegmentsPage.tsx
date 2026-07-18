@@ -34,13 +34,10 @@ export function SegmentsPage() {
         ]}
         eyebrow="Segmentos"
         title="Mercados estratégicos atendidos"
-        description="Conheça os setores em que a Auriun está preparada para apoiar operações com fornecimento técnico e atendimento consultivo."
         image={hubCover.image}
         imageAlt={hubCover.imageAlt}
         imagePosition={hubCover.imageObjectPosition?.hero ?? 'center center'}
         imagePositionMobile={hubCover.imageObjectPosition?.mobile}
-        primaryCta={{ to: '/solicitar-orcamento/', label: 'Solicitar orçamento' }}
-        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 
       <section className="section-pad">

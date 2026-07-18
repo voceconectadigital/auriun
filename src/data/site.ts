@@ -1,13 +1,20 @@
 /**
- * Contatos e canais — preencha quando os dados reais estiverem disponíveis.
- * Valores vazios ou com prefixo PLACEHOLDER não são exibidos na interface.
+ * Contatos e canais — dados provisórios para validação de layout.
+ * TODO: substituir pelos contatos oficiais antes do deploy final.
+ * Enquanto `isIllustrative` for true, NÃO incluir em JSON-LD, metadados ou SEO.
  */
 export const CONTACT = {
-  phone: '', // PLACEHOLDER: ex. '(31) 0000-0000'
-  email: '', // PLACEHOLDER: ex. 'comercial@auriun.com.br'
-  whatsapp: '', // PLACEHOLDER: apenas dígitos com DDI, ex. '5531999999999'
-  address: '', // PLACEHOLDER: endereço completo
-  mapsUrl: '', // PLACEHOLDER: URL do Google Maps
+  /** Display: (31) 3333-0000 → tel:+553133330000 */
+  phone: '(31) 3333-0000',
+  /** Display + mailto */
+  email: 'comercial@auriun.com.br',
+  /** Display: (31) 99999-0000 → wa.me/5531999990000 */
+  whatsapp: '(31) 99999-0000',
+  /** Cidade/UF apenas — sem rua fictícia */
+  address: 'Belo Horizonte — Minas Gerais',
+  mapsUrl: '',
+  /** true = dados ilustrativos; Contact page mostra; Footer/JSON-LD/SEO ocultam */
+  isIllustrative: true,
 } as const
 
 export const SOCIAL = {
@@ -35,24 +42,37 @@ export const BRAND_LOGO = {
   alt: 'Auriun Soluções Industriais',
 } as const
 
+const DEFAULT_WA_MESSAGE =
+  'Olá! Encontrei a Auriun pelo site e gostaria de mais informações.'
+
 export function hasValue(value: string | undefined | null): boolean {
   if (!value) return false
   return !value.toUpperCase().includes('PLACEHOLDER') && value.trim().length > 0
 }
 
+/** Contato público (Footer / JSON-LD / SEO) — ignora dados ilustrativos. */
+export function isPublicContact(): boolean {
+  return !CONTACT.isIllustrative
+}
+
+function toE164Digits(raw: string): string | null {
+  const digits = raw.replace(/\D/g, '')
+  if (!digits) return null
+  return digits.startsWith('55') ? digits : `55${digits}`
+}
+
 export function whatsappUrl(message?: string): string | null {
   if (!hasValue(CONTACT.whatsapp)) return null
-  const text = encodeURIComponent(
-    message ??
-      'Olá! Acessei o site da Auriun e gostaria de solicitar mais informações.',
-  )
-  return `https://wa.me/${CONTACT.whatsapp}?text=${text}`
+  const digits = toE164Digits(CONTACT.whatsapp)
+  if (!digits) return null
+  const text = encodeURIComponent(message ?? DEFAULT_WA_MESSAGE)
+  return `https://wa.me/${digits}?text=${text}`
 }
 
 export function telHref(): string | null {
   if (!hasValue(CONTACT.phone)) return null
-  const digits = CONTACT.phone.replace(/\D/g, '')
-  return digits ? `tel:+${digits.startsWith('55') ? digits : `55${digits}`}` : null
+  const digits = toE164Digits(CONTACT.phone)
+  return digits ? `tel:+${digits}` : null
 }
 
 export function mailHref(): string | null {

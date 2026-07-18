@@ -1,7 +1,7 @@
 import { useId, useState, type FormEvent } from 'react'
 import { Send } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
-import { ChoiceGroup, Field, inputClass } from '@/components/contact/FormControls'
+import { ChoiceGroup, Field, inputClass, textareaClass } from '@/components/contact/FormControls'
 import { CONTACT, hasValue, mailHref, whatsappUrl } from '@/data/site'
 import {
   emailErrorMessage,
@@ -236,6 +236,7 @@ export function ContactForm() {
       <ChoiceGroup
         legend="Assunto"
         name="subject"
+        layout="fluid"
         options={SUBJECT_OPTIONS}
         value={form.subject}
         required
@@ -271,8 +272,8 @@ export function ContactForm() {
               message: form.message.trim() ? null : 'Escreva sua mensagem.',
             }))
           }}
-          className={`${inputClass} resize-y`}
-          placeholder="Como podemos ajudar?"
+          className={textareaClass}
+          placeholder="Escreva sua dúvida ou informe como podemos ajudar."
           aria-invalid={touched.message && errors.message ? true : undefined}
         />
       </Field>

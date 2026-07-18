@@ -1,7 +1,7 @@
-import { whatsappUrl } from '@/data/site'
+import { isPublicContact, whatsappUrl } from '@/data/site'
 
 const DEFAULT_MESSAGE =
-  'Olá! Acessei o site da Auriun e gostaria de solicitar mais informações.'
+  'Olá! Encontrei a Auriun pelo site e gostaria de mais informações.'
 
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
@@ -18,6 +18,8 @@ function WhatsAppIcon({ className }: { className?: string }) {
 }
 
 export function WhatsAppButton() {
+  // Oculta FAB enquanto o número for ilustrativo (evita vazar canal fake site-wide)
+  if (!isPublicContact()) return null
   const href = whatsappUrl(DEFAULT_MESSAGE)
   if (!href) return null
 

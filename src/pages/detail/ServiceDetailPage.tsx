@@ -88,11 +88,8 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
         ]}
         eyebrow={service.eyebrow}
         title={service.title}
-        description={service.description}
         image={service.image}
         imageAlt={service.imageAlt}
-        primaryCta={{ to: '/solicitar-orcamento/', label: 'Conversar com a equipe' }}
-        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 
       <section className="section-pad">

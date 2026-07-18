@@ -35,13 +35,10 @@ export function SolutionsPage() {
         ]}
         eyebrow="Soluções"
         title="Produtos e serviços para a indústria"
-        description="Explore as categorias de fornecimento e os serviços de integração. Cada card abre a página individual da solução."
         image={hubCover.image}
         imageAlt={hubCover.imageAlt}
         imagePosition="68% center"
         imagePositionMobile="62% center"
-        primaryCta={{ to: '/solicitar-orcamento/', label: 'Solicitar orçamento' }}
-        secondaryCta={{ to: '/solucoes/#produtos', label: 'Ver produtos' }}
       />
 
       <section id="produtos" className="scroll-mt-28 section-pad">

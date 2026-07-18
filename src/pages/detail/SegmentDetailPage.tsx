@@ -83,15 +83,12 @@ function SegmentDetailContent({ segment }: { segment: SegmentItem }) {
         ]}
         eyebrow={segment.eyebrow}
         title={segment.title}
-        description={segment.description}
         image={segment.image}
         imageAlt={segment.imageAlt}
         imagePosition={segment.imageObjectPosition?.hero ?? 'center center'}
         imagePositionMobile={segment.imageObjectPosition?.mobile}
         fetchPriority="high"
         preload
-        primaryCta={{ to: '/solicitar-orcamento/', label: 'Solicitar uma solução' }}
-        secondaryCta={{ to: '/solucoes/', label: 'Ver soluções' }}
       />
 
       <section className="section-pad">

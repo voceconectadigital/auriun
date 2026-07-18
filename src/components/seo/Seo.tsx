@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { SITE, BRAND_LOGO } from '@/data/site'
+import { CONTACT, SITE, SOCIAL, BRAND_LOGO, hasValue, isPublicContact } from '@/data/site'
 import { absoluteUrl } from '@/data/routes'
 
 type JsonLdProps = {
@@ -35,7 +35,7 @@ export function breadcrumbJsonLd(
 }
 
 export function organizationJsonLd() {
-  return {
+  const data: Record<string, unknown> = {
     '@context': 'https://schema.org',
     '@type': 'Organization',
     name: SITE.name,
@@ -43,6 +43,32 @@ export function organizationJsonLd() {
     logo: absoluteUrl(BRAND_LOGO.src),
     description: SITE.description,
   }
+
+  // Nunca publicar dados ilustrativos em JSON-LD / SEO
+  if (isPublicContact()) {
+    if (hasValue(CONTACT.email) || hasValue(CONTACT.phone)) {
+      data.contactPoint = {
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        ...(hasValue(CONTACT.email) ? { email: CONTACT.email } : {}),
+        ...(hasValue(CONTACT.phone) ? { telephone: CONTACT.phone } : {}),
+      }
+    }
+
+    if (hasValue(CONTACT.address)) {
+      data.address = {
+        '@type': 'PostalAddress',
+        streetAddress: CONTACT.address,
+      }
+    }
+  }
+
+  const sameAs = [SOCIAL.linkedin, SOCIAL.instagram].filter((url) => hasValue(url))
+  if (sameAs.length > 0) {
+    data.sameAs = sameAs
+  }
+
+  return data
 }
 
 type PageSeoProps = {
