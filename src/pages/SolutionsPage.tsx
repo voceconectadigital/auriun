@@ -1,9 +1,8 @@
-import { Link } from 'react-router-dom'
-import { ArrowRight } from 'lucide-react'
 import { Container } from '@/components/ui/Container'
 import { SectionHeading } from '@/components/ui/SectionHeading'
 import { Button } from '@/components/ui/Button'
 import { InternalHero } from '@/components/ui/InternalHero'
+import { NavigableCard } from '@/components/ui/NavigableCard'
 import {
   JsonLd,
   organizationJsonLd,
@@ -51,34 +50,23 @@ export function SolutionsPage() {
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {products.map((item) => (
-              <article
+              <NavigableCard
                 key={item.slug}
-                className="flex flex-col overflow-hidden border border-brand-line bg-white"
-              >
-                <img
-                  src={item.image}
-                  alt={item.imageAlt}
-                  className="aspect-[16/10] w-full object-cover"
-                  loading="lazy"
-                  width={640}
-                  height={400}
-                />
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="font-display text-lg font-semibold text-brand-graphite">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-slate">
-                    {item.description}
-                  </p>
-                  <Link
-                    to={productPath(item.slug)}
-                    className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-orange hover:text-brand-blue"
-                  >
-                    Conhecer solução
-                    <ArrowRight className="size-3.5" aria-hidden />
-                  </Link>
-                </div>
-              </article>
+                to={productPath(item.slug)}
+                title={item.title}
+                description={item.description}
+                ctaLabel="Conhecer solução"
+                media={
+                  <img
+                    src={item.image}
+                    alt={item.imageAlt}
+                    className="size-full object-cover"
+                    loading="lazy"
+                    width={640}
+                    height={400}
+                  />
+                }
+              />
             ))}
           </div>
         </Container>
@@ -94,34 +82,23 @@ export function SolutionsPage() {
           />
           <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {services.map((item) => (
-              <article
+              <NavigableCard
                 key={item.slug}
-                className="flex flex-col overflow-hidden border border-brand-line bg-white"
-              >
-                <img
-                  src={item.image}
-                  alt={item.imageAlt}
-                  className="aspect-[16/10] w-full object-cover"
-                  loading="lazy"
-                  width={640}
-                  height={400}
-                />
-                <div className="flex flex-1 flex-col p-5">
-                  <h3 className="font-display text-lg font-semibold text-brand-graphite">
-                    {item.title}
-                  </h3>
-                  <p className="mt-2 flex-1 text-sm leading-relaxed text-brand-slate">
-                    {item.description}
-                  </p>
-                  <Link
-                    to={servicePath(item.slug)}
-                    className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-brand-orange hover:text-brand-blue"
-                  >
-                    Conhecer solução
-                    <ArrowRight className="size-3.5" aria-hidden />
-                  </Link>
-                </div>
-              </article>
+                to={servicePath(item.slug)}
+                title={item.title}
+                description={item.description}
+                ctaLabel="Conhecer solução"
+                media={
+                  <img
+                    src={item.image}
+                    alt={item.imageAlt}
+                    className="size-full object-cover"
+                    loading="lazy"
+                    width={640}
+                    height={400}
+                  />
+                }
+              />
             ))}
           </div>
         </Container>

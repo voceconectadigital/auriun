@@ -53,23 +53,29 @@ function RelatedWatermark({
   )
 }
 
+const relatedTitleLinkClass = 'related-card__title-link'
+
+const relatedCtaLinkClass = 'related-card__cta'
+
 function RelatedImageCard({ item }: { item: RelatedCard }) {
   const image = item.image!
   const slug = relatedSlug(item)
-  const label = `Conhecer ${item.title}`
+  const mediaLabel = `Ver ${item.title}`
 
   return (
-    <Link
-      to={item.to}
+    <article
       id={`related-${slug}`}
       data-related-slug={slug}
-      aria-label={label}
       className="related-card related-card--image group"
     >
-      <div className="related-card__media">
+      <Link
+        to={item.to}
+        aria-label={mediaLabel}
+        className="related-card__media related-card__media-link"
+      >
         <SegmentCoverImage
           src={image}
-          alt=""
+          alt={item.imageAlt ?? ''}
           className="related-card__photo"
           objectPosition={item.imageObjectPosition}
           objectPositionMobile={item.imageObjectPositionMobile}
@@ -79,45 +85,50 @@ function RelatedImageCard({ item }: { item: RelatedCard }) {
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         />
         <div className="related-card__media-veil" aria-hidden />
-      </div>
+      </Link>
       <div className="related-card__body">
         <span className="related-card__accent" aria-hidden />
         <div className="related-card__content">
-          <h3 className="related-card__title">{item.title}</h3>
+          <h3 className="related-card__title">
+            <Link to={item.to} className={relatedTitleLinkClass}>
+              {item.title}
+            </Link>
+          </h3>
           <p className="related-card__desc">{item.description}</p>
-          <span className="related-card__cta" aria-hidden>
+          <Link to={item.to} className={relatedCtaLinkClass}>
             Conhecer
             <ArrowRight className="related-card__arrow size-3.5" aria-hidden />
-          </span>
+          </Link>
         </div>
       </div>
-    </Link>
+    </article>
   )
 }
 
 function RelatedTextCard({ item }: { item: RelatedCard }) {
   const slug = relatedSlug(item)
-  const label = `Conhecer ${item.title}`
 
   return (
-    <Link
-      to={item.to}
+    <article
       id={`related-${slug}`}
       data-related-slug={slug}
-      aria-label={label}
       className="related-card related-card--text group"
     >
       <span className="related-card__accent" aria-hidden />
       <RelatedWatermark slug={slug} />
       <div className="related-card__content">
-        <h3 className="related-card__title">{item.title}</h3>
+        <h3 className="related-card__title">
+          <Link to={item.to} className={relatedTitleLinkClass}>
+            {item.title}
+          </Link>
+        </h3>
         <p className="related-card__desc">{item.description}</p>
-        <span className="related-card__cta" aria-hidden>
+        <Link to={item.to} className={relatedCtaLinkClass}>
           Conhecer
           <ArrowRight className="related-card__arrow size-3.5" aria-hidden />
-        </span>
+        </Link>
       </div>
-    </Link>
+    </article>
   )
 }
 

@@ -1921,6 +1921,35 @@ a.contact-panel__row:hover .contact-panel__arrow {
   }
 }
 
+/* ── Navigable hub cards (image + title + CTA as independent links) ── */
+.navigable-card__media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition-property: transform;
+  transition-duration: 450ms;
+  transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .navigable-card__media:hover img,
+  .navigable-card__media:focus-visible img {
+    transform: scale(1.04);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navigable-card__media img {
+    transition: none !important;
+  }
+
+  .navigable-card__media:hover img,
+  .navigable-card__media:focus-visible img {
+    transform: none !important;
+  }
+}
+
 /* ── Related / callout cards (DetailSections RelatedGrid) ── */
 .related-grid {
   display: grid;
@@ -1951,7 +1980,6 @@ a.contact-panel__row:hover .contact-panel__arrow {
   overflow: hidden;
   border: 1px solid var(--color-brand-line);
   background-color: #fff;
-  text-decoration: none;
   color: inherit;
   transition-property: transform, box-shadow, border-color;
   transition-duration: var(--related-duration);
@@ -1984,6 +2012,20 @@ a.contact-panel__row:hover .contact-panel__arrow {
   width: 100%;
   overflow: hidden;
   background-color: color-mix(in srgb, var(--color-brand-navy) 15%, transparent);
+}
+
+.related-card__media-link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.related-card__media-link:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--color-brand-blue);
+  z-index: 1;
 }
 
 @media (min-width: 768px) {
@@ -2059,9 +2101,26 @@ a.contact-panel__row:hover .contact-panel__arrow {
   font-weight: 600;
   line-height: 1.35;
   color: var(--color-brand-graphite);
+}
+
+.related-card__title-link {
+  color: inherit;
+  text-decoration: none;
   transition-property: color;
   transition-duration: var(--related-duration);
   transition-timing-function: var(--related-ease);
+}
+
+.related-card__title-link:hover,
+.related-card__title-link:focus-visible {
+  color: var(--color-brand-blue);
+}
+
+.related-card__title-link:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--color-brand-blue);
 }
 
 .related-card__desc {
@@ -2080,6 +2139,23 @@ a.contact-panel__row:hover .contact-panel__arrow {
   font-size: 0.875rem;
   font-weight: 600;
   color: var(--color-brand-orange);
+  text-decoration: none;
+  width: fit-content;
+  transition-property: color;
+  transition-duration: var(--related-duration);
+  transition-timing-function: var(--related-ease);
+}
+
+.related-card__cta:hover,
+.related-card__cta:focus-visible {
+  color: var(--color-brand-blue);
+}
+
+.related-card__cta:focus-visible {
+  outline: none;
+  box-shadow:
+    0 0 0 2px #fff,
+    0 0 0 4px var(--color-brand-blue);
 }
 
 .related-card__arrow {
@@ -2089,53 +2165,40 @@ a.contact-panel__row:hover .contact-panel__arrow {
 }
 
 .related-card:hover,
-.related-card:focus-visible {
+.related-card:focus-within {
   border-color: color-mix(in srgb, var(--color-brand-blue) 42%, var(--color-brand-orange) 18%);
   box-shadow: 0 14px 32px -12px color-mix(in srgb, var(--color-brand-navy) 28%, transparent);
 }
 
-.related-card:hover .related-card__title,
-.related-card:focus-visible .related-card__title {
-  color: var(--color-brand-blue);
-}
-
 .related-card:hover .related-card__watermark,
-.related-card:focus-visible .related-card__watermark {
+.related-card:focus-within .related-card__watermark {
   color: var(--color-brand-blue);
   opacity: 0.12;
 }
 
-.related-card:hover .related-card__media-veil,
-.related-card:focus-visible .related-card__media-veil {
+.related-card__media-link:hover .related-card__media-veil,
+.related-card__media-link:focus-visible .related-card__media-veil {
   background-color: color-mix(in srgb, var(--color-brand-navy) 18%, transparent);
-}
-
-.related-card:focus-visible {
-  outline: none;
-  box-shadow:
-    0 0 0 2px #fff,
-    0 0 0 4px var(--color-brand-blue),
-    0 14px 32px -12px color-mix(in srgb, var(--color-brand-navy) 28%, transparent);
 }
 
 @media (prefers-reduced-motion: no-preference) {
   .related-card:hover,
-  .related-card:focus-visible {
+  .related-card:focus-within {
     transform: translateY(-4px);
   }
 
   .related-card:hover .related-card__watermark,
-  .related-card:focus-visible .related-card__watermark {
+  .related-card:focus-within .related-card__watermark {
     transform: scale(1.14) translate(-4px, -5px);
   }
 
-  .related-card:hover .related-card__arrow,
-  .related-card:focus-visible .related-card__arrow {
+  .related-card__cta:hover .related-card__arrow,
+  .related-card__cta:focus-visible .related-card__arrow {
     transform: translateX(4px);
   }
 
-  .related-card:hover .related-card__photo,
-  .related-card:focus-visible .related-card__photo {
+  .related-card__media-link:hover .related-card__photo,
+  .related-card__media-link:focus-visible .related-card__photo {
     transform: scale(1.04);
   }
 }
@@ -2215,21 +2278,21 @@ a.contact-panel__row:hover .contact-panel__arrow {
   }
 
   .related-card:hover,
-  .related-card:focus-visible {
+  .related-card:focus-within {
     transform: none !important;
   }
 
   .related-card:hover .related-card__watermark,
-  .related-card:focus-visible .related-card__watermark,
-  .related-card:hover .related-card__arrow,
-  .related-card:focus-visible .related-card__arrow,
-  .related-card:hover .related-card__photo,
-  .related-card:focus-visible .related-card__photo {
+  .related-card:focus-within .related-card__watermark,
+  .related-card__cta:hover .related-card__arrow,
+  .related-card__cta:focus-visible .related-card__arrow,
+  .related-card__media-link:hover .related-card__photo,
+  .related-card__media-link:focus-visible .related-card__photo {
     transform: none !important;
   }
 
   .related-card:hover .related-card__watermark,
-  .related-card:focus-visible .related-card__watermark {
+  .related-card:focus-within .related-card__watermark {
     opacity: 0.1;
     color: var(--color-brand-blue);
   }

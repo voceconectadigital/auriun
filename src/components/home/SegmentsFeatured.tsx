@@ -106,30 +106,44 @@ export function SegmentsFeatured() {
           </div>
 
           <div className="relative min-h-[560px] overflow-hidden bg-brand-blue-deep">
-            <img
-              key={active.slug}
-              src={active.image}
-              alt=""
-              className="segment-framed-img absolute inset-0 size-full object-cover opacity-80 segment-photo-fade"
-              style={panelFraming}
-              width={1100}
-              height={800}
-              loading="lazy"
+            <Link
+              to={segmentPath(active.slug)}
+              aria-label={`Ver ${active.title}`}
+              className="group/media absolute inset-0 z-0 block overflow-hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
+            >
+              <img
+                key={active.slug}
+                src={active.image}
+                alt=""
+                className="segment-framed-img absolute inset-0 size-full object-cover opacity-80 segment-photo-fade transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover/media:scale-105 motion-safe:group-focus-visible/media:scale-105"
+                style={panelFraming}
+                width={1100}
+                height={800}
+                loading="lazy"
+              />
+            </Link>
+            <div
+              className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-t from-brand-navy via-brand-navy/40 to-transparent"
+              aria-hidden
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/40 to-transparent" />
-            <div className="absolute inset-x-0 bottom-0 p-10 xl:p-12">
+            <div className="absolute inset-x-0 bottom-0 z-10 p-10 xl:p-12">
               <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-brand-orange">
                 Segmento
               </p>
               <h3 className="mt-3 text-3xl font-bold tracking-tight text-white xl:text-4xl">
-                {active.title}
+                <Link
+                  to={segmentPath(active.slug)}
+                  className="text-inherit no-underline transition-colors hover:text-brand-orange focus-visible:outline-none focus-visible:text-brand-orange focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
+                >
+                  {active.title}
+                </Link>
               </h3>
               <p className="mt-4 max-w-lg text-base leading-relaxed text-white/75">
                 {active.description}
               </p>
               <Link
                 to={segmentPath(active.slug)}
-                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-brand-orange"
+                className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-brand-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
               >
                 Conhecer segmento
                 <ArrowRight className="size-4" aria-hidden />
@@ -180,32 +194,44 @@ export function SegmentsFeatured() {
             aria-labelledby={`segment-tab-${active.slug}`}
             className="mt-5 overflow-hidden border border-white/12 bg-brand-navy-mid"
           >
-            <div className="relative aspect-[16/10] overflow-hidden bg-brand-blue-deep">
+            <Link
+              to={segmentPath(active.slug)}
+              aria-label={`Ver ${active.title}`}
+              className="group/media relative block aspect-[16/10] overflow-hidden bg-brand-blue-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
+            >
               <img
                 key={active.slug}
                 src={active.image}
                 alt=""
-                className="segment-framed-img size-full object-cover segment-photo-fade"
+                className="segment-framed-img size-full object-cover segment-photo-fade transition-transform duration-[450ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-safe:group-hover/media:scale-105 motion-safe:group-focus-visible/media:scale-105"
                 style={panelFraming}
                 width={800}
                 height={500}
                 loading="lazy"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent" />
-            </div>
+              <div
+                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-brand-navy/60 to-transparent"
+                aria-hidden
+              />
+            </Link>
             <div className="px-5 py-6">
               <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
                 Segmento
               </p>
               <h3 className="mt-2 text-xl font-bold tracking-tight text-white sm:text-2xl">
-                {active.title}
+                <Link
+                  to={segmentPath(active.slug)}
+                  className="text-inherit no-underline transition-colors hover:text-brand-orange focus-visible:outline-none focus-visible:text-brand-orange focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
+                >
+                  {active.title}
+                </Link>
               </h3>
               <p className="mt-3 text-[0.975rem] leading-[1.65] text-white/70">
                 {active.description}
               </p>
               <Link
                 to={segmentPath(active.slug)}
-                className="mt-5 inline-flex min-h-12 items-center gap-2 text-[0.975rem] font-semibold text-brand-orange"
+                className="mt-5 inline-flex min-h-12 items-center gap-2 text-[0.975rem] font-semibold text-brand-orange focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-brand-orange focus-visible:ring-offset-2 focus-visible:ring-offset-brand-navy"
               >
                 Conhecer segmento
                 <ArrowRight className="size-4" aria-hidden />
