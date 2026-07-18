@@ -1,38 +1,28 @@
 import type { LucideIcon } from 'lucide-react'
 import {
-  BatteryCharging,
   Boxes,
-  Building2,
   Cable,
   CircuitBoard,
   ClipboardCheck,
   Construction,
   Cpu,
-  Factory,
   Fan,
-  Flame,
-  FlaskConical,
-  Fuel,
   Gauge,
-  Hammer,
   Handshake,
   HardHat,
   Layers,
   Network,
-  Pickaxe,
   Search,
   Server,
   Ship,
-  Trees,
-  Waves,
-  Wheat,
   Wrench,
   Zap,
 } from 'lucide-react'
 
 /**
- * Typed Lucide map for related/callout cards.
- * Keys are product / service / segment slugs — never React nodes in CMS data.
+ * Typed Lucide map for text-only related/callout cards (products & services).
+ * Segment cards use cover images — no watermark icons.
+ * Keys are product / service slugs — never React nodes in CMS data.
  */
 export const relatedIconBySlug: Readonly<Record<string, LucideIcon>> = {
   // Products
@@ -53,18 +43,6 @@ export const relatedIconBySlug: Readonly<Record<string, LucideIcon>> = {
   'materiais-especiais-e-importados': Ship,
   'consultoria-tecnica-e-comercial': ClipboardCheck,
   'projetos-greenfield-e-brownfield': Construction,
-  // Segments
-  mineracao: Pickaxe,
-  'oleo-e-gas': Fuel,
-  'papel-e-celulose': Trees,
-  siderurgia: Flame,
-  energia: BatteryCharging,
-  saneamento: Waves,
-  infraestrutura: Building2,
-  'construcao-industrial': Hammer,
-  manufatura: Factory,
-  agronegocio: Wheat,
-  'quimica-e-petroquimica': FlaskConical,
 }
 
 /** Controlled fallback when slug is missing or unmapped. */

@@ -81,7 +81,6 @@ function RelatedImageCard({ item }: { item: RelatedCard }) {
       </div>
       <div className="related-card__body">
         <span className="related-card__accent" aria-hidden />
-        <RelatedWatermark slug={slug} />
         <div className="related-card__content">
           <h3 className="related-card__title">{item.title}</h3>
           <p className="related-card__desc">{item.description}</p>

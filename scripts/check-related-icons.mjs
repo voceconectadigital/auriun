@@ -1,5 +1,6 @@
 /**
  * Guard: related-card icon resolution by slug + DetailSections a11y markers.
+ * Watermark icons apply to text-only product/service cards — not image segment cards.
  * Run: node scripts/check-related-icons.mjs
  */
 import { readFileSync, existsSync } from 'node:fs'
@@ -55,14 +56,21 @@ function slugFromRelatedTo(to) {
 const products = extractSlugs(read('src/data/products.ts'))
 const services = extractSlugs(read('src/data/services.ts'))
 const segments = extractSlugs(read('src/data/segments.ts'))
-const allSlugs = [...new Set([...products, ...services, ...segments])]
+// Watermarks are for text-only product/service cards only.
+const mappedSlugs = [...new Set([...products, ...services])]
 
 const iconsSource = read('src/data/relatedIcons.ts')
 const mapKeys = new Set(extractMapKeys(iconsSource))
 
-for (const slug of allSlugs) {
+for (const slug of mappedSlugs) {
   if (!mapKeys.has(slug)) {
-    errors.push(`No icon mapping for known slug: ${slug}`)
+    errors.push(`No icon mapping for known product/service slug: ${slug}`)
+  }
+}
+
+for (const slug of segments) {
+  if (mapKeys.has(slug)) {
+    errors.push(`Segment slug should not have watermark icon mapping: ${slug}`)
   }
 }
 
@@ -73,11 +81,25 @@ const checks = [
   [/id=\{`related-\$\{slug\}`\}/, 'Cards must set id={`related-${slug}`}'],
   [/data-related-icon-fallback/, 'Fallback marker data-related-icon-fallback required'],
   [/resolveRelatedIcon/, 'Must use resolveRelatedIcon'],
-  [/related-card__watermark/, 'Must render related-card__watermark'],
+  [/related-card__watermark/, 'Must render related-card__watermark on text cards'],
 ]
 
 for (const [re, msg] of checks) {
   if (!re.test(detail)) errors.push(msg)
+}
+
+// Image segment cards must not render the watermark.
+const imageCardMatch = detail.match(
+  /function RelatedImageCard[\s\S]*?\nfunction RelatedTextCard/,
+)
+if (!imageCardMatch) {
+  errors.push('Could not isolate RelatedImageCard for watermark check')
+} else if (/RelatedWatermark/.test(imageCardMatch[0])) {
+  errors.push('RelatedImageCard must not render RelatedWatermark')
+}
+
+if (!/function RelatedTextCard[\s\S]*RelatedWatermark/.test(detail)) {
+  errors.push('RelatedTextCard must still render RelatedWatermark')
 }
 
 const pathCases = [
@@ -129,5 +151,5 @@ if (errors.length) {
 }
 
 console.log(
-  `check-related-icons OK — ${allSlugs.length} slugs mapped, 0 known fallbacks, a11y markers present`,
+  `check-related-icons OK — ${mappedSlugs.length} product/service slugs mapped, ${segments.length} segments without watermark icons, a11y markers present`,
 )
