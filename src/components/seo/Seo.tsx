@@ -46,20 +46,53 @@ export function organizationJsonLd() {
 
   // Nunca publicar dados ilustrativos em JSON-LD / SEO
   if (isPublicContact()) {
-    if (hasValue(CONTACT.email) || hasValue(CONTACT.phone)) {
+    const contactPoints = CONTACT.regions
+      .filter((region) => hasValue(region.phone))
+      .map((region) => ({
+        '@type': 'ContactPoint',
+        contactType: 'customer service',
+        areaServed: region.id === 'es' ? 'ES' : 'MG',
+        name: region.label,
+        telephone: region.phone,
+        ...(hasValue(CONTACT.email) ? { email: CONTACT.email } : {}),
+        availableLanguage: ['Portuguese', 'pt-BR'],
+      }))
+
+    if (contactPoints.length > 0) {
+      data.contactPoint = contactPoints
+    } else if (hasValue(CONTACT.email)) {
       data.contactPoint = {
         '@type': 'ContactPoint',
         contactType: 'customer service',
-        ...(hasValue(CONTACT.email) ? { email: CONTACT.email } : {}),
-        ...(hasValue(CONTACT.phone) ? { telephone: CONTACT.phone } : {}),
+        email: CONTACT.email,
+        availableLanguage: ['Portuguese', 'pt-BR'],
       }
     }
 
-    if (hasValue(CONTACT.address)) {
+    const addr = CONTACT.address
+    if (hasValue(addr.street) && hasValue(addr.city)) {
+      // Endereço físico apenas da unidade Serra — sem PostalAddress inventado para BH
       data.address = {
         '@type': 'PostalAddress',
-        streetAddress: CONTACT.address,
+        streetAddress: [addr.street, addr.complement, addr.district]
+          .filter(Boolean)
+          .join(', '),
+        addressLocality: addr.city,
+        addressRegion: addr.state,
+        postalCode: addr.postalCode,
+        addressCountry: 'BR',
       }
+    }
+
+    // Cobertura comercial (ES + BH/MG) — não implica endereço físico em BH
+    data.areaServed = [
+      { '@type': 'AdministrativeArea', name: 'Espírito Santo' },
+      { '@type': 'AdministrativeArea', name: 'Minas Gerais' },
+      { '@type': 'City', name: 'Belo Horizonte' },
+    ]
+
+    if (hasValue(CONTACT.email)) {
+      data.email = CONTACT.email
     }
   }
 

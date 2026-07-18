@@ -1,49 +1,79 @@
 import { Link } from 'react-router-dom'
-import { ArrowRight, ExternalLink, Mail, MapPin, Phone } from 'lucide-react'
+import { ArrowRight, Mail, MapPin, Phone } from 'lucide-react'
 import type { ReactNode } from 'react'
 import { Logo } from '@/components/ui/Logo'
 import { Container } from '@/components/ui/Container'
 import {
   CONTACT,
   SITE,
-  SOCIAL,
   hasValue,
   isPublicContact,
   mailHref,
   telHref,
 } from '@/data/site'
-import { products, productPath } from '@/data/products'
-import { services, servicePath } from '@/data/services'
-import { segments, segmentPath } from '@/data/segments'
+import { getProductBySlug, productPath } from '@/data/products'
+import { getServiceBySlug, servicePath } from '@/data/services'
+
+const FOOTER_SOLUTIONS: ReadonlyArray<{
+  kind: 'product' | 'service'
+  slug: string
+  prefer: 'title' | 'shortTitle'
+}> = [
+  { kind: 'product', slug: 'materiais-eletricos', prefer: 'title' },
+  { kind: 'product', slug: 'automacao-industrial', prefer: 'shortTitle' },
+  { kind: 'product', slug: 'instrumentacao-industrial', prefer: 'shortTitle' },
+  { kind: 'product', slug: 'eletroeletronicos', prefer: 'title' },
+  { kind: 'service', slug: 'strategic-sourcing', prefer: 'title' },
+  { kind: 'service', slug: 'importacao-sob-demanda', prefer: 'title' },
+]
+
+function footerSolutionLink(item: (typeof FOOTER_SOLUTIONS)[number]) {
+  if (item.kind === 'product') {
+    const product = getProductBySlug(item.slug)
+    if (!product) return null
+    return {
+      to: productPath(product.slug),
+      label: item.prefer === 'shortTitle' ? product.shortTitle : product.title,
+    }
+  }
+  const service = getServiceBySlug(item.slug)
+  if (!service) return null
+  return {
+    to: servicePath(service.slug),
+    label: item.prefer === 'shortTitle' ? service.shortTitle : service.title,
+  }
+}
 
 export function Footer() {
   const year = new Date().getFullYear()
   const showChannels = isPublicContact()
-  const phone = showChannels ? telHref() : null
   const email = showChannels ? mailHref() : null
+  const solutionLinks = FOOTER_SOLUTIONS.map(footerSolutionLink).filter(
+    (item): item is { to: string; label: string } => item !== null,
+  )
 
   return (
     <footer className="bg-brand-navy text-white">
       <div className="brand-hairline h-px w-full" aria-hidden />
 
       <div className="footer-cta-wrap">
-        <Container className="pt-14 md:pt-16 lg:pt-20">
-          <div className="footer-cta-band grid overflow-hidden bg-[#1a7bc9] shadow-[0_18px_48px_rgba(3,18,32,0.28)] lg:grid-cols-[1.25fr_auto]">
-            <div className="px-5 py-8 sm:px-10 sm:py-11 lg:px-12 lg:py-12">
-              <p className="text-[12px] font-semibold uppercase tracking-[0.18em] text-white/75">
-                Próximo passo
+        <Container>
+          <div className="footer-cta-band flex flex-col gap-6 overflow-hidden sm:gap-7 lg:flex-row lg:items-center lg:justify-between lg:gap-10">
+            <div className="min-w-0 max-w-xl">
+              <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/70">
+                Atendimento comercial
               </p>
-              <h2 className="mt-3 max-w-xl text-[clamp(1.5rem,6vw,2.15rem)] font-bold leading-tight tracking-[-0.02em] text-white text-balance">
-                Fale com a equipe técnica e comercial da Auriun.
+              <h2 className="mt-2.5 text-[clamp(1.35rem,4.5vw,1.85rem)] font-bold leading-tight tracking-[-0.02em] text-white text-balance">
+                Precisa estruturar uma cotação?
               </h2>
-              <p className="mt-4 max-w-lg text-[0.9375rem] leading-[1.65] text-white/80 sm:text-[0.975rem]">
-                Orçamentos, especificação e sourcing para demandas industriais de alta exigência.
+              <p className="mt-2.5 text-[0.9rem] leading-[1.6] text-white/78 sm:text-[0.9375rem]">
+                Conte o que sua operação precisa e receba um direcionamento comercial.
               </p>
             </div>
-            <div className="flex w-full items-center justify-center border-t border-white/20 px-5 py-6 sm:px-10 lg:w-auto lg:border-l lg:border-t-0 lg:px-12">
+            <div className="shrink-0 lg:pl-4">
               <Link
                 to="/solicitar-orcamento/"
-                className="footer-cta-button group inline-flex min-h-[52px] w-full cursor-pointer items-center justify-center gap-2.5 bg-brand-orange px-8 text-[0.975rem] font-bold tracking-wide text-white lg:w-auto"
+                className="footer-cta-button group inline-flex min-h-12 w-full cursor-pointer items-center justify-center gap-2.5 bg-brand-orange px-7 text-[0.9375rem] font-bold tracking-wide text-white sm:w-auto"
               >
                 Solicitar orçamento
                 <ArrowRight
@@ -57,94 +87,73 @@ export function Footer() {
       </div>
 
       <div className="footer-main border-t border-white/10">
-        <Container className="section-pad grid gap-10 pt-14 pb-14 md:grid-cols-2 md:gap-14 md:pt-20 lg:grid-cols-12 lg:gap-12 lg:pb-20 lg:pt-20">
-          <div className="lg:col-span-4">
+        <Container className="grid gap-8 py-10 md:grid-cols-2 md:gap-10 lg:grid-cols-12 lg:gap-8 lg:py-12">
+          <div className="lg:col-span-3">
             <Link
               to="/"
-              className="inline-flex items-center"
+              className="inline-flex items-center overflow-visible"
               aria-label="Auriun — página inicial"
             >
-              <Logo className="h-auto w-[150px] max-w-[170px] sm:w-[160px]" />
+              <Logo className="h-auto w-[132px] max-w-[150px] overflow-visible sm:w-[142px]" />
             </Link>
-            <p className="mt-6 max-w-sm text-[0.975rem] leading-[1.65] text-white/65 sm:mt-7">
+            <p className="mt-4 max-w-xs text-[0.875rem] leading-[1.6] text-white/65">
               {SITE.valueProposition}
             </p>
-            <p className="mt-4 max-w-sm text-[0.875rem] leading-[1.65] text-white/45 sm:mt-5 sm:text-sm">
-              Distribuição, integração e inteligência em suprimentos para operações industriais
-              de alta exigência.
+            <p className="mt-3 max-w-xs text-[0.8125rem] leading-[1.55] text-white/42">
+              Distribuição, integração e inteligência em suprimentos para a indústria.
             </p>
           </div>
 
           <FooterNavBlock title="Navegação" className="lg:col-span-2">
-            <ul className="space-y-1 text-[0.9375rem] text-white/60">
+            <ul className="space-y-0.5 text-[0.875rem] text-white/60">
               <li>
-                <Link to="/" className="inline-flex min-h-12 items-center transition-colors hover:text-white">
+                <Link to="/" className="footer-nav-link">
                   Home
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/a-auriun/"
-                  className="inline-flex min-h-12 items-center transition-colors hover:text-white"
-                >
+                <Link to="/a-auriun/" className="footer-nav-link">
                   A Auriun
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/solucoes/"
-                  className="inline-flex min-h-12 items-center transition-colors hover:text-white"
-                >
+                <Link to="/solucoes/" className="footer-nav-link">
                   Soluções
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/segmentos/"
-                  className="inline-flex min-h-12 items-center transition-colors hover:text-white"
-                >
+                <Link to="/segmentos/" className="footer-nav-link">
                   Segmentos
                 </Link>
               </li>
               <li>
-                <Link
-                  to="/contato/"
-                  className="inline-flex min-h-12 items-center transition-colors hover:text-white"
-                >
+                <Link to="/contato/" className="footer-nav-link">
                   Contato
+                </Link>
+              </li>
+              <li>
+                <Link to="/solicitar-orcamento/" className="footer-nav-link">
+                  Solicitar orçamento
                 </Link>
               </li>
             </ul>
           </FooterNavBlock>
 
-          <FooterNavBlock title="Soluções" className="lg:col-span-3">
-            <ul className="space-y-1 text-[0.9375rem] text-white/60">
-              {products.slice(0, 4).map((item) => (
-                <li key={item.slug}>
-                  <Link
-                    to={productPath(item.slug)}
-                    className="inline-flex min-h-12 items-center transition-colors hover:text-white"
-                  >
-                    {item.shortTitle}
-                  </Link>
-                </li>
-              ))}
-              {services.slice(0, 2).map((item) => (
-                <li key={item.slug}>
-                  <Link
-                    to={servicePath(item.slug)}
-                    className="inline-flex min-h-12 items-center transition-colors hover:text-white"
-                  >
-                    {item.shortTitle}
+          <FooterNavBlock title="Soluções-chave" className="lg:col-span-4">
+            <ul className="space-y-0.5 text-[0.875rem] text-white/60">
+              {solutionLinks.map((item) => (
+                <li key={item.to}>
+                  <Link to={item.to} className="footer-nav-link">
+                    {item.label}
                   </Link>
                 </li>
               ))}
               <li>
                 <Link
                   to="/solucoes/"
-                  className="inline-flex min-h-12 items-center gap-1.5 font-medium text-brand-orange transition-colors hover:text-white"
+                  className="footer-nav-link gap-1.5 font-medium text-brand-orange hover:text-white"
                 >
-                  Ver todas
+                  Ver todas as soluções
                   <ArrowRight className="size-3.5" aria-hidden />
                 </Link>
               </li>
@@ -152,100 +161,70 @@ export function Footer() {
           </FooterNavBlock>
 
           <FooterNavBlock title="Contato" className="lg:col-span-3">
-            <ul className="space-y-1 text-[0.9375rem] text-white/60">
-              {phone && hasValue(CONTACT.phone) ? (
-                <li>
-                  <a
-                    href={phone}
-                    className="inline-flex min-h-12 items-center gap-2 transition-colors hover:text-white"
-                  >
-                    <Phone className="size-4 opacity-70" aria-hidden />
-                    {CONTACT.phone}
-                  </a>
-                </li>
-              ) : null}
+            <ul className="space-y-0.5 text-[0.875rem] text-white/60">
+              {showChannels
+                ? CONTACT.regions.map((region) => {
+                    const href = telHref(region.phone)
+                    if (!href || !hasValue(region.phone)) return null
+                    return (
+                      <li key={region.id}>
+                        <a href={href} className="footer-nav-link gap-2">
+                          <Phone className="size-3.5 opacity-70" aria-hidden />
+                          <span>
+                            {region.shortLabel}: {region.phone}
+                          </span>
+                        </a>
+                      </li>
+                    )
+                  })
+                : null}
               {email && hasValue(CONTACT.email) ? (
                 <li>
-                  <a
-                    href={email}
-                    className="inline-flex min-h-12 items-center gap-2 transition-colors hover:text-white"
-                  >
-                    <Mail className="size-4 opacity-70" aria-hidden />
+                  <a href={email} className="footer-nav-link gap-2">
+                    <Mail className="size-3.5 opacity-70" aria-hidden />
                     {CONTACT.email}
                   </a>
                 </li>
               ) : null}
-              {showChannels && hasValue(CONTACT.address) ? (
-                <li className="flex items-start gap-2 py-3">
-                  <MapPin className="mt-0.5 size-4 shrink-0 opacity-70" aria-hidden />
-                  <span>{CONTACT.address}</span>
+              {showChannels && hasValue(CONTACT.address.city) ? (
+                <li className="flex items-start gap-2 py-2.5 text-white/55">
+                  <MapPin className="mt-0.5 size-3.5 shrink-0 opacity-70" aria-hidden />
+                  <span>
+                    {CONTACT.address.city} – {CONTACT.address.state}
+                    {hasValue(CONTACT.address.serviceAreaNote) ? (
+                      <>
+                        <br />
+                        <span className="text-white/48">{CONTACT.address.serviceAreaNote}</span>
+                      </>
+                    ) : null}
+                  </span>
                 </li>
-              ) : (
-                <li className="py-3 text-white/40">Dados de contato em atualização.</li>
-              )}
-              {hasValue(SOCIAL.linkedin) ? (
-                <li>
-                  <a
-                    href={SOCIAL.linkedin}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-12 items-center gap-2 transition-colors hover:text-white"
-                  >
-                    <ExternalLink className="size-4 opacity-70" aria-hidden />
-                    LinkedIn
-                  </a>
-                </li>
-              ) : null}
-              {hasValue(SOCIAL.instagram) ? (
-                <li>
-                  <a
-                    href={SOCIAL.instagram}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-12 items-center gap-2 transition-colors hover:text-white"
-                  >
-                    <ExternalLink className="size-4 opacity-70" aria-hidden />
-                    Instagram
-                  </a>
-                </li>
+              ) : !showChannels ? (
+                <li className="py-2.5 text-white/40">Dados de contato em atualização.</li>
               ) : null}
             </ul>
 
-            <div className="mt-6">
-              <p className="text-[12px] font-semibold uppercase tracking-[0.16em] text-white/90">
-                Segmentos
-              </p>
-              <ul className="mt-3 flex flex-wrap gap-x-3 gap-y-1 text-[0.8125rem] text-white/50">
-                {segments.map((item) => (
-                  <li key={item.slug}>
-                    <Link
-                      to={segmentPath(item.slug)}
-                      className="inline-flex min-h-10 items-center transition-colors hover:text-white"
-                    >
-                      {item.shortTitle}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+            <div className="mt-4 border-t border-white/10 pt-4">
+              <Link
+                to="/segmentos/"
+                className="footer-nav-link gap-1.5 text-[0.8125rem] font-medium text-white/70 hover:text-white"
+              >
+                Ver todos os segmentos
+                <ArrowRight className="size-3.5" aria-hidden />
+              </Link>
             </div>
           </FooterNavBlock>
         </Container>
       </div>
 
       <div className="border-t border-white/10">
-        <Container className="flex flex-col gap-4 py-7 sm:flex-row sm:items-end sm:justify-between">
-          <p
-            className="select-none text-[clamp(2.25rem,10vw,5.5rem)] font-bold leading-none tracking-[-0.06em] text-white/[0.06]"
-            aria-hidden
-          >
-            AURIUN
+        <Container className="footer-bottom flex flex-col gap-2 py-5 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
+          <p className="text-[0.75rem] leading-relaxed text-white/45">
+            © {year} {SITE.name}. Todos os direitos reservados.
           </p>
-          <div className="text-[0.8125rem] leading-relaxed text-white/45 sm:text-right">
-            <p>
-              © {year} {SITE.name}. Todos os direitos reservados.
-            </p>
-            <p className="mt-1">{SITE.domain}</p>
-          </div>
+          <p className="text-[0.75rem] leading-relaxed text-white/35 sm:text-right">
+            {SITE.domain}
+          </p>
         </Container>
       </div>
     </footer>
@@ -263,21 +242,22 @@ function FooterNavBlock({
 }) {
   return (
     <div className={className}>
-      {/* Mobile accordion */}
       <details className="group md:hidden">
-        <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between border-b border-white/10 py-3 text-[12px] font-semibold uppercase tracking-[0.16em] text-white/90 marker:content-none [&::-webkit-details-marker]:hidden">
+        <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between border-b border-white/10 py-2.5 text-[11px] font-semibold uppercase tracking-[0.16em] text-white/90 marker:content-none [&::-webkit-details-marker]:hidden">
           {title}
-          <ArrowRight className="size-4 shrink-0 text-brand-orange transition group-open:rotate-90" aria-hidden />
+          <ArrowRight
+            className="size-3.5 shrink-0 text-brand-orange transition group-open:rotate-90"
+            aria-hidden
+          />
         </summary>
-        <div className="pb-2 pt-3">{children}</div>
+        <div className="pb-1 pt-2.5">{children}</div>
       </details>
 
-      {/* Desktop static */}
       <div className="hidden md:block">
         <h3 className="text-[11px] font-semibold uppercase tracking-[0.16em] text-white/90">
           {title}
         </h3>
-        <div className="mt-5">{children}</div>
+        <div className="mt-3.5">{children}</div>
       </div>
     </div>
   )

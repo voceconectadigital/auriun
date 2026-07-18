@@ -78,7 +78,7 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
           { label: product.shortTitle },
         ]}
         eyebrow={product.eyebrow}
-        title={product.title}
+        title={product.heroTitle ?? product.title}
         image={product.image}
         imageAlt={product.imageAlt}
       />
@@ -153,6 +153,7 @@ function ProductDetailContent({ product }: { product: ProductItem }) {
       <DetailCta
         title="Solicite uma cotação para esta categoria"
         description="Envie a especificação, a lista de materiais ou o contexto da demanda. Nossa equipe analisa o escopo e retorna com orientação técnica e comercial."
+        label={product.ctaLabel ?? 'Solicitar orçamento'}
       />
       <RelatedGrid
         variant="major"

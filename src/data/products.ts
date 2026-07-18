@@ -225,6 +225,49 @@ export const products: ProductItem[] = [
       'Climatização para salas técnicas, ambientes críticos e áreas industriais com atendimento consultivo.',
   },
   {
+    slug: 'eletrodomesticos',
+    title: 'Eletrodomésticos',
+    shortTitle: 'Eletrodomésticos',
+    eyebrow: 'Fornecimento corporativo',
+    heroTitle: 'Eletrodomésticos para empresas e operações',
+    description:
+      'Fornecimento corporativo de equipamentos para áreas administrativas, operacionais, refeitórios, alojamentos e demais estruturas empresariais.',
+    introduction:
+      'A Auriun apoia empresas que precisam equipar áreas administrativas, operacionais, refeitórios, alojamentos e demais estruturas com eletrodomésticos sob demanda. O atendimento é orientado pela necessidade, quantidade, aplicação e especificação informadas pelo cliente — sem abordar o fornecimento sob lógica de varejo.\n\nOs itens estão sujeitos à especificação e à disponibilidade no momento da cotação. Categorias frequentemente solicitadas incluem refrigeradores e frigobares, micro-ondas, fogões e cooktops, bebedouros, purificadores, equipamentos para cozinhas e refeitórios, soluções de climatização e conforto, além de outros equipamentos sob consulta.',
+    image: '/images/produtos/produto-climatizacao-industrial.jpg',
+    imageAlt: 'Equipamentos e ambientes preparados para operações corporativas — imagem provisória até asset oficial',
+    applications: [
+      'Áreas administrativas e salas de apoio',
+      'Refeitórios e estruturas de alimentação',
+      'Alojamentos e bases operacionais',
+      'Ampliação de unidades e postos de trabalho',
+      'Reposição e adequação sob especificação',
+    ],
+    solutionGroups: [
+      'Refrigeradores e frigobares',
+      'Micro-ondas, fogões e cooktops',
+      'Bebedouros e purificadores',
+      'Equipamentos para cozinhas e refeitórios',
+      'Climatização, conforto e itens sob consulta',
+    ],
+    benefits: [
+      'Fornecimento sob demanda para demandas corporativas',
+      'Cotação conforme escopo, quantidade e aplicação',
+      'Leitura comercial objetiva sem linguagem de varejo',
+      'Integração com outras linhas de suprimentos da Auriun',
+    ],
+    relatedSegments: ['manufatura', 'infraestrutura', 'construcao-industrial'],
+    relatedServices: [
+      'consultoria-tecnica-e-comercial',
+      'importacao-sob-demanda',
+      'gestao-estrategica-de-suprimentos',
+    ],
+    seoTitle: 'Eletrodomésticos para empresas',
+    seoDescription:
+      'Fornecimento corporativo de eletrodomésticos sob demanda para áreas administrativas, operacionais, refeitórios e estruturas empresariais.',
+    ctaLabel: 'Solicitar cotação',
+  },
+  {
     slug: 'ferramentas-epis-e-epcs',
     title: 'Ferramentas, EPIs e EPCs',
     shortTitle: 'EPIs e ferramentas',
@@ -297,6 +340,49 @@ export const products: ProductItem[] = [
     seoTitle: 'Tecnologia da informação industrial',
     seoDescription:
       'Notebooks, computadores, servidores e acessórios para operação, engenharia e gestão industrial.',
+  },
+  {
+    slug: 'eletroeletronicos',
+    title: 'Eletroeletrônicos',
+    shortTitle: 'Eletroeletrônicos',
+    eyebrow: 'Tecnologia e suprimentos',
+    heroTitle: 'Eletroeletrônicos para demandas corporativas',
+    description:
+      'Equipamentos e dispositivos para demandas corporativas, administrativas e operacionais, fornecidos conforme especificação.',
+    introduction:
+      'A Auriun disponibiliza atendimento B2B para eletroeletrônicos conforme necessidade, aplicação e especificação técnica da operação. O foco é apoiar compras corporativas e operacionais com clareza de escopo — sem promessas de estoque, marcas ou disponibilidade imediata sem confirmação.\n\nEntre as categorias que podem ser avaliadas sob consulta estão televisores e monitores, equipamentos de áudio e vídeo, dispositivos eletrônicos, soluções para salas e ambientes corporativos, itens de comunicação, periféricos e acessórios, além de outros equipamentos alinhados à demanda apresentada.',
+    image: '/images/produtos/produto-tecnologia-da-informacao.jpg',
+    imageAlt: 'Ambiente corporativo com equipamentos eletrônicos — imagem provisória até asset oficial',
+    applications: [
+      'Salas de reunião e ambientes corporativos',
+      'Áreas administrativas e de supervisão',
+      'Estruturas operacionais e de apoio',
+      'Projetos de adequação e expansão',
+      'Demandas pontuais conforme especificação',
+    ],
+    solutionGroups: [
+      'Televisores e monitores',
+      'Áudio, vídeo e comunicação',
+      'Dispositivos eletrônicos',
+      'Periféricos e acessórios',
+      'Itens adicionais sob consulta',
+    ],
+    benefits: [
+      'Fornecimento alinhado ao escopo corporativo',
+      'Cotação sob especificação e aplicação informadas',
+      'Integração com TI e suprimentos estratégicos',
+      'Atendimento comercial objetivo e consultivo',
+    ],
+    relatedSegments: ['manufatura', 'energia', 'infraestrutura'],
+    relatedServices: [
+      'consultoria-tecnica-e-comercial',
+      'importacao-sob-demanda',
+      'materiais-especiais-e-importados',
+    ],
+    seoTitle: 'Eletroeletrônicos corporativos',
+    seoDescription:
+      'Eletroeletrônicos para demandas corporativas, administrativas e operacionais com fornecimento sob especificação.',
+    ctaLabel: 'Solicitar cotação',
   },
   {
     slug: 'mro-capex-e-opex',

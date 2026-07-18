@@ -87,7 +87,7 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
           { label: service.shortTitle },
         ]}
         eyebrow={service.eyebrow}
-        title={service.title}
+        title={service.heroTitle ?? service.title}
         image={service.image}
         imageAlt={service.imageAlt}
       />
@@ -180,7 +180,7 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
       <DetailCta
         title="Converse com a equipe Auriun"
         description="Descreva o desafio de suprimentos, sourcing ou projeto. Retornamos com uma leitura objetiva do escopo."
-        label="Falar com a equipe"
+        label={service.ctaLabel ?? 'Falar com a equipe'}
       />
       <RelatedGrid
         variant="major"

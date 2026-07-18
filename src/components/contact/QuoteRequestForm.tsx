@@ -609,7 +609,7 @@ export function QuoteRequestForm() {
                       }))
                     }}
                     className={textareaClass}
-                    placeholder="Informe produto ou serviço, aplicação, quantidade, especificação, prazo desejado e demais detalhes disponíveis."
+                    placeholder="Informe produto ou serviço (ex.: eletrodomésticos, eletroeletrônicos, importação), aplicação, quantidade, especificação, prazo desejado e demais detalhes disponíveis."
                     aria-invalid={touched.message && errors.message ? true : undefined}
                   />
                 </Field>

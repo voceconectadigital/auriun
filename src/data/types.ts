@@ -3,6 +3,8 @@ export type ProductItem = {
   title: string
   shortTitle: string
   eyebrow: string
+  /** Optional longer H1 for InternalHero; falls back to title */
+  heroTitle?: string
   description: string
   introduction: string
   image: string
@@ -14,6 +16,8 @@ export type ProductItem = {
   relatedServices: string[]
   seoTitle: string
   seoDescription: string
+  /** Optional DetailCta button label */
+  ctaLabel?: string
 }
 
 export type ServiceItem = {
@@ -21,6 +25,8 @@ export type ServiceItem = {
   title: string
   shortTitle: string
   eyebrow: string
+  /** Optional longer H1 for InternalHero; falls back to title */
+  heroTitle?: string
   description: string
   introduction: string
   image: string
@@ -34,6 +40,8 @@ export type ServiceItem = {
   relatedServices: string[]
   seoTitle: string
   seoDescription: string
+  /** Optional DetailCta button label */
+  ctaLabel?: string
 }
 
 /** CSS object-position values for segment photo framing by layout. */

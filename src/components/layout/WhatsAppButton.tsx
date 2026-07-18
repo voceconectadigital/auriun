@@ -1,8 +1,5 @@
 import { isPublicContact, whatsappUrl } from '@/data/site'
 
-const DEFAULT_MESSAGE =
-  'Olá! Encontrei a Auriun pelo site e gostaria de mais informações.'
-
 function WhatsAppIcon({ className }: { className?: string }) {
   return (
     <svg
@@ -20,7 +17,7 @@ function WhatsAppIcon({ className }: { className?: string }) {
 export function WhatsAppButton() {
   // Oculta FAB enquanto o número for ilustrativo (evita vazar canal fake site-wide)
   if (!isPublicContact()) return null
-  const href = whatsappUrl(DEFAULT_MESSAGE)
+  const href = whatsappUrl()
   if (!href) return null
 
   return (

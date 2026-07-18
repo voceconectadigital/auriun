@@ -202,10 +202,62 @@ export const services: ServiceItem[] = [
     ],
     relatedSegments: ['mineracao', 'oleo-e-gas', 'quimica-e-petroquimica', 'siderurgia'],
     relatedProducts: ['componentes-eletronicos', 'instrumentacao-industrial', 'automacao-industrial', 'materiais-eletricos'],
-    relatedServices: ['strategic-sourcing', 'desenvolvimento-de-fornecedores', 'supply-chain-management'],
+    relatedServices: ['strategic-sourcing', 'desenvolvimento-de-fornecedores', 'supply-chain-management', 'importacao-sob-demanda'],
     seoTitle: 'Materiais especiais e importados',
     seoDescription:
       'Localização e fornecimento de materiais especiais e importados para demandas industriais de difícil aquisição.',
+  },
+  {
+    slug: 'importacao-sob-demanda',
+    title: 'Importação sob demanda',
+    shortTitle: 'Importação',
+    eyebrow: 'Fornecimento internacional',
+    heroTitle: 'Importação sob demanda para empresas',
+    description:
+      'Apoio na busca e no fornecimento internacional de produtos, equipamentos e materiais conforme a necessidade da operação.',
+    introduction:
+      'A importação sob demanda da Auriun apoia empresas que precisam localizar e estruturar o fornecimento internacional de produtos, equipamentos e materiais a partir do escopo da operação. O serviço tem caráter comercial e consultivo: identifica alternativas, organiza informações e acompanha a demanda com clareza.\n\nA estrutura da operação e os serviços envolvidos são definidos conforme o escopo, a origem dos itens e as necessidades do cliente. O atendimento pode contemplar identificação de fornecedores, pesquisa internacional, levantamento de alternativas, cotação, negociação comercial, alinhamento de especificações, coordenação do fornecimento e acompanhamento da demanda.',
+    image: '/images/servicos/servico-materiais-especiais-e-importados.jpg',
+    imageAlt: 'Contexto ilustrativo de fornecimento internacional — imagem provisória até asset oficial',
+    challenges: [
+      'Necessidade de itens não disponíveis localmente com a especificidade exigida',
+      'Dificuldade em comparar alternativas internacionais com critério comercial',
+      'Demandas que exigem pesquisa e alinhamento de especificação antes da compra',
+      'Operações que precisam de coordenação clara entre cotação e fornecimento',
+    ],
+    approach: [
+      'Leitura do escopo, da origem desejada e dos requisitos técnicos',
+      'Pesquisa e identificação de alternativas de fornecimento',
+      'Organização de cotações e alinhamento comercial',
+      'Acompanhamento da demanda conforme o caminho acordado com o cliente',
+    ],
+    benefits: [
+      'Apoio estruturado à busca internacional sob demanda',
+      'Maior clareza na comparação de alternativas comerciais',
+      'Integração com sourcing e materiais especiais',
+      'Comunicação objetiva ao longo do processo',
+    ],
+    mroCapexOpex: [
+      'MRO: apoio a itens especiais de reposição via fontes internacionais',
+      'CAPEX: pesquisa e cotação de equipamentos para projetos',
+      'OPEX: avaliação de suprimentos recorrentes conforme origem e escopo',
+    ],
+    relatedSegments: ['mineracao', 'oleo-e-gas', 'manufatura'],
+    relatedProducts: [
+      'eletrodomesticos',
+      'eletroeletronicos',
+      'componentes-eletronicos',
+      'mro-capex-e-opex',
+    ],
+    relatedServices: [
+      'materiais-especiais-e-importados',
+      'strategic-sourcing',
+      'desenvolvimento-de-fornecedores',
+    ],
+    seoTitle: 'Importação sob demanda',
+    seoDescription:
+      'Importação sob demanda para empresas: apoio na busca, cotação e coordenação de fornecimento internacional conforme o escopo.',
+    ctaLabel: 'Falar sobre uma importação',
   },
   {
     slug: 'consultoria-tecnica-e-comercial',
