@@ -274,6 +274,8 @@ export const services: ServiceItem[] = [
       'A consultoria técnica e comercial da Auriun conecta a linguagem da engenharia à da compra. O serviço ajuda a transformar uma necessidade operacional em um escopo de fornecimento claro e comparável.\n\nÉ indicado para demandas multidisciplinares, modernizações e situações em que a especificação ainda precisa ser organizada antes da cotação.',
     image: '/images/servicos/Consultoria-tecnica-e-comercial.png',
     imageAlt: 'Atendimento técnico-comercial industrial ilustrativo',
+    imagePosition: '58% 14%',
+    imagePositionMobile: '52% 12%',
     challenges: [
       'Escopos incompletos ou ambíguos',
       'Dificuldade em traduzir a necessidade de campo em pedido de compra',
