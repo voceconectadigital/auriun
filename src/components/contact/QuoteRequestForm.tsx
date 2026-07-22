@@ -9,7 +9,6 @@ import {
 import { Check, ChevronLeft, ChevronRight, Send } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { ChoiceGroup, Field, inputClass, textareaClass } from '@/components/contact/FormControls'
-import { CONTACT, hasValue, isPublicContact, mailHref, whatsappUrl } from '@/data/site'
 import {
   emailErrorMessage,
   formatBrMobileDisplay,
@@ -18,6 +17,7 @@ import {
   phoneDigitsOnly,
   validateEmail,
 } from '@/lib/formValidation'
+import { submitContactForm } from '@/lib/submitContactForm'
 
 const SEGMENT_OPTIONS = [
   { value: 'Mineração', label: 'Mineração' },
@@ -131,9 +131,6 @@ const FIELD_FOCUS_IDS: Record<FieldKey, string> = {
   message: 'message',
 }
 
-const CONFIG_MESSAGE =
-  'O canal de envio ainda precisa ser configurado. Sua solicitação não foi enviada. Entre em contato pelos canais oficiais quando estiverem disponíveis.'
-
 function stepStateFor(
   id: StepId,
   current: StepId,
@@ -146,7 +143,7 @@ function stepStateFor(
 
 /**
  * Commercial quote-request wizard (4 steps).
- * Delivery: opens WhatsApp or mailto when public contacts are configured — no false "sent" success.
+ * Delivery: Cloudflare Pages Function + Resend (server-side RESEND_API_KEY).
  */
 export function QuoteRequestForm() {
   const baseId = useId()
@@ -161,7 +158,6 @@ export function QuoteRequestForm() {
   const [transitionKey, setTransitionKey] = useState(0)
 
   const current = WIZARD_STEPS[step - 1]
-  const channelsReady = isPublicContact()
 
   useEffect(() => {
     const preferReduced =
@@ -264,7 +260,7 @@ export function QuoteRequestForm() {
     goToStep(target)
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (loading) return
 
@@ -288,44 +284,30 @@ export function QuoteRequestForm() {
       return
     }
 
-    const body = [
-      `form_type: quote_request`,
-      `Nome: ${form.name.trim()}`,
-      `Empresa: ${form.company.trim()}`,
-      `E-mail: ${form.email.trim()}`,
-      `Telefone: ${form.phoneDigits}`,
-      `Segmento: ${form.segment || 'Não informado'}`,
-      `Tipo de demanda: ${form.demandType}`,
-      '',
-      form.message.trim(),
-    ].join('\n')
-
-    const wa = channelsReady ? whatsappUrl(`Solicitação de orçamento — Auriun\n\n${body}`) : null
-    const mail = channelsReady ? mailHref() : null
-
-    if (!wa && !(mail && hasValue(CONTACT.email))) {
-      setStatus(CONFIG_MESSAGE)
-      return
-    }
-
     setLoading(true)
-    setStatus('Abrindo canal de envio…')
+    setStatus('Enviando…')
 
-    if (wa) {
-      window.open(wa, '_blank', 'noopener,noreferrer')
-      setStatus('')
+    const result = await submitContactForm({
+      form_type: 'quote_request',
+      name: form.name.trim(),
+      company: form.company.trim(),
+      email: form.email.trim(),
+      phone: form.phoneDigits,
+      segment: form.segment || 'Não informado',
+      demandType: form.demandType,
+      message: form.message.trim(),
+    })
+
+    if (result.ok) {
       setForm(initial)
       setErrors({})
       setTouched({})
       setStep(1)
       setHighestReached(1)
       setTransitionKey((k) => k + 1)
-    } else if (mail && hasValue(CONTACT.email)) {
-      const subject = encodeURIComponent(
-        `Orçamento — ${form.company.trim() || form.name.trim()}`,
-      )
-      window.location.href = `${mail}?subject=${subject}&body=${encodeURIComponent(body)}`
-      setStatus('')
+      setStatus('Solicitação enviada com sucesso. Em breve a equipe comercial entrará em contato.')
+    } else {
+      setStatus(result.error)
     }
 
     setLoading(false)
@@ -656,7 +638,7 @@ export function QuoteRequestForm() {
                 className="form-submit form-submit--orange quote-wizard__submit min-h-[52px] w-full font-bold"
                 disabled={loading}
               >
-                {loading ? 'Abrindo…' : 'Solicitar orçamento'}
+                {loading ? 'Enviando…' : 'Solicitar orçamento'}
                 {!loading ? <Send className="size-4" aria-hidden /> : null}
               </Button>
             )}

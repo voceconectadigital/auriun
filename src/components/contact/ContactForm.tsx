@@ -2,7 +2,6 @@ import { useId, useState, type FormEvent } from 'react'
 import { Send } from 'lucide-react'
 import { Button } from '@/components/ui/Button'
 import { ChoiceGroup, Field, inputClass, textareaClass } from '@/components/contact/FormControls'
-import { CONTACT, hasValue, mailHref, whatsappUrl } from '@/data/site'
 import {
   emailErrorMessage,
   formatBrMobileDisplay,
@@ -11,6 +10,7 @@ import {
   phoneDigitsOnly,
   validateEmail,
 } from '@/lib/formValidation'
+import { submitContactForm } from '@/lib/submitContactForm'
 
 const SUBJECT_OPTIONS = [
   { value: 'Dúvida geral', label: 'Dúvida geral' },
@@ -49,8 +49,7 @@ type FieldErrors = {
 
 /**
  * Institutional contact form.
- * Delivery: opens WhatsApp or mailto when configured — no false "sent" success.
- * Pending: real backend/webhook not wired; see agent report.
+ * Delivery: Cloudflare Pages Function + Resend (server-side RESEND_API_KEY).
  */
 export function ContactForm() {
   const baseId = useId()
@@ -59,6 +58,7 @@ export function ContactForm() {
   const [touched, setTouched] = useState<Record<string, boolean>>({})
   const [loading, setLoading] = useState(false)
   const [status, setStatus] = useState('')
+  const [statusKind, setStatusKind] = useState<'idle' | 'success' | 'error'>('idle')
 
   function setEmail(value: string) {
     setForm((prev) => ({ ...prev, email: value }))
@@ -91,7 +91,7 @@ export function ContactForm() {
     return next
   }
 
-  function handleSubmit(e: FormEvent) {
+  async function handleSubmit(e: FormEvent) {
     e.preventDefault()
     if (loading) return
 
@@ -100,39 +100,32 @@ export function ContactForm() {
     setErrors(next)
     if (Object.values(next).some(Boolean)) {
       setStatus('')
+      setStatusKind('idle')
       return
     }
 
     setLoading(true)
     setStatus('Enviando...')
+    setStatusKind('idle')
 
-    const body = [
-      `form_type: contact`,
-      `Nome: ${form.name.trim()}`,
-      `E-mail: ${form.email.trim()}`,
-      `Telefone: ${form.phoneDigits}`,
-      `Assunto: ${form.subject}`,
-      '',
-      form.message.trim(),
-    ].join('\n')
+    const result = await submitContactForm({
+      form_type: 'contact',
+      name: form.name.trim(),
+      email: form.email.trim(),
+      phone: form.phoneDigits,
+      subject: form.subject,
+      message: form.message.trim(),
+    })
 
-    const wa = whatsappUrl(`Contato — Auriun\n\n${body}`)
-    const mail = mailHref()
-
-    // External handoff only — do not claim message delivery success.
-    if (wa) {
-      window.open(wa, '_blank', 'noopener,noreferrer')
-      setStatus('')
+    if (result.ok) {
       setForm(initial)
       setErrors({})
       setTouched({})
-    } else if (mail && hasValue(CONTACT.email)) {
-      const subject = encodeURIComponent(`Contato — ${form.subject} — ${form.name.trim()}`)
-      window.location.href = `${mail}?subject=${subject}&body=${encodeURIComponent(body)}`
-      setStatus('')
+      setStatus('Mensagem enviada com sucesso. Em breve entraremos em contato.')
+      setStatusKind('success')
     } else {
-      // Channels not configured — no false success UI for visitors.
-      setStatus('')
+      setStatus(result.error)
+      setStatusKind('error')
     }
 
     setLoading(false)
@@ -289,7 +282,17 @@ export function ContactForm() {
           {loading ? 'Enviando...' : 'Enviar mensagem'}
           {!loading ? <Send className="size-4" aria-hidden /> : null}
         </Button>
-        <p className="sr-only" aria-live="polite">
+        <p
+          className={
+            status
+              ? statusKind === 'error'
+                ? 'mt-3 text-sm text-red-700'
+                : 'mt-3 text-sm text-brand-navy'
+              : 'sr-only'
+          }
+          role="status"
+          aria-live="polite"
+        >
           {status}
         </p>
       </div>
