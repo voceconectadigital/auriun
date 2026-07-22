@@ -11,8 +11,10 @@ export const services: ServiceItem[] = [
       'Identificação e estruturação de fontes de fornecimento alinhadas à demanda técnica industrial.',
     introduction:
       'O Strategic Sourcing da Auriun apoia a organização de fontes de fornecimento com base em especificação, criticidade e contexto de compra. O serviço é voltado a demandas em que preço isolado não basta — é necessário alinhar disponibilidade, equivalência técnica e continuidade.\n\nAtuamos de forma consultiva junto a compras, manutenção e engenharia para estruturar alternativas comerciais coerentes com o escopo apresentado.',
-    image: '/images/servicos/servico-strategic-sourcing.jpg',
+    image: '/images/servicos/Strategic-Sourcing.png',
     imageAlt: 'Contexto ilustrativo de sourcing e planejamento de suprimentos',
+    imagePosition: '68% 18%',
+    imagePositionMobile: '58% 16%',
     challenges: [
       'Dependência de poucos fornecedores para itens críticos',
       'Dificuldade em comparar alternativas técnicas equivalentes',
@@ -52,8 +54,10 @@ export const services: ServiceItem[] = [
       'Apoio à cadeia de suprimentos com visão de prazo, disponibilidade e continuidade operacional.',
     introduction:
       'A gestão da cadeia de suprimentos industriais exige coordenação entre especificação, fornecedor, prazo e criticidade do item. A Auriun apoia esse fluxo com atendimento orientado à realidade operacional do cliente.\n\nO serviço é especialmente útil quando a compra precisa considerar lead time, risco de desabastecimento e impacto na linha ou na manutenção.',
-    image: '/images/servicos/servico-supply-chain-management.jpg',
+    image: '/images/servicos/Supply-Chain-Management.png',
     imageAlt: 'Cadeia de suprimentos e logística industrial ilustrativas',
+    imagePosition: '65% 12%',
+    imagePositionMobile: '58% 10%',
     challenges: [
       'Rupturas de abastecimento em itens críticos',
       'Falta de visibilidade sobre prazos e alternativas',
@@ -93,7 +97,7 @@ export const services: ServiceItem[] = [
       'Homologação e desenvolvimento de parceiros nacionais e internacionais para demandas específicas.',
     introduction:
       'Quando a base atual de fornecedores não cobre a necessidade técnica, a Auriun apoia o desenvolvimento e a avaliação de novas fontes. O trabalho considera requisitos do item, contexto de uso e critérios comerciais da operação.\n\nO serviço contribui para ampliar opções sem abrir mão da leitura técnica da demanda.',
-    image: '/images/servicos/servico-desenvolvimento-de-fornecedores.jpg',
+    image: '/images/servicos/Desenvolvimento-de-fornecedores.png',
     imageAlt: 'Ambiente ilustrativo de avaliação e desenvolvimento de fornecedores',
     challenges: [
       'Lacunas de fornecimento em categorias específicas',
@@ -134,7 +138,7 @@ export const services: ServiceItem[] = [
       'Organização de suprimentos com visão de criticidade, recorrência e impacto operacional.',
     introduction:
       'A gestão estratégica de suprimentos ajuda a transformar compras reativas em um fluxo mais previsível. A Auriun apoia a organização de demandas por criticidade, recorrência e impacto na operação.\n\nO serviço é direcionado a equipes que precisam equilibrar urgência, custo e disponibilidade sem perder o critério técnico.',
-    image: '/images/servicos/servico-gestao-estrategica-de-suprimentos.jpg',
+    image: '/images/servicos/Gestao-estrategica-de-suprimentos.png',
     imageAlt: 'Gestão de suprimentos industriais em contexto ilustrativo',
     challenges: [
       'Compras emergenciais frequentes',
@@ -175,8 +179,8 @@ export const services: ServiceItem[] = [
       'Localização e fornecimento de itens de difícil aquisição, inclusive sob especificação técnica.',
     introduction:
       'Materiais especiais e de difícil aquisição exigem rede ampliada e leitura cuidadosa da especificação. A Auriun está preparada para apoiar a localização de itens nacionais ou importados quando a reposição convencional não resolve.\n\nO atendimento parte da referência técnica, do equivalente aceitável e do impacto da falta do item na operação.',
-    image: '/images/servicos/servico-materiais-especiais-e-importados.jpg',
-    imageAlt: 'Materiais técnicos especiais em contexto industrial ilustrativo',
+    image: '/images/servicos/Materiais-especiais-e-importados.png',
+    imageAlt: 'Materiais técnicos especiais em contexto industrial',
     challenges: [
       'Itens descontinuados ou de baixa disponibilidade',
       'Especificações restritas e pouco flexíveis',
@@ -217,8 +221,8 @@ export const services: ServiceItem[] = [
       'Apoio na busca e no fornecimento internacional de produtos, equipamentos e materiais conforme a necessidade da operação.',
     introduction:
       'A importação sob demanda da Auriun apoia empresas que precisam localizar e estruturar o fornecimento internacional de produtos, equipamentos e materiais a partir do escopo da operação. O serviço tem caráter comercial e consultivo: identifica alternativas, organiza informações e acompanha a demanda com clareza.\n\nA estrutura da operação e os serviços envolvidos são definidos conforme o escopo, a origem dos itens e as necessidades do cliente. O atendimento pode contemplar identificação de fornecedores, pesquisa internacional, levantamento de alternativas, cotação, negociação comercial, alinhamento de especificações, coordenação do fornecimento e acompanhamento da demanda.',
-    image: '/images/servicos/servico-materiais-especiais-e-importados.jpg',
-    imageAlt: 'Contexto ilustrativo de fornecimento internacional — imagem provisória até asset oficial',
+    image: '/images/servicos/Importacao-sob-demanda.png',
+    imageAlt: 'Operação logística de importação sob demanda para empresas',
     challenges: [
       'Necessidade de itens não disponíveis localmente com a especificidade exigida',
       'Dificuldade em comparar alternativas internacionais com critério comercial',
@@ -268,7 +272,7 @@ export const services: ServiceItem[] = [
       'Atendimento consultivo desde a leitura da necessidade até a proposta de fornecimento.',
     introduction:
       'A consultoria técnica e comercial da Auriun conecta a linguagem da engenharia à da compra. O serviço ajuda a transformar uma necessidade operacional em um escopo de fornecimento claro e comparável.\n\nÉ indicado para demandas multidisciplinares, modernizações e situações em que a especificação ainda precisa ser organizada antes da cotação.',
-    image: '/images/servicos/servico-consultoria-tecnica-e-comercial.jpg',
+    image: '/images/servicos/Consultoria-tecnica-e-comercial.png',
     imageAlt: 'Atendimento técnico-comercial industrial ilustrativo',
     challenges: [
       'Escopos incompletos ou ambíguos',
@@ -309,7 +313,7 @@ export const services: ServiceItem[] = [
       'Suporte a novas plantas e modernizações com fornecimento alinhado ao escopo do projeto.',
     introduction:
       'Projetos Greenfield e Brownfield exigem coordenação entre engenharia, compras e cronograma de obra. A Auriun apoia o fornecimento de materiais e soluções alinhados ao escopo técnico de novas plantas e modernizações.\n\nO atendimento considera a natureza do projeto — implantação ou retrofit — e a necessidade de compatibilidade com sistemas existentes quando aplicável.',
-    image: '/images/servicos/servico-projetos-greenfield-e-brownfield.jpg',
+    image: '/images/servicos/Projetos-Greenfield-e-Brownfield.png',
     imageAlt: 'Projeto e infraestrutura industrial em contexto ilustrativo',
     challenges: [
       'Listas longas e multidisciplinares',

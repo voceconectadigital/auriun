@@ -4,45 +4,49 @@ import { Container } from '@/components/ui/Container'
 const differentials = [
   {
     title: 'Atendimento técnico e consultivo',
+    titleLines: null as string[] | null,
     text: 'Escopo, especificação e contexto operacional orientam cada proposta.',
     span: 'lg:col-span-7 lg:row-span-2',
     featured: true,
-    image: '/images/diferenciais/atendimento-consultivo.webp',
-    imageFallback: '/images/diferenciais/atendimento-consultivo.jpg',
+    overlay: 'featured' as const,
+    image: '/images/diferenciais/Atendimento-tecnico-e-consultivo.webp',
     // Profissional + painel à direita
     imagePosition: 'object-[72%_42%] sm:object-[70%_40%] lg:object-[68%_38%]',
   },
   {
     title: 'Agilidade e capacidade de sourcing',
+    titleLines: ['Agilidade e capacidade', 'de sourcing'],
     text: 'Resposta objetiva a demandas urgentes e categorias de difícil reposição.',
     span: 'lg:col-span-5',
     featured: false,
-    image: '/images/diferenciais/agilidade-sourcing.webp',
-    imageFallback: '/images/diferenciais/agilidade-sourcing.jpg',
+    overlay: 'fade-right' as const,
+    image: '/images/diferenciais/Agilidade-e-capacidade-de-sourcing.webp',
     // Profissional + prateleiras à direita
     imagePosition: 'object-[78%_45%] sm:object-[76%_42%] lg:object-[74%_40%]',
   },
   {
     title: 'Rede nacional e internacional',
+    titleLines: ['Rede nacional e', 'internacional'],
     text: 'Acesso a fontes alinhadas à aplicação, com visão ampliada de fornecimento.',
     span: 'lg:col-span-5',
     featured: false,
-    image: '/images/diferenciais/rede-fornecedores.webp',
-    imageFallback: '/images/diferenciais/rede-fornecedores.jpg',
+    overlay: 'fade-right' as const,
+    image: '/images/diferenciais/Rede-nacional-e-internacional.webp',
     // Centro logístico: armazém + pátio/porto
     imagePosition: 'object-[42%_48%] sm:object-[40%_45%] lg:object-[38%_42%]',
   },
   {
     title: 'Compromisso com prazos e continuidade operacional',
+    titleLines: null as string[] | null,
     text: 'Fornecimento pensado para reduzir risco de desabastecimento na operação.',
     span: 'lg:col-span-12',
     featured: false,
-    image: '/images/diferenciais/continuidade-operacional.webp',
-    imageFallback: '/images/diferenciais/continuidade-operacional.jpg',
+    overlay: 'fade-right' as const,
+    image: '/images/diferenciais/Compromisso-com-prazos-e-continuidade-operacional.webp',
     // Profissional + linha industrial (técnico à direita)
     imagePosition: 'object-[76%_50%] sm:object-[72%_48%] lg:object-[68%_46%]',
   },
-] as const
+]
 
 export function Differentials() {
   return (
@@ -77,25 +81,31 @@ export function Differentials() {
                 'active:scale-[0.985] transition-transform duration-200 lg:active:scale-100',
               ].join(' ')}
             >
-              <picture>
-                <source srcSet={item.image} type="image/webp" />
-                <img
-                  src={item.imageFallback}
-                  alt=""
-                  aria-hidden
-                  className={[
-                    'differential-card-image absolute inset-0 size-full object-cover',
-                    item.imagePosition,
-                    item.featured ? 'scale-[1.02]' : '',
-                  ].join(' ')}
-                  width={item.featured ? 1200 : 900}
-                  height={item.featured ? 900 : 600}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </picture>
+              <img
+                src={item.image}
+                alt=""
+                aria-hidden
+                className={[
+                  'differential-card-image absolute inset-0 size-full object-cover',
+                  item.imagePosition,
+                  item.featured ? 'scale-[1.02]' : '',
+                ].join(' ')}
+                width={item.featured ? 1200 : 900}
+                height={item.featured ? 900 : 600}
+                loading="lazy"
+                decoding="async"
+              />
 
-              <div className="differential-card-overlay absolute inset-0" aria-hidden />
+              <div
+                className={[
+                  'differential-card-overlay absolute inset-0',
+                  item.overlay === 'featured' ? 'differential-card-overlay--featured' : '',
+                  item.overlay === 'fade-right' ? 'differential-card-overlay--fade-right' : '',
+                ]
+                  .filter(Boolean)
+                  .join(' ')}
+                aria-hidden
+              />
 
               <div className="differential-card-content relative z-[1] flex h-full min-h-[inherit] flex-col justify-between p-6 sm:p-7 lg:p-8">
                 <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
@@ -114,7 +124,14 @@ export function Differentials() {
                           : 'text-xl sm:text-2xl',
                     ].join(' ')}
                   >
-                    {item.title}
+                    {item.titleLines
+                      ? item.titleLines.map((line, lineIndex) => (
+                          <span key={line}>
+                            {lineIndex > 0 ? <br /> : null}
+                            {line}
+                          </span>
+                        ))
+                      : item.title}
                   </h3>
                   <p
                     className={[

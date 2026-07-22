@@ -50,6 +50,8 @@ export function NavigableCard({
     <article
       className={[
         'navigable-card flex flex-col overflow-hidden border border-brand-line bg-white',
+        'transition-[box-shadow] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)]',
+        'hover:shadow-[0_10px_28px_rgba(7,26,45,0.1)] focus-within:shadow-[0_10px_28px_rgba(7,26,45,0.1)]',
         className,
       ]
         .filter(Boolean)

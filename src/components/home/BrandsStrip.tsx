@@ -1,6 +1,29 @@
 import { Container } from '@/components/ui/Container'
 import { partnerBrands } from '@/data/content'
 
+const brandCardClass =
+  'group aspect-[3/2] flex items-center justify-center overflow-hidden border border-brand-line bg-white [border-radius:5px] transition-[box-shadow,border-color] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-brand-blue/25 hover:shadow-[0_8px_22px_rgba(7,26,45,0.1)]'
+
+function BrandLogo({
+  name,
+  logo,
+}: {
+  name: string
+  logo: string
+}) {
+  return (
+    <img
+      src={logo}
+      alt={name}
+      className="h-full w-full object-contain object-center opacity-80 transition-[opacity,transform,filter] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.06] group-hover:opacity-100 group-hover:brightness-105"
+      width={300}
+      height={200}
+      loading="lazy"
+      decoding="async"
+    />
+  )
+}
+
 export function BrandsStrip() {
   const loop = [...partnerBrands, ...partnerBrands]
 
@@ -25,18 +48,15 @@ export function BrandsStrip() {
         <ul className="grid grid-cols-2 gap-3 min-[480px]:grid-cols-3 sm:gap-4">
           {partnerBrands.map((brand) => (
             <li
-              key={brand}
-              className="flex min-h-[88px] items-center justify-center border border-brand-line bg-brand-mist/40 px-3 py-5"
+              key={brand.name}
+              className={brandCardClass}
             >
-              <span className="text-center text-[0.875rem] font-semibold tracking-[0.04em] text-brand-graphite/75">
-                {brand}
-              </span>
+              <BrandLogo name={brand.name} logo={brand.logo} />
             </li>
           ))}
         </ul>
         <p className="mt-6 text-[0.8125rem] leading-relaxed text-brand-slate/70">
-          Logotipos oficiais pendentes de autorização — células tipográficas temporárias.
-          Não representa exclusividade ou representação oficial.
+          Não representa exclusividade ou representação oficial das marcas.
         </p>
       </Container>
 
@@ -56,12 +76,10 @@ export function BrandsStrip() {
             <div className="brands-marquee-track flex w-max gap-4 px-4 sm:gap-5">
               {loop.map((brand, index) => (
                 <div
-                  key={`${brand}-${index}`}
-                  className="flex h-[96px] w-[180px] shrink-0 items-center justify-center border border-brand-line bg-brand-mist/40 px-4 sm:h-[108px] sm:w-[200px]"
+                  key={`${brand.name}-${index}`}
+                  className={`${brandCardClass} w-[180px] shrink-0 sm:w-[210px]`}
                 >
-                  <span className="text-center text-sm font-semibold tracking-[0.04em] text-brand-graphite/70 sm:text-[0.95rem]">
-                    {brand}
-                  </span>
+                  <BrandLogo name={brand.name} logo={brand.logo} />
                 </div>
               ))}
             </div>
@@ -72,12 +90,10 @@ export function BrandsStrip() {
           <ul className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 lg:gap-5">
             {partnerBrands.map((brand) => (
               <li
-                key={brand}
-                className="flex min-h-[96px] items-center justify-center border border-brand-line bg-brand-mist/40 px-4 py-6"
+                key={brand.name}
+                className={brandCardClass}
               >
-                <span className="text-center text-sm font-semibold tracking-[0.04em] text-brand-graphite/70">
-                  {brand}
-                </span>
+                <BrandLogo name={brand.name} logo={brand.logo} />
               </li>
             ))}
           </ul>
@@ -86,15 +102,14 @@ export function BrandsStrip() {
         <Container className="sr-only">
           <ul>
             {partnerBrands.map((brand) => (
-              <li key={brand}>{brand}</li>
+              <li key={brand.name}>{brand.name}</li>
             ))}
           </ul>
         </Container>
 
         <Container className="mt-8">
           <p className="text-xs leading-relaxed text-brand-slate/70">
-            Logotipos oficiais pendentes de autorização — células tipográficas temporárias.
-            Não representa exclusividade ou representação oficial.
+            Não representa exclusividade ou representação oficial das marcas.
           </p>
         </Container>
       </div>

@@ -92,7 +92,7 @@ export function ContactPage() {
     description:
       'Fale com a Auriun Soluções Industriais. Canais para dúvidas, parcerias, fornecedores e informações gerais.',
     path: '/contato/',
-    image: '/images/diferenciais/atendimento-consultivo.jpg',
+    image: '/images/diferenciais/Atendimento-tecnico-e-consultivo.webp',
   })
 
   const emailHref = mailHref()
@@ -122,7 +122,7 @@ export function ContactPage() {
         ]}
         eyebrow="Contato institucional"
         title="Como podemos ajudar?"
-        image="/images/diferenciais/atendimento-consultivo.jpg"
+        image="/images/diferenciais/Atendimento-tecnico-e-consultivo.webp"
         imageAlt="Atendimento consultivo da equipe Auriun"
         imagePosition="center 40%"
         imagePositionMobile="center 35%"

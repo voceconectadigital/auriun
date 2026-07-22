@@ -97,18 +97,18 @@ export const aboutContent = {
   ],
 } as const
 
-/** Marcas citadas pelo cliente — logos oficiais devem substituir este grid textual. */
+/** Marcas do portfólio multimarcas — logos em /images/logo-parceiros. */
 export const partnerBrands = [
-  'Siemens',
-  'Schneider Electric',
-  'Steck',
-  'Prysmian',
-  'WEG',
-  'ABB',
-  'LG',
-  'Samsung',
-  'Philips',
-  'Tramontina',
+  { name: 'Siemens', logo: '/images/logo-parceiros/siemens.webp' },
+  { name: 'Schneider Electric', logo: '/images/logo-parceiros/schneider-electric.webp' },
+  { name: 'Steck', logo: '/images/logo-parceiros/Steck.webp' },
+  { name: 'Prysmian', logo: '/images/logo-parceiros/Prysmian.webp' },
+  { name: 'WEG', logo: '/images/logo-parceiros/WEG.webp' },
+  { name: 'ABB', logo: '/images/logo-parceiros/ABB.webp' },
+  { name: 'LG', logo: '/images/logo-parceiros/lg.webp' },
+  { name: 'Samsung', logo: '/images/logo-parceiros/samsung.webp' },
+  { name: 'Philips', logo: '/images/logo-parceiros/philips.webp' },
+  { name: 'Tramontina', logo: '/images/logo-parceiros/tramontina.webp' },
 ] as const
 
 export const productIcons: Record<string, LucideIcon> = {

@@ -31,6 +31,10 @@ export type ServiceItem = {
   introduction: string
   image: string
   imageAlt: string
+  /** CSS object-position for InternalHero (desktop). */
+  imagePosition?: string
+  /** CSS object-position for InternalHero (mobile). */
+  imagePositionMobile?: string
   challenges: string[]
   approach: string[]
   benefits: string[]

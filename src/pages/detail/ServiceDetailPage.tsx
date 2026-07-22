@@ -90,6 +90,8 @@ function ServiceDetailContent({ service }: { service: ServiceItem }) {
         title={service.heroTitle ?? service.title}
         image={service.image}
         imageAlt={service.imageAlt}
+        imagePosition={service.imagePosition}
+        imagePositionMobile={service.imagePositionMobile}
       />
 
       <section className="section-pad">

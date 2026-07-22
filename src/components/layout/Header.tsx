@@ -362,7 +362,7 @@ export function Header() {
                 <Link
                   to="/solucoes/"
                   onClick={closeAll}
-                  className="group relative min-h-[220px] overflow-hidden bg-brand-navy"
+                  className="group relative min-h-[220px] overflow-hidden bg-brand-navy lg:h-full"
                 >
                   <img
                     src="/images/produtos/materiais-eletricos-900x900.webp"
@@ -389,23 +389,20 @@ export function Header() {
                   </div>
                 </Link>
 
-                <div className="min-h-0">
+                <div className="flex min-h-0 flex-col">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-blue">
                     Produtos
                   </p>
-                  <ul className="mt-4 max-h-[min(52vh,420px)] space-y-1 overflow-y-auto overscroll-contain pr-1">
+                  <ul className="mt-3 grid grid-cols-2 gap-x-2 gap-y-0.5">
                     {products.map((item) => (
                       <li key={item.slug}>
                         <Link
                           to={productPath(item.slug)}
-                          className="group block px-2 py-2 hover:bg-brand-mist"
+                          className="group block rounded-sm px-2 py-1.5 hover:bg-brand-mist"
                           onClick={closeAll}
                         >
-                          <span className="block text-[0.9375rem] font-medium text-brand-graphite group-hover:text-brand-blue">
+                          <span className="block text-[0.875rem] font-medium leading-snug text-brand-graphite group-hover:text-brand-blue">
                             {item.shortTitle}
-                          </span>
-                          <span className="mt-0.5 line-clamp-1 text-xs leading-relaxed text-brand-slate">
-                            {item.description}
                           </span>
                         </Link>
                       </li>
@@ -414,30 +411,27 @@ export function Header() {
                   <Link
                     to="/solucoes/#produtos"
                     onClick={closeAll}
-                    className="mt-3 inline-flex items-center gap-1.5 px-2 text-sm font-semibold text-brand-blue hover:text-brand-navy"
+                    className="mt-auto inline-flex items-center gap-1.5 px-2 pt-3 text-sm font-semibold text-brand-blue hover:text-brand-navy"
                   >
                     Ver todos os produtos
                     <ArrowRight className="size-3.5" aria-hidden />
                   </Link>
                 </div>
 
-                <div className="min-h-0">
+                <div className="flex min-h-0 flex-col">
                   <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-brand-orange">
                     Serviços
                   </p>
-                  <ul className="mt-4 max-h-[min(52vh,420px)] space-y-1 overflow-y-auto overscroll-contain pr-1">
+                  <ul className="mt-3 space-y-0.5">
                     {services.map((item) => (
                       <li key={item.slug}>
                         <Link
                           to={servicePath(item.slug)}
-                          className="group block px-2 py-2 hover:bg-brand-mist"
+                          className="group block rounded-sm px-2 py-1.5 hover:bg-brand-mist"
                           onClick={closeAll}
                         >
-                          <span className="block text-[0.9375rem] font-medium text-brand-graphite group-hover:text-brand-blue">
+                          <span className="block text-[0.875rem] font-medium leading-snug text-brand-graphite group-hover:text-brand-blue">
                             {item.shortTitle}
-                          </span>
-                          <span className="mt-0.5 line-clamp-1 text-xs leading-relaxed text-brand-slate">
-                            {item.description}
                           </span>
                         </Link>
                       </li>
@@ -446,7 +440,7 @@ export function Header() {
                   <Link
                     to="/solucoes/#servicos"
                     onClick={closeAll}
-                    className="mt-3 inline-flex items-center gap-1.5 px-2 text-sm font-semibold text-brand-orange hover:text-brand-navy"
+                    className="mt-auto inline-flex items-center gap-1.5 px-2 pt-3 text-sm font-semibold text-brand-orange hover:text-brand-navy"
                   >
                     Ver todos os serviços
                     <ArrowRight className="size-3.5" aria-hidden />

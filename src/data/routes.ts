@@ -40,7 +40,7 @@ export const staticRoutes: StaticRoute[] = [
     seoTitle: `Contato | ${SITE.name}`,
     seoDescription:
       'Fale com a Auriun Soluções Industriais. Canais para dúvidas, parcerias, fornecedores e informações gerais.',
-    ogImage: '/images/diferenciais/atendimento-consultivo.jpg',
+    ogImage: '/images/diferenciais/Atendimento-tecnico-e-consultivo.webp',
   },
   {
     path: '/solicitar-orcamento/',
