@@ -17,7 +17,7 @@ const panels = [
     description:
       'Materiais elétricos, automação, instrumentação, conectividade e suprimentos para MRO, CAPEX e OPEX.',
     href: '/solucoes/',
-    image: '/images/produtos/produto-materiais-eletricos.jpg',
+    image: '/images/solucoes/produtos-industriais.webp',
     imageAlt: 'Materiais e infraestrutura elétrica industrial',
   },
   {
@@ -33,7 +33,7 @@ const panels = [
     description:
       'Strategic sourcing, supply chain, desenvolvimento de fornecedores e consultoria técnica-comercial.',
     href: '/solucoes/',
-    image: '/images/servicos/servico-strategic-sourcing.jpg',
+    image: '/images/solucoes/servicos-estrategicos.webp',
     imageAlt: 'Operação de sourcing e cadeia de suprimentos',
   },
   {
@@ -49,7 +49,7 @@ const panels = [
     description:
       'Localização de itens de difícil aquisição, nacionais ou importados, com rede ampliada de fornecimento.',
     href: '/solucoes/servicos/materiais-especiais-e-importados/',
-    image: '/images/servicos/servico-materiais-especiais-e-importados.jpg',
+    image: '/images/solucoes/materiais-especiais.webp',
     imageAlt: 'Materiais especiais e importados para indústria',
   },
 ] as const

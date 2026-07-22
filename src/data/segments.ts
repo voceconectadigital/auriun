@@ -25,7 +25,7 @@ export const segments: SegmentItem[] = [
       'Sourcing para itens críticos e especiais',
       'Organização de demandas MRO, CAPEX e OPEX',
     ],
-    image: '/images/segmentos/segmento-mineracao.webp',
+    image: '/images/segmentos/mineracao-900x900.webp',
     imageAlt:
       'Operação de mineração com equipamentos de grande porte e infraestrutura de processamento',
     cardImageAlt: 'Soluções industriais para operações de mineração',
@@ -81,7 +81,7 @@ export const segments: SegmentItem[] = [
       'Localização de itens especiais',
       'Apoio a sourcing e projetos de expansão',
     ],
-    image: '/images/segmentos/segmento-oleo-e-gas.jpg',
+    image: '/images/segmentos/oleo-e-gas.webp',
     imageAlt: 'Ambiente ilustrativo do setor de óleo e gás',
     relatedProducts: [
       'instrumentacao-industrial',
@@ -129,7 +129,7 @@ export const segments: SegmentItem[] = [
       'Gestão estratégica de suprimentos de manutenção',
       'Apoio a projetos brownfield',
     ],
-    image: '/images/segmentos/segmento-papel-e-celulose.jpg',
+    image: '/images/segmentos/papel-e-celulose.webp',
     imageAlt: 'Ambiente ilustrativo do setor de papel e celulose',
     relatedProducts: [
       'automacao-industrial',
@@ -177,7 +177,7 @@ export const segments: SegmentItem[] = [
       'Suprimentos MRO e materiais especiais',
       'Sourcing para categorias de alta criticidade',
     ],
-    image: '/images/segmentos/segmento-siderurgia.jpg',
+    image: '/images/segmentos/siderurgia.webp',
     imageAlt: 'Ambiente ilustrativo do setor siderúrgico',
     relatedProducts: [
       'materiais-eletricos',
@@ -225,7 +225,7 @@ export const segments: SegmentItem[] = [
       'Climatização de salas técnicas',
       'Apoio a projetos greenfield e brownfield',
     ],
-    image: '/images/segmentos/segmento-energia.jpg',
+    image: '/images/segmentos/energia.webp',
     imageAlt: 'Infraestrutura energética ilustrativa',
     relatedProducts: [
       'materiais-eletricos',
@@ -273,7 +273,7 @@ export const segments: SegmentItem[] = [
       'Ferramentas e EPIs para equipes de campo',
       'Gestão de suprimentos de manutenção',
     ],
-    image: '/images/segmentos/segmento-saneamento.jpg',
+    image: '/images/segmentos/saneamento-900x900.webp',
     imageAlt: 'Ambiente ilustrativo de infraestrutura de saneamento',
     relatedProducts: [
       'instrumentacao-industrial',
@@ -321,7 +321,7 @@ export const segments: SegmentItem[] = [
       'Climatização e TI quando aplicável',
       'Apoio a projetos greenfield',
     ],
-    image: '/images/segmentos/segmento-infraestrutura.jpg',
+    image: '/images/segmentos/infraestrutura.webp',
     imageAlt: 'Obra e infraestrutura industrial ilustrativas',
     relatedProducts: [
       'cabos-e-conectividade',
@@ -369,7 +369,7 @@ export const segments: SegmentItem[] = [
       'Consultoria técnico-comercial de escopo',
       'Apoio a projetos brownfield e greenfield',
     ],
-    image: '/images/segmentos/segmento-construcao-industrial.jpg',
+    image: '/images/segmentos/construcao-industrial.webp',
     imageAlt: 'Construção e montagem industrial ilustrativas',
     relatedProducts: [
       'materiais-eletricos',
@@ -417,7 +417,7 @@ export const segments: SegmentItem[] = [
       'Suprimentos MRO/CAPEX/OPEX',
       'Consultoria técnico-comercial',
     ],
-    image: '/images/segmentos/segmento-manufatura.jpg',
+    image: '/images/segmentos/manufatura.webp',
     imageAlt: 'Ambiente ilustrativo de manufatura industrial',
     relatedProducts: [
       'automacao-industrial',
@@ -465,7 +465,7 @@ export const segments: SegmentItem[] = [
       'TI e climatização quando aplicável',
       'Supply chain para demandas sazonais',
     ],
-    image: '/images/segmentos/segmento-agronegocio.jpg',
+    image: '/images/segmentos/agronegocio.webp',
     imageAlt: 'Ambiente ilustrativo de operação agroindustrial',
     relatedProducts: [
       'automacao-industrial',
@@ -513,7 +513,7 @@ export const segments: SegmentItem[] = [
       'Localização de itens especiais',
       'Desenvolvimento de fornecedores e sourcing',
     ],
-    image: '/images/segmentos/segmento-quimica-e-petroquimica.jpg',
+    image: '/images/segmentos/quimica-e-petroquimica-900x900.webp',
     imageAlt: 'Ambiente ilustrativo do setor químico e petroquímico',
     relatedProducts: [
       'instrumentacao-industrial',
