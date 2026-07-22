@@ -34,7 +34,7 @@ export function QuoteRequestPage() {
     description:
       'Solicite uma cotação técnica à Auriun Soluções Industriais. Compartilhe as informações da demanda para avaliação de escopo com mais precisão.',
     path: '/solicitar-orcamento/',
-    image: '/images/cta-industrial.jpg',
+    image: '/images/bg-title/solicitar-orcamento.webp',
   })
 
   return (
@@ -56,8 +56,8 @@ export function QuoteRequestPage() {
         ]}
         eyebrow="Atendimento comercial"
         title="Conte o que sua operação precisa"
-        image="/images/cta-industrial.jpg"
-        imageAlt="Ambiente industrial representando demandas comerciais da Auriun"
+        image="/images/bg-title/solicitar-orcamento.webp"
+        imageAlt="Profissional em ambiente industrial representando demandas comerciais da Auriun"
         imagePosition="center center"
         imagePositionMobile="center 40%"
       />

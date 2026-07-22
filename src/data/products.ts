@@ -11,7 +11,7 @@ export const products: ProductItem[] = [
       'Linhas de baixa, média e alta tensão para distribuição, proteção e infraestrutura elétrica industrial.',
     introduction:
       'A Auriun está preparada para apoiar demandas de materiais elétricos voltadas a instalações industriais, salas elétricas e infraestrutura de energia. O fornecimento é orientado pela especificação técnica e pelo contexto operacional de cada solicitação.\n\nAtendemos necessidades de reposição, modernização e projetos, com leitura consultiva da aplicação para orientar alternativas compatíveis com o escopo apresentado.',
-    image: '/images/produtos/produto-materiais-eletricos.jpg',
+    image: '/images/produtos/materiais-eletricos-900x900.webp',
     imageAlt: 'Infraestrutura elétrica industrial ilustrativa',
     applications: [
       'Quadros e painéis de distribuição',
@@ -48,7 +48,7 @@ export const products: ProductItem[] = [
       'Componentes e sistemas de controle para processos produtivos mais estáveis e monitorados.',
     introduction:
       'Soluções de automação voltadas às necessidades de plantas que buscam maior controle, rastreabilidade e estabilidade de processo. A Auriun apoia a identificação de componentes compatíveis com o ambiente industrial e com o escopo técnico informado.\n\nO atendimento considera integração com painéis, acionamentos e arquiteturas de controle já existentes, sem pressupor padronização única para todos os projetos.',
-    image: '/images/produtos/produto-automacao-industrial.jpg',
+    image: '/images/produtos/automacao-industrial-900x900.webp',
     imageAlt: 'Ambiente ilustrativo de automação e controle industrial',
     applications: [
       'Controle de processos e linhas produtivas',
@@ -85,7 +85,7 @@ export const products: ProductItem[] = [
       'Medição e monitoramento para precisão operacional, segurança e rastreabilidade de processos.',
     introduction:
       'A instrumentação industrial é central para decisões operacionais confiáveis. A Auriun oferece fornecimento direcionado a operações que dependem de medição de pressão, temperatura, vazão, nível e variáveis correlatas.\n\nApoiamos a seleção de instrumentos e acessórios a partir da aplicação informada, considerando ambiente, faixa de trabalho e integração com sistemas de controle.',
-    image: '/images/produtos/produto-instrumentacao-industrial.jpg',
+    image: '/images/produtos/instrumentacao-industrial-900x900.webp',
     imageAlt: 'Instrumentação e medição em contexto industrial ilustrativo',
     applications: [
       'Monitoramento de processos contínuos',
@@ -122,7 +122,7 @@ export const products: ProductItem[] = [
       'Componentes eletroeletrônicos para manutenção, montagem e reposição em ambientes industriais.',
     introduction:
       'Fornecimento de componentes eletrônicos e eletroeletrônicos para bancadas, manutenção e sistemas industriais. A Auriun apoia a localização de itens conforme referência, equivalente técnico ou descrição funcional.\n\nO atendimento é útil tanto para reposição pontual quanto para listas técnicas vinculadas a projetos de montagem e modernização.',
-    image: '/images/produtos/produto-componentes-eletronicos.jpg',
+    image: '/images/produtos/componentes-eletronicos-900x900.webp',
     imageAlt: 'Componentes eletrônicos em contexto técnico ilustrativo',
     applications: [
       'Reposição de placas e módulos',
@@ -159,7 +159,7 @@ export const products: ProductItem[] = [
       'Cabos elétricos, conectores e acessórios para infraestrutura elétrica e de dados.',
     introduction:
       'Soluções de cabos e conectividade aplicáveis a energia, automação e comunicação industrial. A Auriun está preparada para apoiar especificações de cabeamento e acessórios conforme a aplicação e o ambiente de instalação.\n\nO portfólio contempla demandas de obra, manutenção e expansão de infraestrutura, com atenção à compatibilidade entre cabo, conector e condição operacional.',
-    image: '/images/produtos/produto-cabos-e-conectividade.jpg',
+    image: '/images/produtos/cabos-e-conectividade-900x900.webp',
     imageAlt: 'Cabeamento e conectividade industrial ilustrativos',
     applications: [
       'Distribuição de energia',
@@ -196,7 +196,7 @@ export const products: ProductItem[] = [
       'Soluções de climatização para ambientes críticos, salas técnicas e áreas produtivas.',
     introduction:
       'A climatização adequada é relevante para salas elétricas, centros de dados, ambientes de processo e áreas que exigem controle térmico. A Auriun apoia o fornecimento direcionado a essas operações, com base no contexto informado pelo cliente.\n\nO atendimento considera exigências de continuidade, manutenção e compatibilidade com a infraestrutura existente.',
-    image: '/images/produtos/produto-climatizacao-industrial.jpg',
+    image: '/images/produtos/climatizacao-industrial-900x900.webp',
     imageAlt: 'Ambiente técnico com necessidade de climatização ilustrativa',
     applications: [
       'Salas elétricas e de controle',
@@ -234,8 +234,8 @@ export const products: ProductItem[] = [
       'Fornecimento corporativo de equipamentos para áreas administrativas, operacionais, refeitórios, alojamentos e demais estruturas empresariais.',
     introduction:
       'A Auriun apoia empresas que precisam equipar áreas administrativas, operacionais, refeitórios, alojamentos e demais estruturas com eletrodomésticos sob demanda. O atendimento é orientado pela necessidade, quantidade, aplicação e especificação informadas pelo cliente — sem abordar o fornecimento sob lógica de varejo.\n\nOs itens estão sujeitos à especificação e à disponibilidade no momento da cotação. Categorias frequentemente solicitadas incluem refrigeradores e frigobares, micro-ondas, fogões e cooktops, bebedouros, purificadores, equipamentos para cozinhas e refeitórios, soluções de climatização e conforto, além de outros equipamentos sob consulta.',
-    image: '/images/produtos/produto-climatizacao-industrial.jpg',
-    imageAlt: 'Equipamentos e ambientes preparados para operações corporativas — imagem provisória até asset oficial',
+    image: '/images/produtos/eletrodomesticos.png',
+    imageAlt: 'Eletrodomésticos para áreas administrativas, refeitórios e operações corporativas',
     applications: [
       'Áreas administrativas e salas de apoio',
       'Refeitórios e estruturas de alimentação',
@@ -276,8 +276,8 @@ export const products: ProductItem[] = [
       'Equipamentos de proteção e ferramentas para equipes de campo, manutenção e obra.',
     introduction:
       'Fornecimento de ferramentas, EPIs e EPCs voltado às necessidades de equipes de manutenção, montagem e operação. A Auriun apoia listas de suprimentos alinhadas à rotina de campo e às exigências de segurança do ambiente de trabalho.\n\nO objetivo é facilitar a disponibilidade de itens recorrentes e apoiar solicitações vinculadas a paradas, obras e atividades de rotina.',
-    image: '/images/produtos/produto-ferramentas-epis-e-epcs.jpg',
-    imageAlt: 'Ferramentas e equipamentos de proteção em contexto industrial ilustrativo',
+    image: '/images/produtos/Ferramentas-EPIs-e-EPCs.png',
+    imageAlt: 'Ferramentas e equipamentos de proteção em contexto industrial',
     applications: [
       'Manutenção mecânica e elétrica',
       'Montagem e comissionamento',
@@ -313,8 +313,8 @@ export const products: ProductItem[] = [
       'Notebooks, computadores, servidores e acessórios para operação, engenharia e gestão.',
     introduction:
       'Soluções de TI aplicáveis a engenharia, operação, supervisão e gestão industrial. A Auriun está preparada para apoiar o fornecimento de equipamentos e acessórios conforme requisitos de desempenho e ambiente de uso informados.\n\nO atendimento cobre desde estações de trabalho até itens de infraestrutura que sustentam a operação digital da planta.',
-    image: '/images/produtos/produto-tecnologia-da-informacao.jpg',
-    imageAlt: 'Equipamentos de tecnologia da informação em contexto corporativo ilustrativo',
+    image: '/images/produtos/tecnologia-da-informacao.png',
+    imageAlt: 'Equipamentos de tecnologia da informação em contexto corporativo',
     applications: [
       'Engenharia e projetos',
       'Supervisão e salas de controle',
@@ -351,8 +351,8 @@ export const products: ProductItem[] = [
       'Equipamentos e dispositivos para demandas corporativas, administrativas e operacionais, fornecidos conforme especificação.',
     introduction:
       'A Auriun disponibiliza atendimento B2B para eletroeletrônicos conforme necessidade, aplicação e especificação técnica da operação. O foco é apoiar compras corporativas e operacionais com clareza de escopo — sem promessas de estoque, marcas ou disponibilidade imediata sem confirmação.\n\nEntre as categorias que podem ser avaliadas sob consulta estão televisores e monitores, equipamentos de áudio e vídeo, dispositivos eletrônicos, soluções para salas e ambientes corporativos, itens de comunicação, periféricos e acessórios, além de outros equipamentos alinhados à demanda apresentada.',
-    image: '/images/produtos/produto-tecnologia-da-informacao.jpg',
-    imageAlt: 'Ambiente corporativo com equipamentos eletrônicos — imagem provisória até asset oficial',
+    image: '/images/produtos/eletroeletronicos.png',
+    imageAlt: 'Eletroeletrônicos para demandas corporativas e operacionais',
     applications: [
       'Salas de reunião e ambientes corporativos',
       'Áreas administrativas e de supervisão',
@@ -393,8 +393,8 @@ export const products: ProductItem[] = [
       'Suprimentos estratégicos para manutenção, investimentos e operação contínua da indústria.',
     introduction:
       'A Auriun estrutura o fornecimento sob a lógica de MRO, CAPEX e OPEX, reconhecendo que cada modalidade exige ritmo, prioridade e leitura comercial distintos. O portfólio aplica-se a reposição, projetos de expansão e suporte ao custeio operacional.\n\nEssa abordagem ajuda compradores, manutenção e engenharia a organizar demandas sem tratar todo o suprimento da mesma forma.',
-    image: '/images/produtos/produto-mro-capex-e-opex.jpg',
-    imageAlt: 'Operação industrial ilustrativa vinculada a suprimentos MRO CAPEX e OPEX',
+    image: '/images/produtos/MRO-CAPEX-e-OPEX.png',
+    imageAlt: 'Operação industrial vinculada a suprimentos MRO, CAPEX e OPEX',
     applications: [
       'Paradas programadas e corretivas',
       'Projetos de ampliação e modernização',

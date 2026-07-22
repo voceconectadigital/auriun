@@ -365,7 +365,7 @@ export function Header() {
                   className="group relative min-h-[220px] overflow-hidden bg-brand-navy"
                 >
                   <img
-                    src="/images/produtos/produto-materiais-eletricos.jpg"
+                    src="/images/produtos/materiais-eletricos-900x900.webp"
                     alt=""
                     className="absolute inset-0 size-full object-cover opacity-70 transition duration-700 group-hover:scale-[1.03]"
                     width={720}
