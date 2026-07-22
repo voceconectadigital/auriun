@@ -2095,6 +2095,7 @@ a.contact-panel__row:focus-visible .contact-panel__arrow {
 .form-submit {
   min-height: 54px;
   font-weight: 700;
+  cursor: pointer;
   box-shadow: 0 8px 20px rgba(3, 18, 32, 0.12);
   transition:
     transform 180ms ease,

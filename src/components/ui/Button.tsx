@@ -62,7 +62,7 @@ export function Button(props: ButtonProps) {
   } = props
 
   const classes = cx(
-    'inline-flex items-center justify-center gap-2 rounded-sm font-semibold tracking-wide transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50',
+    'inline-flex cursor-pointer items-center justify-center gap-2 rounded-sm font-semibold tracking-wide transition focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50',
     variants[variant],
     sizes[size],
     className,
