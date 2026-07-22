@@ -25,7 +25,7 @@ export const segments: SegmentItem[] = [
       'Sourcing para itens críticos e especiais',
       'Organização de demandas MRO, CAPEX e OPEX',
     ],
-    image: '/images/segmentos/mineracao-900x900.webp',
+    image: '/images/segmentos/mineracao.webp',
     imageAlt:
       'Operação de mineração com equipamentos de grande porte e infraestrutura de processamento',
     cardImageAlt: 'Soluções industriais para operações de mineração',
