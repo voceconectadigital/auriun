@@ -12,7 +12,7 @@ export type ContactRegion = {
   shortLabel: string
   /** Display: (27) 2180-2327 */
   phone: string
-  /** Mesmo número para WhatsApp quando aplicável */
+  /** WhatsApp da região — vazio quando o canal não é oferecido */
   whatsapp: string
 }
 
@@ -50,7 +50,7 @@ export const CONTACT = {
       label: 'Atendimento Minas Gerais',
       shortLabel: 'MG',
       phone: '(31) 3181-4897',
-      whatsapp: '(31) 3181-4897',
+      whatsapp: '',
     },
   ] as const satisfies readonly ContactRegion[],
   address: {
